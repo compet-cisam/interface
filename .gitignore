@@ -19,6 +19,7 @@ __pycache__/
 # Pyodide distribution
 static/pyodide/*
 !static/pyodide/pyodide-lock.json
+pyodide-lock.json
 
 # Distribution / packaging
 .Python
@@ -180,6 +181,9 @@ yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
 .pnpm-debug.log*
+
+.pnpm-store/
+
 
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
