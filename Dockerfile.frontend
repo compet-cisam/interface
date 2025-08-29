@@ -1,0 +1,21 @@
+# Usa a mesma imagem base do Node.js
+FROM node:22-alpine
+
+# Define o diretório de trabalho dentro do contêiner
+WORKDIR /app
+
+# Copia os arquivos de manifesto de pacotes.
+# O '*' garante que tanto package.json quanto package-lock.json sejam copiados.
+COPY package*.json ./
+
+# Instala as dependências do projeto usando npm
+RUN npm install
+
+# Copia o restante do código da sua aplicação para o diretório de trabalho
+COPY . .
+
+# Expõe a porta que a sua aplicação vai usar (ajuste se for diferente)
+EXPOSE 5173
+
+# Define o comando para iniciar o servidor de desenvolvimento com npm
+CMD ["npm", "run", "dev"]
