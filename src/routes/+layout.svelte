@@ -2,6 +2,7 @@
 	import { setContext, onMount } from 'svelte';
 	import { writable } from 'svelte/store';
 	import { browser } from '$app/environment';
+	import '../tailwind.css'; // <-- ESTA É A LINHA ADICIONADA
 
 	// --- Sistema de Notificações (Toasts) ---
 	type Toast = {
