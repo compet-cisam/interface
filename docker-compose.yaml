@@ -80,7 +80,7 @@ services:
       - ./public:/app/public
       - ./static:/app/static
     ports:
-      - "5173:5173"
+      - "2705:5173"
     environment:
       - NODE_OPTIONS=--max-old-space-size=8192
     restart: unless-stopped
