@@ -38,10 +38,7 @@ services:
     container_name: open-webui
     volumes:
       - open-webui:/app/backend/data
-      - ./src:/app/src
-      - ./static:/app/static
-      - ./public:/app/public
-      - ./backend:/app/backend
+
     depends_on:
       ollama:
         condition: service_started
