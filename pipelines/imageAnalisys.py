@@ -183,98 +183,109 @@ class Pipeline:
 
         files_to_pass = []
 
-        messages = body.get("messages", [])
-        if messages:
-            last_message = messages[-1] 
-            content_list = last_message.get("content", [])
+        try:
 
-            for content_item in content_list:
-                if content_item.get("type") == "image_url":
-                    image_url_dict = content_item.get("image_url", {})
-                    base64_url = image_url_dict.get("url")
-                    
-                    if base64_url:
-                        try:
-                            base64_clean = self._extract_base64_from_url(base64_url)
-                            base64_normalized = self._normalize_image(base64_clean)
-                            
-                            if self._validate_base64_image(base64_normalized):
-                                files_to_pass.append({
-                                    "data": base64_url,
-                                    "base64_clean": base64_normalized
-                                })
-                                print(f"✅ Imagem adicionada com sucesso (tamanho: {len(base64_normalized)} chars)")
-                            else:
-                                print("🔴 Imagem inválida descartada")
-                        except Exception as e:
-                            print(f"🔴 Erro ao processar imagem: {e}")
+            messages = body.get("messages", [])
+            if messages:
+                last_message = messages[-1] 
+                content_list = last_message.get("content", [])
 
-        if not files_to_pass:
-            print("--- INLET: Nenhum arquivo encontrado em 'messages'. Tentando 'metadata.files'... ---")
-            files_metadata = body.get("metadata", {}).get("files", [])
-            if files_metadata:
-                for file_meta in files_metadata:
-                    file_data = file_meta.get("file", {})
-                    if file_data:
-                        data = file_data.get("data", "")
-                        if data:
+                for content_item in content_list:
+                    if content_item.get("type") == "image_url":
+                        image_url_dict = content_item.get("image_url", {})
+                        base64_url = image_url_dict.get("url")
+                        
+                        if base64_url:
                             try:
-                                base64_clean = self._extract_base64_from_url(data)
+                                base64_clean = self._extract_base64_from_url(base64_url)
                                 base64_normalized = self._normalize_image(base64_clean)
                                 
                                 if self._validate_base64_image(base64_normalized):
                                     files_to_pass.append({
-                                        "data": data,
+                                        "data": base64_url,
                                         "base64_clean": base64_normalized
                                     })
+                                    print(f"✅ Imagem adicionada com sucesso (tamanho: {len(base64_normalized)} chars)")
+                                else:
+                                    print("🔴 Imagem inválida descartada")
                             except Exception as e:
-                                print(f"🔴 Erro ao processar arquivo de metadata: {e}")
+                                print(f"🔴 Erro ao processar imagem: {e}")
 
-        body['processed_files'] = files_to_pass
-        print(f"--- INLET: {len(files_to_pass)} arquivos preparados no body. ---")
-        return body
+            if not files_to_pass:
+                print("--- INLET: Nenhum arquivo encontrado em 'messages'. Tentando 'metadata.files'... ---")
+                files_metadata = body.get("metadata", {}).get("files", [])
+                if files_metadata:
+                    for file_meta in files_metadata:
+                        file_data = file_meta.get("file", {})
+                        if file_data:
+                            data = file_data.get("data", "")
+                            if data:
+                                try:
+                                    base64_clean = self._extract_base64_from_url(data)
+                                    base64_normalized = self._normalize_image(base64_clean)
+                                    
+                                    if self._validate_base64_image(base64_normalized):
+                                        files_to_pass.append({
+                                            "data": data,
+                                            "base64_clean": base64_normalized
+                                        })
+                                except Exception as e:
+                                    print(f"🔴 Erro ao processar arquivo de metadata: {e}")
 
+            body['processed_files'] = files_to_pass
+            print(f"--- INLET: {len(files_to_pass)} arquivos preparados no body. ---")
+            return body
+        
+        except Exception as e:
+            body['processed_files'] = None
+            return body
+        
     def pipe(
         self, user_message: str, model_id: str, messages: List[dict], body: dict
     ) -> Union[str, Generator, Iterator]:
 
         processed_files = body.get('processed_files', [])
         
-        if processed_files:
-            first_file = processed_files[0]
-            base64_clean = first_file.get('base64_clean', '')
+        if processed_files is not None:
+                
+            if processed_files:
+                first_file = processed_files[0]
+                base64_clean = first_file.get('base64_clean', '')
+                
+                if base64_clean:
+                    print(f"--- PIPE: Usando imagem do inlet (tamanho: {len(base64_clean)} chars) ---")
+                    return self._call_ollama(base64_clean, user_message)
             
-            if base64_clean:
-                print(f"--- PIPE: Usando imagem do inlet (tamanho: {len(base64_clean)} chars) ---")
-                return self._call_ollama(base64_clean, user_message)
-        
-        print("--- PIPE: Processando imagens diretamente das mensagens ---")
-        
-        messages = body.get("messages", [])
-        if messages:
-            last_message = messages[-1] 
-            content_list = last_message.get("content", [])
+            print("--- PIPE: Processando imagens diretamente das mensagens ---")
+            
+            messages = body.get("messages", [])
+            if messages:
+                last_message = messages[-1] 
+                content_list = last_message.get("content", [])
 
-            for content_item in content_list:
-                if content_item.get("type") == "image_url":
-                    image_url_dict = content_item.get("image_url", {})
-                    base64_url = image_url_dict.get("url")
-                    
-                    if base64_url:
-                        try:
-                            base64_clean = self._extract_base64_from_url(base64_url)
-                            base64_normalized = self._normalize_image(base64_clean)
-                            
-                            if self._validate_base64_image(base64_normalized):
-                                print(f"--- PIPE: Imagem encontrada e validada (tamanho: {len(base64_normalized)} chars) ---")
-                                return self._call_ollama(base64_normalized, user_message)
-                            else:
-                                print("🔴 PIPE: Imagem inválida encontrada")
-                        except Exception as e:
-                            print(f"🔴 PIPE: Erro ao processar imagem: {e}")
+                for content_item in content_list:
+                    if content_item.get("type") == "image_url":
+                        image_url_dict = content_item.get("image_url", {})
+                        base64_url = image_url_dict.get("url")
+                        
+                        if base64_url:
+                            try:
+                                base64_clean = self._extract_base64_from_url(base64_url)
+                                base64_normalized = self._normalize_image(base64_clean)
+                                
+                                if self._validate_base64_image(base64_normalized):
+                                    print(f"--- PIPE: Imagem encontrada e validada (tamanho: {len(base64_normalized)} chars) ---")
+                                    return self._call_ollama(base64_normalized, user_message)
+                                else:
+                                    print("🔴 PIPE: Imagem inválida encontrada")
+                            except Exception as e:
+                                print(f"🔴 PIPE: Erro ao processar imagem: {e}")
 
-        print("--- PIPE: Nenhuma imagem válida encontrada para processar. ---")
-        return "Nenhuma imagem foi encontrada ou todas as imagens estão corrompidas. Por favor, envie uma imagem válida."
+            print("--- PIPE: Nenhuma imagem válida encontrada para processar. ---")
+            return "Nenhuma imagem foi encontrada ou todas as imagens estão corrompidas. Por favor, envie uma imagem válida."
+
+        else:
+            return 'Por favor, envie uma imagem para ser analisada.'
 
     def _call_ollama(self, base64_string: str, user_message: str = "") -> str:
         print("--- PIPE: Chamando Ollama para análise de imagem ---")
