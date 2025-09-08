@@ -2,9 +2,8 @@
 	import { setContext, onMount } from 'svelte';
 	import { writable } from 'svelte/store';
 	import { browser } from '$app/environment';
-	import '../tailwind.css'; // <-- ESTA É A LINHA ADICIONADA
+	import '../tailwind.css';
 
-	// --- Sistema de Notificações (Toasts) ---
 	type Toast = {
 		id: number;
 		message: string;
@@ -21,40 +20,23 @@
 	}
 	setContext('showToast', showToast);
 
-	// --- Sistema de Tema de Acessibilidade ---
-	const selectedTheme = writable('default');
-
-	onMount(() => {
-		if (browser) {
-			const savedTheme = localStorage.getItem('theme') || 'default';
-			selectedTheme.set(savedTheme);
-
-			selectedTheme.subscribe((value) => {
-				localStorage.setItem('theme', value);
-				document.documentElement.setAttribute('data-theme', value);
-			});
+	function handleImageError(event: Event) {
+		const target = event.target as HTMLImageElement;
+		const placeholderUrl = target.dataset.placeholder;
+		if (placeholderUrl) {
+			target.src = placeholderUrl;
 		}
-	});
-
-	function toggleTheme() {
-		selectedTheme.update((current) => (current === 'default' ? 'colorblind' : 'default'));
 	}
 </script>
 
-<!-- Estilos Globais e Definições de Tema -->
 <style>
 	:global(html) {
-		--primary-color: #3b82f6; /* Azul */
-		--primary-hover-color: #2563eb;
-		--accent-color: #ef4444; /* Vermelho */
-		--accent-hover-color: #dc2626;
-	}
-
-	:global(html[data-theme='colorblind']) {
-		--primary-color: #4f46e5; /* Índigo */
-		--primary-hover-color: #4338ca;
-		--accent-color: #f59e0b; /* Âmbar */
-		--accent-hover-color: #d97706;
+		--primary-color: #0038a8;
+		--primary-hover-color: #002b82;
+		--accent-color: #16a34a;
+		--accent-hover-color: #15803d;
+		--danger-color: #d8292f;
+		--danger-hover-color: #b91c1c;
 	}
 
 	:global(.bg-primary) { background-color: var(--primary-color); }
@@ -65,9 +47,20 @@
 	:global(.focus\:ring-accent:focus) { --tw-ring-color: var(--accent-color); }
 	:global(.text-primary) { color: var(--primary-color); }
 	:global(.hover\:text-primary-hover:hover) { color: var(--primary-hover-color); }
+	:global(.bg-danger) { background-color: var(--danger-color); }
+	:global(.hover\:bg-danger-hover:hover) { background-color: var(--danger-hover-color); }
+	:global(.text-danger) { color: var(--danger-color); }
+	:global(.hover\:text-danger-hover:hover) { color: var(--danger-hover-color); }
+	:global(body) {
+		min-height: 100vh;
+		display: flex;
+		flex-direction: column;
+	}
+	:global(.flex-grow) {
+		flex-grow: 1;
+	}
 </style>
 
-<!-- Componente de Notificações -->
 <div aria-live="assertive" class="pointer-events-none fixed inset-0 flex items-start px-4 py-6 sm:p-6 z-50">
 	<div class="flex w-full flex-col items-center space-y-4 sm:items-end">
 		{#each $toasts as toast (toast.id)}
@@ -91,10 +84,6 @@
 	</div>
 </div>
 
-<!-- Botão de Acessibilidade -->
-<button on:click={toggleTheme} class="fixed bottom-4 right-4 z-50 rounded-full bg-gray-800 p-3 text-white shadow-lg hover:bg-gray-700">
-	<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2"></path><path d="M12 20v2"></path><path d="m4.93 4.93 1.41 1.41"></path><path d="m17.66 17.66 1.41 1.41"></path><path d="M2 12h2"></path><path d="M20 12h2"></path><path d="m4.93 19.07 1.41-1.41"></path><path d="m17.66 6.34 1.41-1.41"></path></svg>
-</button>
-
-<slot />
-
+<div class="flex-grow">
+	<slot />
+</div>
