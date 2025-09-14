@@ -34,19 +34,11 @@ services:
     restart: unless-stopped
 
   open-webui:
-    build:
-      context: .
-      args:
-        OLLAMA_BASE_URL: '/ollama'
-      dockerfile: Dockerfile
     image: ghcr.io/open-webui/open-webui:${WEBUI_DOCKER_TAG-main}
     container_name: open-webui
     volumes:
       - open-webui:/app/backend/data
-      - ./src:/app/src
-      - ./static:/app/static
-      - ./public:/app/public
-      - ./backend:/app/backend
+
     depends_on:
       ollama:
         condition: service_started
@@ -76,6 +68,22 @@ services:
         - DB_NAME=${POSTGRES_DB}
         - DB_USER=${POSTGRES_USER}
         - DB_PASS=${POSTGRES_PASSWORD}
+
+  open-webui-frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    container_name: open-webui-frontend
+    working_dir: /app
+    volumes:
+      - ./src:/app/src
+      - ./public:/app/public
+      - ./static:/app/static
+    ports:
+      - "2705:5173"
+    environment:
+      - NODE_OPTIONS=--max-old-space-size=8192
+    restart: unless-stopped
 
 
 volumes:
