@@ -1,76 +1,140 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
 	import { goto } from '$app/navigation';
-	import type { Writable } from 'svelte/store';
 
 	const showToast: (message: string, type: 'success' | 'error') => void =
 		getContext('showToast');
+
+	type UserType = 'paciente' | 'medico' | 'admin';
+	let selectedUserType: UserType = 'paciente';
 
 	let fullName = '';
 	let motherName = '';
 	let fatherName = '';
 	let birthDate = '';
 	let cpf = '';
-	let email = ''; // Novo campo
+	let email = '';
 	let password = '';
-	let passwordConfirm = '';
-	let securityQuestion = '';
-	let securityAnswer = '';
+	let confirmPassword = '';
+	let crm = '';
+	let adminCode = '';
 
-	let validation = {
-		length: false,
-		uppercase: false,
-		lowercase: false,
-		number: false,
-		symbol: false
+	let isLoading = false;
+
+	function handleRegister() {
+		isLoading = true;
+
+		setTimeout(() => {
+			if (password !== confirmPassword) {
+				showToast('As senhas não coincidem.', 'error');
+				isLoading = false;
+				return;
+			}
+
+			const strength = checkPasswordStrength(password);
+			if (strength.level !== 'Forte') {
+				showToast('A sua senha não cumpre todos os requisitos de segurança.', 'error');
+				isLoading = false;
+				return;
+			}
+
+			let userData: any = {};
+			let userKey: string = '';
+
+			if (selectedUserType === 'paciente') {
+				if (!fullName || !cpf || !email) {
+					showToast('Por favor, preencha todos os campos obrigatórios.', 'error');
+					isLoading = false;
+					return;
+				}
+				userData = {
+					fullName,
+					motherName,
+					fatherName,
+					birthDate,
+					cpf,
+					email,
+					password
+				};
+				userKey = cpf;
+			} else if (selectedUserType === 'medico') {
+				if (!fullName || !crm || !email) {
+					showToast('Por favor, preencha todos os campos obrigatórios.', 'error');
+					isLoading = false;
+					return;
+				}
+				userData = { fullName, crm, email, password };
+				userKey = crm;
+			} else if (selectedUserType === 'admin') {
+				if (!adminCode) {
+					showToast('Por favor, preencha o código de acesso.', 'error');
+					isLoading = false;
+					return;
+				}
+				userData = { adminCode, password, fullName: 'Administrador' };
+				userKey = adminCode;
+			}
+
+			if (localStorage.getItem(userKey)) {
+				showToast('Este utilizador já está registado.', 'error');
+				isLoading = false;
+				return;
+			}
+
+			localStorage.setItem(userKey, JSON.stringify(userData));
+			showToast('Conta criada com sucesso! Faça o login.', 'success');
+			goto('/login');
+
+			isLoading = false;
+		}, 500);
+	}
+
+	function checkPasswordStrength(pass: string) {
+		let score = 0;
+		const checks = {
+			length: pass.length >= 8 && pass.length <= 15,
+			lowercase: /[a-z]/.test(pass),
+			uppercase: /[A-Z]/.test(pass),
+			number: /[0-9]/.test(pass),
+			special: /[^a-zA-Z0-9]/.test(pass)
+		};
+
+		if (checks.length) score++;
+		if (checks.lowercase) score++;
+		if (checks.uppercase) score++;
+		if (checks.number) score++;
+		if (checks.special) score++;
+
+		let level: 'Fraca' | 'Moderada' | 'Forte' = 'Fraca';
+		let color = 'bg-red-500';
+		const widths = ['w-0', 'w-[20%]', 'w-[40%]', 'w-[60%]', 'w-[80%]', 'w-full'];
+		const width = widths[score];
+
+		if (score >= 5) {
+			level = 'Forte';
+			color = 'bg-green-500';
+		} else if (score >= 3) {
+			level = 'Moderada';
+			color = 'bg-yellow-500';
+		}
+
+		return { level, color, width, checks };
+	}
+
+	let passwordStrength = {
+		level: 'Fraca',
+		color: 'bg-red-500',
+		width: 'w-0',
+		checks: {
+			length: false,
+			lowercase: false,
+			uppercase: false,
+			number: false,
+			special: false
+		}
 	};
 
-	function validatePassword(pass: string) {
-		validation = {
-			length: pass.length >= 8 && pass.length <= 15,
-			uppercase: /[A-Z]/.test(pass),
-			lowercase: /[a-z]/.test(pass),
-			number: /[0-9]/.test(pass),
-			symbol: /[^A-Za-z0-9]/.test(pass)
-		};
-	}
-
-	$: validatePassword(password);
-
-	function handleSignUp() {
-		const allValid = Object.values(validation).every(Boolean);
-
-		if (!allValid) {
-			showToast('A sua senha não cumpre todos os requisitos de segurança.', 'error');
-			return;
-		}
-
-		if (password !== passwordConfirm) {
-			showToast('As senhas não coincidem.', 'error');
-			return;
-		}
-
-		if (localStorage.getItem(cpf)) {
-			showToast('Este CPF já está cadastrado.', 'error');
-			return;
-		}
-
-		const userData = {
-			fullName,
-			motherName,
-			fatherName,
-			birthDate,
-			cpf,
-			email,
-			password,
-			securityQuestion,
-			securityAnswer
-		};
-
-		localStorage.setItem(cpf, JSON.stringify(userData));
-		showToast('Cadastro realizado com sucesso!', 'success');
-		goto('/login');
-	}
+	$: passwordStrength = checkPasswordStrength(password);
 
 	function togglePasswordVisibility(inputId: string) {
 		const input = document.getElementById(inputId) as HTMLInputElement | null;
@@ -80,109 +144,320 @@
 	}
 </script>
 
-<div class="w-full max-w-md p-8 space-y-6 bg-white rounded-2xl shadow-lg">
+<div class="w-full max-w-2xl p-8 space-y-6 bg-white rounded-2xl shadow-lg">
 	<div class="text-center">
-		<h2 class="text-4xl font-bold text-gray-900">Crie a sua conta</h2>
-		<p class="mt-2 text-lg text-gray-600">
-			Preencha seus dados abaixo corretamente para acessar a nossa plataforma.
-		</p>
+		<h2 class="text-4xl font-bold text-gray-900">Crie sua Conta</h2>
+		<p class="mt-2 text-lg text-gray-600">Selecione o seu tipo de perfil para se cadastrar na nossa plataforma.</p>
 	</div>
 
-	<form class="space-y-4" on:submit|preventDefault={handleSignUp}>
-		<div>
-			<label for="fullName" class="block text-base font-semibold text-gray-700">Nome Completo</label>
-			<input bind:value={fullName} id="fullName" type="text" required class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-4 focus:ring-primary/50 text-lg" />
-		</div>
-		<div>
-			<label for="motherName" class="block text-base font-semibold text-gray-700">Nome da Mãe</label>
-			<input bind:value={motherName} id="motherName" type="text" required class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-4 focus:ring-primary/50 text-lg" />
-		</div>
-		<div>
-			<label for="fatherName" class="block text-base font-semibold text-gray-700">Nome do Pai</label>
-			<input bind:value={fatherName} id="fatherName" type="text" required class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-4 focus:ring-primary/50 text-lg" />
-		</div>
-		<div>
-			<label for="birthDate" class="block text-base font-semibold text-gray-700">Data de Nascimento</label>
-			<input bind:value={birthDate} id="birthDate" type="date" required class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-4 focus:ring-primary/50 text-lg" />
-		</div>
-		<div>
-			<label for="cpf" class="block text-base font-semibold text-gray-700">CPF</label>
-			<input bind:value={cpf} id="cpf" type="text" required class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-4 focus:ring-primary/50 text-lg" />
-		</div>
-		<div>
-			<label for="email" class="block text-base font-semibold text-gray-700">E-mail</label>
-			<input bind:value={email} id="email" type="email" required class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-4 focus:ring-primary/50 text-lg" />
-		</div>
+	<div class="flex border-b border-gray-200">
+		<button
+			class="flex-1 py-3 text-lg font-semibold text-center transition-colors {selectedUserType ===
+			'paciente'
+				? 'border-b-2 border-primary text-primary'
+				: 'text-gray-500 hover:text-gray-700'}"
+			on:click={() => (selectedUserType = 'paciente')}>Paciente</button
+		>
+		<button
+			class="flex-1 py-3 text-lg font-semibold text-center transition-colors {selectedUserType ===
+			'medico'
+				? 'border-b-2 border-primary text-primary'
+				: 'text-gray-500 hover:text-gray-700'}"
+			on:click={() => (selectedUserType = 'medico')}>Médico</button
+		>
+		<button
+			class="flex-1 py-3 text-lg font-semibold text-center transition-colors {selectedUserType ===
+			'admin'
+				? 'border-b-2 border-primary text-primary'
+				: 'text-gray-500 hover:text-gray-700'}"
+			on:click={() => (selectedUserType = 'admin')}>Administrador</button
+		>
+	</div>
 
-		<div>
-			<label for="securityQuestion" class="block text-base font-semibold text-gray-700">Pergunta de Segurança</label>
-			<select bind:value={securityQuestion} id="securityQuestion" required class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-4 focus:ring-primary/50 text-lg bg-white">
-				<option value="" disabled>Selecione uma pergunta...</option>
-				<option value="animal">Nome do animal de estimação</option>
-				<option value="cor">Cor preferida</option>
-				<option value="comida">Comida preferida</option>
-				<option value="amigo">Melhor amigo da infância</option>
-				<option value="cidade">Cidade onde os pais se conheceram</option>
-			</select>
-		</div>
-
-		<div>
-			<label for="securityAnswer" class="block text-base font-semibold text-gray-700">Resposta de Segurança</label>
-			<input bind:value={securityAnswer} id="securityAnswer" type="text" required class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-4 focus:ring-primary/50 text-lg" />
-		</div>
+	<form class="mt-8 space-y-6" on:submit|preventDefault={handleRegister}>
+		{#if selectedUserType === 'paciente'}
+			<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+				<div>
+					<label for="fullName" class="block text-base font-semibold text-gray-700"
+						>Nome Completo</label
+					>
+					<input
+						bind:value={fullName}
+						type="text"
+						required
+						class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md"
+					/>
+				</div>
+				<div>
+					<label for="cpf" class="block text-base font-semibold text-gray-700">CPF</label>
+					<input
+						bind:value={cpf}
+						type="text"
+						required
+						class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md"
+					/>
+				</div>
+				<div>
+					<label for="email" class="block text-base font-semibold text-gray-700">E-mail</label>
+					<input
+						bind:value={email}
+						type="email"
+						required
+						class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md"
+					/>
+				</div>
+				<div>
+					<label for="birthDate" class="block text-base font-semibold text-gray-700"
+						>Data de Nascimento</label
+					>
+					<input
+						bind:value={birthDate}
+						type="date"
+						class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md"
+					/>
+				</div>
+				<div>
+					<label for="motherName" class="block text-base font-semibold text-gray-700"
+						>Nome da Mãe</label
+					>
+					<input
+						bind:value={motherName}
+						type="text"
+						class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md"
+					/>
+				</div>
+				<div>
+					<label for="fatherName" class="block text-base font-semibold text-gray-700"
+						>Nome do Pai</label
+					>
+					<input
+						bind:value={fatherName}
+						type="text"
+						class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md"
+					/>
+				</div>
+			</div>
+		{:else if selectedUserType === 'medico'}
+			<div>
+				<label for="fullName" class="block text-base font-semibold text-gray-700"
+					>Nome Completo</label
+				>
+				<input
+					bind:value={fullName}
+					type="text"
+					required
+					class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md"
+				/>
+			</div>
+			<div>
+				<label for="crm" class="block text-base font-semibold text-gray-700">CRM</label>
+				<input
+					bind:value={crm}
+					type="text"
+					required
+					class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md"
+					placeholder="CRM-PE 123456"
+				/>
+			</div>
+			<div>
+				<label for="email" class="block text-base font-semibold text-gray-700">E-mail</label>
+				<input
+					bind:value={email}
+					type="email"
+					required
+					class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md"
+				/>
+			</div>
+		{:else if selectedUserType === 'admin'}
+			<div>
+				<label for="adminCode" class="block text-base font-semibold text-gray-700"
+					>Código de Acesso</label
+				>
+				<input
+					bind:value={adminCode}
+					type="text"
+					required
+					class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md"
+				/>
+			</div>
+		{/if}
 
 		<div class="relative">
 			<label for="password" class="block text-base font-semibold text-gray-700">Senha</label>
-			<input bind:value={password} id="password" type="password" required class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-4 focus:ring-primary/50 text-lg" />
-			<button type="button" on:click={() => togglePasswordVisibility('password')} class="absolute inset-y-0 right-0 top-6 px-3 flex items-center text-gray-500">
-				<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+			<input
+				bind:value={password}
+				id="password"
+				type="password"
+				required
+				class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md"
+			/>
+			<button
+				type="button"
+				on:click={() => togglePasswordVisibility('password')}
+				class="absolute inset-y-0 right-0 top-6 px-3 flex items-center text-gray-500"
+			>
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					width="20"
+					height="20"
+					viewBox="0 0 24 24"
+					fill="none"
+					stroke="currentColor"
+					stroke-width="2"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" /><circle
+						cx="12"
+						cy="12"
+						r="3"
+					/></svg
+				>
 			</button>
 		</div>
 
-		{#if password.length > 0}
-			<div class="pt-2">
-				<p class="text-sm text-gray-600 mb-2">A sua senha precisa de se encaixar nestes moldes:</p>
-				<ul class="space-y-1 text-sm">
-					<li class="flex items-center {validation.length ? 'text-green-600' : 'text-gray-500'}">
-						<svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d={validation.length ? 'M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z' : 'M10 18a8 8 0 100-16 8 8 0 000 16zM9.293 11.293a1 1 0 011.414 0L12 12.586l1.293-1.293a1 1 0 111.414 1.414L13.414 14l1.293 1.293a1 1 0 01-1.414 1.414L12 15.414l-1.293 1.293a1 1 0 01-1.414-1.414L10.586 14 9.293 12.707a1 1 0 010-1.414z'} clip-rule="evenodd"></path></svg>
-						Senha entre 8 - 15 dígitos
+		{#if password}
+			<!-- Password Strength Indicator -->
+			<div class="space-y-2">
+				<div class="flex items-center justify-between">
+					<p class="text-sm font-medium text-gray-700">Força da senha:</p>
+					<p
+						class="text-sm font-bold {passwordStrength.level === 'Forte'
+							? 'text-green-600'
+							: passwordStrength.level === 'Moderada'
+							? 'text-yellow-600'
+							: 'text-red-600'}"
+					>
+						{passwordStrength.level}
+					</p>
+				</div>
+				<div class="w-full bg-gray-200 rounded-full h-2">
+					<div
+						class="h-2 rounded-full transition-all duration-300 {passwordStrength.color} {passwordStrength.width}"
+					/>
+				</div>
+				<ul class="pt-2 text-sm text-gray-500 space-y-1">
+					<li class="flex items-center">
+						<svg
+							class="w-4 h-4 mr-2 {passwordStrength.checks.length ? 'text-green-500' : 'text-gray-400'}"
+							fill="none"
+							stroke="currentColor"
+							viewBox="0 0 24 24"
+							><path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M5 13l4 4L19 7"
+							/></svg
+						>
+						Entre 8 e 15 caracteres
 					</li>
-					<li class="flex items-center {validation.lowercase ? 'text-green-600' : 'text-gray-500'}">
-						<svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d={validation.lowercase ? 'M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z' : 'M10 18a8 8 0 100-16 8 8 0 000 16zM9.293 11.293a1 1 0 011.414 0L12 12.586l1.293-1.293a1 1 0 111.414 1.414L13.414 14l1.293 1.293a1 1 0 01-1.414 1.414L12 15.414l-1.293 1.293a1 1 0 01-1.414-1.414L10.586 14 9.293 12.707a1 1 0 010-1.414z'} clip-rule="evenodd"></path></svg>
-						Pelo menos uma letra minúscula
+					<li class="flex items-center">
+						<svg
+							class="w-4 h-4 mr-2 {passwordStrength.checks.uppercase && passwordStrength.checks.lowercase
+								? 'text-green-500'
+								: 'text-gray-400'}"
+							fill="none"
+							stroke="currentColor"
+							viewBox="0 0 24 24"
+							><path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M5 13l4 4L19 7"
+							/></svg
+						>
+						Letras maiúsculas e minúsculas
 					</li>
-					<li class="flex items-center {validation.uppercase ? 'text-green-600' : 'text-gray-500'}">
-						<svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d={validation.uppercase ? 'M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z' : 'M10 18a8 8 0 100-16 8 8 0 000 16zM9.293 11.293a1 1 0 011.414 0L12 12.586l1.293-1.293a1 1 0 111.414 1.414L13.414 14l1.293 1.293a1 1 0 01-1.414 1.414L12 15.414l-1.293 1.293a1 1 0 01-1.414-1.414L10.586 14 9.293 12.707a1 1 0 010-1.414z'} clip-rule="evenodd"></path></svg>
-						Pelo menos uma letra maiúscula
-					</li>
-					<li class="flex items-center {validation.number ? 'text-green-600' : 'text-gray-500'}">
-						<svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d={validation.number ? 'M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z' : 'M10 18a8 8 0 100-16 8 8 0 000 16zM9.293 11.293a1 1 0 011.414 0L12 12.586l1.293-1.293a1 1 0 111.414 1.414L13.414 14l1.293 1.293a1 1 0 01-1.414 1.414L12 15.414l-1.293 1.293a1 1 0 01-1.414-1.414L10.586 14 9.293 12.707a1 1 0 010-1.414z'} clip-rule="evenodd"></path></svg>
+					<li class="flex items-center">
+						<svg
+							class="w-4 h-4 mr-2 {passwordStrength.checks.number ? 'text-green-500' : 'text-gray-400'}"
+							fill="none"
+							stroke="currentColor"
+							viewBox="0 0 24 24"
+							><path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M5 13l4 4L19 7"
+							/></svg
+						>
 						Pelo menos um número
 					</li>
-					<li class="flex items-center {validation.symbol ? 'text-green-600' : 'text-gray-500'}">
-						<svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d={validation.symbol ? 'M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z' : 'M10 18a8 8 0 100-16 8 8 0 000 16zM9.293 11.293a1 1 0 011.414 0L12 12.586l1.293-1.293a1 1 0 111.414 1.414L13.414 14l1.293 1.293a1 1 0 01-1.414 1.414L12 15.414l-1.293 1.293a1 1 0 01-1.414-1.414L10.586 14 9.293 12.707a1 1 0 010-1.414z'} clip-rule="evenodd"></path></svg>
-						Pelo menos um símbolo (ex: !@#$%)
+					<li class="flex items-center">
+						<svg
+							class="w-4 h-4 mr-2 {passwordStrength.checks.special ? 'text-green-500' : 'text-gray-400'}"
+							fill="none"
+							stroke="currentColor"
+							viewBox="0 0 24 24"
+							><path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M5 13l4 4L19 7"
+							/></svg
+						>
+						Pelo menos um caracter especial
 					</li>
 				</ul>
 			</div>
 		{/if}
 
 		<div class="relative">
-			<label for="passwordConfirm" class="block text-base font-semibold text-gray-700">Confirmar Senha</label>
-			<input bind:value={passwordConfirm} id="passwordConfirm" type="password" required class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-4 focus:ring-primary/50 text-lg" />
-			<button type="button" on:click={() => togglePasswordVisibility('passwordConfirm')} class="absolute inset-y-0 right-0 top-6 px-3 flex items-center text-gray-500">
-				<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+			<label for="confirmPassword" class="block text-base font-semibold text-gray-700"
+				>Confirmar Senha</label
+			>
+			<input
+				bind:value={confirmPassword}
+				id="confirmPassword"
+				type="password"
+				required
+				class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md"
+			/>
+			<button
+				type="button"
+				on:click={() => togglePasswordVisibility('confirmPassword')}
+				class="absolute inset-y-0 right-0 top-6 px-3 flex items-center text-gray-500"
+			>
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					width="20"
+					height="20"
+					viewBox="0 0 24 24"
+					fill="none"
+					stroke="currentColor"
+					stroke-width="2"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" /><circle
+						cx="12"
+						cy="12"
+						r="3"
+					/></svg
+				>
 			</button>
 		</div>
 
-		<div class="flex items-center space-x-4 pt-4">
-			<button type="button" on:click={() => goto('/login')} class="group relative w-full flex justify-center py-4 px-4 border border-gray-300 text-lg font-bold rounded-md text-gray-700 bg-white hover:bg-gray-50">Voltar</button>
-			<button type="submit" class="group relative w-full flex justify-center py-4 px-4 border border-transparent text-lg font-bold rounded-md text-white bg-accent hover:bg-accent-hover focus:outline-none focus:ring-4 focus:ring-offset-2 focus:ring-accent">Criar Conta</button>
+		<div>
+			<button
+				type="submit"
+				class="w-full flex justify-center py-3 px-4 text-lg font-bold rounded-md text-white bg-accent hover:bg-accent-hover disabled:opacity-75"
+				disabled={isLoading}
+			>
+				{#if isLoading}
+					<span
+						class="animate-spin h-5 w-5 mr-3 border-2 border-white border-t-transparent rounded-full"
+					/>
+					Criando conta...
+				{:else}
+					Criar Conta
+				{/if}
+			</button>
 		</div>
 	</form>
+
+	<p class="mt-4 text-center text-base text-gray-600">
+		Já tem uma conta?
+		<a href="/login" class="font-semibold text-primary hover:text-primary-hover">Faça o login</a>
+	</p>
 </div>
-
-
-
-
 

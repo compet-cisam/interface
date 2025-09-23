@@ -5,14 +5,28 @@
 	interface UserData {
 		fullName: string;
 		cpf: string;
+		crm?: string;
 	}
 
-	let user: UserData | null = null;
+	let patientToDisplay: UserData | null = null;
+	let isDoctorViewing = false;
 
 	onMount(() => {
-		const userDataString = sessionStorage.getItem('loggedInUser');
-		if (userDataString) {
-			user = JSON.parse(userDataString);
+		const loggedInUserStr = sessionStorage.getItem('loggedInUser');
+		const viewingPatientStr = sessionStorage.getItem('viewingPatient');
+
+		if (loggedInUserStr) {
+			const loggedInUser: UserData = JSON.parse(loggedInUserStr);
+
+			if (viewingPatientStr && loggedInUser.crm) {
+				isDoctorViewing = true;
+				patientToDisplay = JSON.parse(viewingPatientStr);
+			} else if (loggedInUser.cpf) {
+				isDoctorViewing = false;
+				patientToDisplay = loggedInUser;
+			} else {
+				goto('/login');
+			}
 		} else {
 			goto('/login');
 		}
@@ -23,47 +37,59 @@
 		goto('/login');
 	}
 
+	function handleBackToDoctorPanel() {
+		sessionStorage.removeItem('viewingPatient');
+		goto('/profissional');
+	}
+
 	function handleNavigation(path: string) {
-		if (path === '/envio-exames') {
-			goto('/envio-exames');
-		} else if (path === '/dados-do-paciente') {
-			goto('/dados-do-paciente');
-		} else {
-			alert(`Funcionalidade para "${path}" a ser implementada.`);
-		}
+		goto(path);
 	}
 </script>
 
-<main class="container mx-auto p-4 sm:p-6 lg:p-8">
-	<div class="flex items-center justify-between mb-8">
-		<h1 class="text-3xl font-bold text-gray-900 sm:text-4xl">
-			{#if user}
-				Olá, {user.fullName.split(' ')[0]}!
-			{/if}
-		</h1>
-		<button
-			on:click={handleLogout}
-			class="font-semibold text-danger hover:text-danger-hover transition-colors text-lg"
-		>
-			Sair
-		</button>
-	</div>
-	
-	<div class="mx-auto max-w-2xl text-center">
-		<p class="mt-2 text-xl text-gray-600">Gerencie as suas informações e exames.</p>
+<main class="container mx-auto p-4 sm:p-6 lg:p-8 flex-grow">
+	<div class="flex items-start justify-between mb-6">
+		<div>
+			<h1 class="text-3xl font-bold text-gray-800">
+				{#if patientToDisplay}
+					{#if isDoctorViewing}
+						Painel de {patientToDisplay.fullName}
+					{:else}
+						Olá, {patientToDisplay.fullName.split(' ')[0]}!
+					{/if}
+				{/if}
+			</h1>
+			<p class="mt-2 text-xl text-gray-600">Gerencie as informações e exames.</p>
+		</div>
+
+		{#if isDoctorViewing}
+			<button
+				on:click={handleBackToDoctorPanel}
+				class="font-semibold text-primary hover:text-primary-hover transition-colors text-base"
+			>
+				Voltar ao Meu Painel
+			</button>
+		{:else}
+			<button
+				on:click={handleLogout}
+				class="font-semibold text-danger hover:text-danger-hover transition-colors text-base"
+			>
+				Sair
+			</button>
+		{/if}
 	</div>
 
-	<div class="mt-12 grid grid-cols-1 gap-8 md:grid-cols-2">
+	<div class="mt-12 flex flex-col md:flex-row gap-6 justify-center items-stretch">
 		<button
 			on:click={() => handleNavigation('/envio-exames')}
-			class="group flex flex-col items-center rounded-2xl bg-white p-8 text-center shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+			class="group flex flex-col items-center rounded-2xl bg-white p-8 text-center shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl flex-1"
 		>
 			<div
-				class="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-blue-100 text-primary transition-colors group-hover:bg-primary group-hover:text-white"
+				class="mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-blue-100 text-primary transition-colors group-hover:bg-primary group-hover:text-white"
 			>
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
-					class="h-8 w-8"
+					class="h-9 w-9"
 					fill="none"
 					viewBox="0 0 24 24"
 					stroke="currentColor"
@@ -77,21 +103,21 @@
 				</svg>
 			</div>
 			<h3 class="text-2xl font-bold text-gray-800">Enviar Exames de Imagem</h3>
-			<p class="mt-2 text-base text-gray-600">
-				Clique aqui para enviar os seus exames, como ultrassonografias, ressonâncias, entre outros.
+			<p class="mt-2 text-gray-600">
+				Clique aqui para enviar os seus exames, como ultrassonografias e ressonâncias.
 			</p>
 		</button>
 
 		<button
 			on:click={() => handleNavigation('/dados-do-paciente')}
-			class="group flex flex-col items-center rounded-2xl bg-white p-8 text-center shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+			class="group flex flex-col items-center rounded-2xl bg-white p-8 text-center shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl flex-1"
 		>
 			<div
-				class="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-blue-100 text-primary transition-colors group-hover:bg-primary group-hover:text-white"
+				class="mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-blue-100 text-primary transition-colors group-hover:bg-primary group-hover:text-white"
 			>
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
-					class="h-8 w-8"
+					class="h-9 w-9"
 					fill="none"
 					viewBox="0 0 24 24"
 					stroke="currentColor"
@@ -105,12 +131,9 @@
 				</svg>
 			</div>
 			<h3 class="text-2xl font-bold text-gray-800">Meus Dados e Exames</h3>
-			<p class="mt-2 text-base text-gray-600">
+			<p class="mt-2 text-gray-600">
 				Acesse aqui todas as informações e exames que você já enviou para a plataforma.
 			</p>
 		</button>
 	</div>
 </main>
-
-
-

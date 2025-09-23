@@ -1,168 +1,264 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
+	import { onMount, getContext } from 'svelte';
 	import { goto } from '$app/navigation';
-	import { getContext } from 'svelte';
-	import type { Writable } from 'svelte/store';
 
 	const showToast: (message: string, type: 'success' | 'error') => void =
 		getContext('showToast');
 
-	interface ExamFile {
-		id: number;
+	interface User {
+		fullName: string;
+		cpf?: string;
+		crm?: string;
+	}
+
+	interface FileWithType {
+		file: File;
 		type: string;
-		file: File | null;
-		fileName: string;
-		dataUrl: string | null;
 	}
 
-	interface UserData {
-		cpf: string;
-	}
+	let currentUser: User | null = null;
+	let patient: User | null = null;
+	let isDoctorViewing = false;
 
-	let examList: ExamFile[] = [];
-	let currentUser: UserData | null = null;
+	let filesWithTypes: FileWithType[] = [];
+	let isLoading = false;
 
 	onMount(() => {
-		const userDataString = sessionStorage.getItem('loggedInUser');
-		if (userDataString) {
-			currentUser = JSON.parse(userDataString);
-		} else {
-			goto('/login');
+		const viewingPatientStr = sessionStorage.getItem('viewingPatient');
+		const loggedInUserStr = sessionStorage.getItem('loggedInUser');
+
+		if (viewingPatientStr) {
+			const viewingPatient = JSON.parse(viewingPatientStr);
+			const patientDataStr = localStorage.getItem(viewingPatient.cpf);
+			if (patientDataStr) {
+				patient = JSON.parse(patientDataStr);
+			}
+			isDoctorViewing = true;
+		} else if (loggedInUserStr) {
+			patient = JSON.parse(loggedInUserStr);
 		}
-		addExamField();
+
+		if (!loggedInUserStr) {
+			goto('/login');
+		} else {
+			currentUser = JSON.parse(loggedInUserStr);
+		}
 	});
 
-	function addExamField() {
-		const newExam: ExamFile = {
-			id: Date.now(),
-			type: '',
-			file: null,
-			fileName: 'Nenhum ficheiro escolhido',
-			dataUrl: null
-		};
-		examList = [...examList, newExam];
-	}
-
-	function removeExamField(id: number) {
-		examList = examList.filter((exam) => exam.id !== id);
-	}
-
-	function handleFileSelect(event: Event, id: number) {
-		const input = event.target as HTMLInputElement;
+	function handleFileSelect(e: Event) {
+		const input = e.currentTarget as HTMLInputElement;
 		if (input.files && input.files.length > 0) {
-			const file = input.files[0];
-			const reader = new FileReader();
-			reader.onload = (e) => {
-				examList = examList.map((exam) =>
-					exam.id === id
-						? { ...exam, file: file, fileName: file.name, dataUrl: e.target?.result as string }
-						: exam
-				);
-			};
-			reader.readAsDataURL(file);
+			const newFiles = Array.from(input.files).map((f) => ({ file: f, type: '' }));
+			filesWithTypes = [...filesWithTypes, ...newFiles];
 		}
 	}
 
-	function handleSubmit() {
-		if (!currentUser) {
-			showToast('Erro: Utilizador não encontrado. Por favor, faça login novamente.', 'error');
+	function handleDrop(e: DragEvent) {
+		if (e.dataTransfer && e.dataTransfer.files.length > 0) {
+			const newFiles = Array.from(e.dataTransfer.files).map((f) => ({ file: f, type: '' }));
+			filesWithTypes = [...filesWithTypes, ...newFiles];
+		}
+	}
+
+	function removeFile(indexToRemove: number) {
+		filesWithTypes = filesWithTypes.filter((_, index) => index !== indexToRemove);
+
+		if (filesWithTypes.length === 0) {
+			const fileInput = document.getElementById('exam-file') as HTMLInputElement;
+			if (fileInput) fileInput.value = '';
+		}
+	}
+
+	async function handleExamSubmit() {
+		if (!patient || !patient.cpf || filesWithTypes.length === 0) {
+			showToast('Por favor, selecione pelo menos um ficheiro.', 'error');
 			return;
 		}
 
-		const examsToSubmit = examList.filter((exam) => exam.type && exam.file && exam.dataUrl);
-		if (examsToSubmit.length === 0) {
-			showToast('Por favor, preencha e anexe pelo menos um exame.', 'error');
+		const hasEmptyType = filesWithTypes.some(f => !f.type);
+		if (hasEmptyType) {
+			showToast('Por favor, selecione um tipo para cada exame.', 'error');
 			return;
 		}
 
-		const storageKey = `exams_${currentUser.cpf}`;
-		const existingExamsString = localStorage.getItem(storageKey);
-		let existingExams = existingExamsString ? JSON.parse(existingExamsString) : [];
+		isLoading = true;
 
-		const newExams = examsToSubmit.map((exam) => ({
-			id: exam.id,
-			type: exam.type,
-			fileName: exam.fileName,
-			timestamp: new Date().toLocaleString('pt-BR'),
-			dataUrl: exam.dataUrl
-		}));
+		try {
+			const examsKey = `exams_${patient.cpf}`;
+			const existingExamsString = localStorage.getItem(examsKey);
+			let existingExams = [];
+			if (existingExamsString) {
+				existingExams = JSON.parse(existingExamsString);
+			}
 
-		const updatedExams = [...existingExams, ...newExams];
-		localStorage.setItem(storageKey, JSON.stringify(updatedExams));
+			const fileReadPromises = filesWithTypes.map(({ file, type }, i) => {
+				return new Promise((resolve, reject) => {
+					const reader = new FileReader();
+					reader.readAsDataURL(file);
+					reader.onload = () => {
+						const newExam = {
+							id: Date.now() + i,
+							type: type,
+							fileName: file.name,
+							timestamp: new Date().toLocaleString('pt-BR'),
+							dataUrl: reader.result as string,
+							submittedBy: currentUser?.fullName
+						};
+						resolve(newExam);
+					};
+					reader.onerror = (error) => reject(error);
+				});
+			});
 
-		showToast(`${examsToSubmit.length} exame(s) enviado(s) com sucesso!`, 'success');
+			const newExams = await Promise.all(fileReadPromises);
+			const updatedExams = [...existingExams, ...newExams];
+			localStorage.setItem(examsKey, JSON.stringify(updatedExams));
+
+			showToast(`${newExams.length} exame(s) enviado(s) com sucesso!`, 'success');
+
+			filesWithTypes = [];
+			const fileInput = document.getElementById('exam-file') as HTMLInputElement;
+			if (fileInput) fileInput.value = '';
+		} catch (e) {
+			showToast('Ocorreu um erro ao salvar os exames.', 'error');
+		} finally {
+			isLoading = false;
+		}
+	}
+
+	function goBack() {
+		// Correção: Leva sempre de volta ao painel do paciente em visualização
 		goto('/painel');
 	}
 </script>
 
-<div class="min-h-screen bg-gray-50 flex-grow" style="background: linear-gradient(to bottom, #FFFFFF, #EBF8FF);">
-	<main class="container mx-auto p-4 sm:p-6 lg:p-8">
-		<div class="mx-auto max-w-2xl rounded-2xl bg-white p-8 shadow-lg">
-			<div class="text-center">
-				<h1 class="text-3xl font-bold text-gray-900">Envio de Exames</h1>
-				<p class="mt-2 text-gray-600">Adicione um ou mais exames para enviar à plataforma.</p>
-			</div>
+<main class="container mx-auto p-4 sm:p-6 lg:p-8 flex-grow">
+	<div class="max-w-3xl mx-auto">
+		<button
+			on:click={goBack}
+			class="flex items-center text-lg font-semibold text-primary hover:text-primary-hover mb-6"
+		>
+			<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+				><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg
+			>
+			<span class="ml-2">Voltar ao Painel do Paciente</span>
+		</button>
 
-			<form on:submit|preventDefault={handleSubmit} class="mt-8 space-y-6">
-				<div id="exam-list-container" class="space-y-6">
-					{#each examList as exam (exam.id)}
-						<div class="rounded-lg border bg-gray-50 p-4">
-							<div class="mb-4 flex items-center justify-between">
-								<span class="font-medium text-gray-800">Exame</span>
-								{#if examList.length > 1}
-									<button
-										type="button"
-										on:click={() => removeExamField(exam.id)}
-										class="text-gray-400 hover:text-red-500"
-									>
-										<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-											<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
-										</svg>
-									</button>
-								{/if}
-							</div>
+		<div class="p-8 bg-white rounded-2xl shadow-lg">
+			<h1 class="text-3xl font-bold text-gray-900">Enviar Exame de Imagem</h1>
+			{#if patient}
+				<p class="mt-2 text-lg text-gray-600">
+					Enviando exame para: <span class="font-semibold">{patient.fullName}</span>
+				</p>
+			{/if}
 
-							<div class="space-y-4">
-								<div>
-									<label for="exam-type-{exam.id}" class="mb-1 block text-sm font-medium text-gray-700">Tipo de Exame</label>
-									<select bind:value={exam.type} id="exam-type-{exam.id}" required class="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary">
-										<option value="" disabled>Selecione o tipo</option>
-										<option value="Ultrassonografia">Ultrassonografia</option>
-										<option value="Ressonância Magnética">Ressonância Magnética</option>
-										<option value="Mamografia">Mamografia</option>
-										<option value="Tomografia Computadorizada">Tomografia Computadorizada</option>
-										<option value="Raio-X">Raio-X</option>
-										<option value="Outro">Outro</option>
-									</select>
-								</div>
-								<div>
-									<label for="file-upload-{exam.id}" class="mb-1 block text-sm font-medium text-gray-700">Arquivo do Exame</label>
-									<div class="flex items-center space-x-4">
-										<label class="cursor-pointer rounded-md bg-white px-4 py-2 text-sm font-medium text-primary shadow-sm border border-primary hover:bg-blue-50">
-											<span>Escolher arquivo</span>
-											<input id="file-upload-{exam.id}" on:change={(e) => handleFileSelect(e, exam.id)} type="file" class="sr-only" accept=".pdf,.png,.jpg,.jpeg"/>
-										</label>
-										<span class="text-sm text-gray-500">{exam.fileName}</span>
-									</div>
-								</div>
+			<form class="mt-8 space-y-6" on:submit|preventDefault={handleExamSubmit}>
+				<div>
+					<label for="exam-file" class="block text-base font-semibold text-gray-700"
+						>Anexar Documento(s)</label
+					>
+					<div
+						class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md"
+						on:dragover|preventDefault
+						on:drop|preventDefault={handleDrop}
+					>
+						<div class="space-y-1 text-center">
+							<svg
+								class="mx-auto h-12 w-12 text-gray-400"
+								stroke="currentColor"
+								fill="none"
+								viewBox="0 0 48 48"
+								aria-hidden="true"
+							>
+								<path
+									d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8"
+									stroke-width="2"
+									stroke-linecap="round"
+									stroke-linejoin="round"></path>
+							</svg>
+							<div class="flex justify-center text-sm text-gray-600">
+								<label
+									for="exam-file"
+									class="relative cursor-pointer bg-white rounded-md font-medium text-primary hover:text-primary-hover focus-within:outline-none"
+								>
+									<span>Carregue um ou mais ficheiros</span>
+									<input
+										id="exam-file"
+										name="exam-file"
+										type="file"
+										class="sr-only"
+										on:change={handleFileSelect}
+										accept="image/*,application/pdf"
+										multiple
+									/>
+								</label>
+								<p class="pl-1">ou arraste e solte</p>
 							</div>
+							<p class="text-xs text-gray-500">PNG, JPG, PDF até 10MB</p>
+							{#if filesWithTypes.length > 0}
+								<div class="pt-4 text-left">
+									<p class="font-semibold text-gray-800">Ficheiros selecionados:</p>
+									<ul class="mt-2 space-y-4">
+										{#each filesWithTypes as { file, type }, i}
+											<li class="p-3 rounded-md border border-gray-200 bg-gray-50">
+												<div class="flex items-center justify-between">
+													<span class="truncate font-medium text-gray-700">{file.name}</span>
+													<button
+														type="button"
+														on:click={() => removeFile(i)}
+														class="ml-2 text-gray-400 hover:text-danger"
+														aria-label="Remover {file.name}"
+													>
+														<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+															<path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+														</svg>
+													</button>
+												</div>
+												<div class="mt-2">
+													<label for="exam-type-{i}" class="sr-only">Tipo do Exame para {file.name}</label>
+													<select
+														bind:value={filesWithTypes[i].type}
+														id="exam-type-{i}"
+														required
+														class="block w-full px-2 py-1.5 border border-gray-300 rounded-md shadow-sm text-sm"
+													>
+														<option value="" disabled>Selecione um tipo de exame</option>
+														<option value="Ultrassonografia">Ultrassonografia</option>
+														<option value="Ressonância Magnética">Ressonância Magnética</option>
+														<option value="Tomografia Computadorizada">Tomografia Computadorizada</option>
+														<option value="Raio-X">Raio-X</option>
+														<option value="Mamografia">Mamografia</option>
+														<option value="Outro">Outro</option>
+													</select>
+												</div>
+											</li>
+										{/each}
+									</ul>
+								</div>
+							{/if}
 						</div>
-					{/each}
+					</div>
 				</div>
-
-				<button type="button" on:click={addExamField} class="flex w-full items-center justify-center space-x-2 rounded-lg border-2 border-dashed border-gray-300 py-3 text-sm font-medium text-gray-700 hover:border-primary hover:text-primary">
-					<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-						<path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
-					</svg>
-					<span>Adicionar outro exame</span>
-				</button>
-
-				<div class="flex items-center space-x-4 pt-4">
-					<button type="button" on:click={() => goto('/painel')} class="w-full rounded-md border border-gray-300 bg-white py-3 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50">Voltar</button>
-					<button type="submit" class="w-full rounded-md border border-transparent bg-accent py-3 text-sm font-medium text-white shadow-sm hover:bg-accent-hover">Enviar Exames</button>
+				<div>
+					<button
+						type="submit"
+						class="w-full flex justify-center py-3 px-4 text-lg font-bold rounded-md text-white bg-accent hover:bg-accent-hover"
+						disabled={isLoading || filesWithTypes.length === 0}
+					>
+						{#if isLoading}
+							<span
+								class="animate-spin h-5 w-5 mr-3 border-2 border-white border-t-transparent rounded-full"
+							></span>
+							Enviando...
+						{:else}
+							Enviar Exame(s)
+						{/if}
+					</button>
 				</div>
 			</form>
 		</div>
-	</main>
-</div>
+	</div>
+</main>
+
+
 

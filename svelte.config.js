@@ -5,12 +5,9 @@ import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 const config = {
 	preprocess: vitePreprocess(),
 	kit: {
-		adapter: adapter(),
-		files: {
-			// Não precisamos mais de um app.html personalizado
-			// appTemplate: 'src/app.html'
-		}
+		adapter: adapter()
 	}
 };
 
 export default config;
+

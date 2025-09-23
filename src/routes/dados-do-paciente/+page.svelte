@@ -1,8 +1,6 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
+	import { onMount, getContext } from 'svelte';
 	import { goto } from '$app/navigation';
-	import { getContext } from 'svelte';
-	import type { Writable } from 'svelte/store';
 
 	const showToast: (message: string, type: 'success' | 'error') => void =
 		getContext('showToast');
@@ -22,10 +20,12 @@
 		fileName: string;
 		timestamp: string;
 		dataUrl: string;
+		submittedBy: string;
 	}
 
 	let user: UserData | null = null;
 	let submittedExams: Exam[] = [];
+	let isDoctorViewing = false;
 
 	let showModal = false;
 	let selectedExam: Exam | null = null;
@@ -34,12 +34,28 @@
 	let examToDelete: Exam | null = null;
 
 	onMount(() => {
-		const userDataString = sessionStorage.getItem('loggedInUser');
-		if (userDataString) {
-			user = JSON.parse(userDataString) as UserData;
-			loadExams();
+		const viewingPatientStr = sessionStorage.getItem('viewingPatient');
+		const loggedInUserStr = sessionStorage.getItem('loggedInUser');
+		let patientCpf: string | null = null;
+
+		if (viewingPatientStr) {
+			const viewingPatient = JSON.parse(viewingPatientStr);
+			patientCpf = viewingPatient.cpf;
+			isDoctorViewing = true;
+		} else if (loggedInUserStr) {
+			const loggedInUser = JSON.parse(loggedInUserStr);
+			patientCpf = loggedInUser.cpf;
 		} else {
 			goto('/login');
+			return;
+		}
+
+		if (patientCpf) {
+			const patientDataStr = localStorage.getItem(patientCpf);
+			if (patientDataStr) {
+				user = JSON.parse(patientDataStr);
+				loadExams();
+			}
 		}
 
 		const handleEscape = (event: KeyboardEvent) => {
@@ -56,10 +72,13 @@
 	});
 
 	function loadExams() {
-		if (user) {
-			const userExamsString = localStorage.getItem(`exams_${user.cpf}`);
+		if (user && user.cpf) {
+			const examsKey = `exams_${user.cpf}`;
+			const userExamsString = localStorage.getItem(examsKey);
 			if (userExamsString) {
 				submittedExams = JSON.parse(userExamsString);
+			} else {
+				submittedExams = [];
 			}
 		}
 	}
@@ -70,9 +89,10 @@
 	}
 
 	function confirmDelete() {
-		if (user && examToDelete) {
+		if (user && user.cpf && examToDelete) {
 			const updatedExams = submittedExams.filter((exam) => exam.id !== examToDelete!.id);
-			localStorage.setItem(`exams_${user.cpf}`, JSON.stringify(updatedExams));
+			const examsKey = `exams_${user.cpf}`;
+			localStorage.setItem(examsKey, JSON.stringify(updatedExams));
 			submittedExams = updatedExams;
 			showToast('Exame removido com sucesso.', 'success');
 		}
@@ -100,6 +120,11 @@
 		if (!dateString) return '';
 		const [year, month, day] = dateString.split('-');
 		return `${day}/${month}/${year}`;
+	}
+
+	function goBack() {
+		// Correção: Leva sempre de volta ao painel do paciente em visualização
+		goto('/painel');
 	}
 </script>
 
@@ -196,7 +221,7 @@
 		<div class="mx-auto max-w-3xl space-y-8">
 			{#if user}
 				<div class="rounded-2xl bg-white p-6 sm:p-8 shadow-lg">
-					<h1 class="text-3xl font-bold text-gray-900">Meus Dados Pessoais</h1>
+					<h1 class="text-3xl font-bold text-gray-900">Dados Pessoais</h1>
 					<div class="mt-6 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-8 text-lg">
 						<div>
 							<dt class="text-base font-semibold text-gray-500">Nome Completo</dt>
@@ -227,7 +252,7 @@
 			{/if}
 
 			<div class="rounded-2xl bg-white p-6 sm:p-8 shadow-lg">
-				<h2 class="text-3xl font-bold text-gray-900">Meus Exames Enviados</h2>
+				<h2 class="text-3xl font-bold text-gray-900">Exames Enviados</h2>
 				<ul class="mt-6 space-y-4">
 					{#if submittedExams.length > 0}
 						{#each submittedExams as exam}
@@ -236,6 +261,9 @@
 									<p class="font-semibold text-lg text-gray-800 truncate">{exam.fileName}</p>
 									<p class="text-base text-gray-500">Tipo: {exam.type}</p>
 									<p class="text-base text-gray-500">Enviado em: {exam.timestamp}</p>
+									{#if exam.submittedBy}
+										<p class="text-sm text-gray-500 italic">Enviado por: {exam.submittedBy}</p>
+									{/if}
 								</div>
 								<div class="flex flex-shrink-0 items-center space-x-4 ml-4">
 									<button
@@ -270,19 +298,19 @@
 						{/each}
 					{:else}
 						<li class="text-center text-gray-500 py-4 text-lg">
-							Você ainda não enviou nenhum exame.
+							Ainda não foram enviados exames.
 						</li>
 					{/if}
 				</ul>
 			</div>
 
 			<div class="pt-4 text-center">
-				<a
-					href="/painel"
+				<button
+					on:click={goBack}
 					class="inline-block rounded-md border border-gray-300 bg-white px-10 py-4 text-lg font-bold text-gray-700 shadow-sm hover:bg-gray-50"
 				>
-					Voltar ao Painel
-				</a>
+					Voltar
+				</button>
 			</div>
 		</div>
 	</main>

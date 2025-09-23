@@ -19,14 +19,6 @@
 		}, 3000);
 	}
 	setContext('showToast', showToast);
-
-	function handleImageError(event: Event) {
-		const target = event.target as HTMLImageElement;
-		const placeholderUrl = target.dataset.placeholder;
-		if (placeholderUrl) {
-			target.src = placeholderUrl;
-		}
-	}
 </script>
 
 <style>
@@ -38,7 +30,6 @@
 		--danger-color: #d8292f;
 		--danger-hover-color: #b91c1c;
 	}
-
 	:global(.bg-primary) { background-color: var(--primary-color); }
 	:global(.hover\:bg-primary-hover:hover) { background-color: var(--primary-hover-color); }
 	:global(.focus\:ring-primary:focus) { --tw-ring-color: var(--primary-color); }
@@ -47,7 +38,7 @@
 	:global(.focus\:ring-accent:focus) { --tw-ring-color: var(--accent-color); }
 	:global(.text-primary) { color: var(--primary-color); }
 	:global(.hover\:text-primary-hover:hover) { color: var(--primary-hover-color); }
-	:global(.bg-danger) { background-color: var(--danger-color); }
+    :global(.bg-danger) { background-color: var(--danger-color); }
 	:global(.hover\:bg-danger-hover:hover) { background-color: var(--danger-hover-color); }
 	:global(.text-danger) { color: var(--danger-color); }
 	:global(.hover\:text-danger-hover:hover) { color: var(--danger-hover-color); }
