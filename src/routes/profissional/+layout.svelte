@@ -1,5 +1,4 @@
 <script lang="ts">
-	// Esta função para imagens com erro é uma ótima ideia! Vamos mantê-la.
 	function handleImageError(event: Event) {
 		const target = event.target as HTMLImageElement;
 		const placeholderUrl = target.dataset.placeholder;
