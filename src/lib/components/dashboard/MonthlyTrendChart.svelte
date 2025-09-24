@@ -69,8 +69,16 @@
     };
 </script>
 
-<h3 class="text-center text-gray-200 text-lg font-semibold mb-4">Tendência de Consultas por Mês</h3>
+<!-- <div class="h-64 rounded-xl bg-[#1e1e2f] p-4 shadow-lg"> -->
+<!-- <h3 class="text-center text-gray-200 text-lg font-semibold mb-4">Tendência de Consultas por Mês</h3>
 
 <div class="h-64 rounded-xl bg-[#1e1e2f] p-4 shadow-lg">
     <Line data={chartData} options={chartOptions} />
+</div> -->
+
+<div class="bg-[#1e1e2f] p-4 rounded-xl shadow-lg h-full flex flex-col">
+	<h3 class="text-center text-lg font-semibold mb-3 text-white">Tendência de Consultas por Mês</h3>
+	<div class="max-h-[500px] overflow-y-auto min-h-[300px]" >
+		<Line data={chartData} options={chartOptions} />
+	</div>
 </div>

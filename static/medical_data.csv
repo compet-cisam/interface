@@ -1,7 +1,7 @@
 PatientID;Age;HealthArea;Symptom;DiagnosedDisease;RecommendedTreatment;AgeRange;AppointmentMonth;AppointmentYear;FullDate
 1;37;Histeroscopia Diagnóstica;Desejo de engravidar + suspeita de um pólipo ;Endométrio padrão secretor;Sem dados;35-44;Março;2023;23/03/2023
 2;52;Histeroscopia Diagnóstica;Indisposição e cansaço;Pólipo endocervical e suspeita de mioma;Sem dados;45-54;Abril;2023;20/04/2023
-3;73;Histeroscopia Diagnóstica;Indicação cirúrgica ;Sem dados;Sem dados;65+;Fevereiro;2023;09/02/2023
+3;73;Histeroscopia Diagnóstica;Indicação cirúrgica;Sem dados;Sem dados;65+;Fevereiro;2023;09/02/2023
 4;36;Histeroscopia Diagnóstica;Sangramento contínuo;Espessamento endometrial;Sem dados;35-44;Abril;2023;27/04/2023
 5;54;Histeroscopia Diagnóstica;Dores no baixo ventre + pólipos;Sem dados;Sem dados;45-54;Outubro;2023;05/10/2023
 6;63;Histeroscopia Diagnóstica;Sangramento na menopausa ;Pólipo endometrial + pólipo endocervical; mucometra por estenose cervical;55-64;Março;2023;02/03/2023
@@ -30,7 +30,7 @@ PatientID;Age;HealthArea;Symptom;DiagnosedDisease;RecommendedTreatment;AgeRange;
 29;72;Histeroscopia Diagnóstica;sangramento na menopausa ;Sem dados;Sem dados;65+;Maio;2024;30/05/2024
 30;41;Histeroscopia Diagnóstica;Dores intensas +  sangramento contínuo;Espessamento endometrial;Sem dados;35-44;Dezembro;2023;21/12/2023
 31;46;Histeroscopia Diagnóstica;Pólipo endometrial + cólicas ;Pólipo endometrial;Sem dados;45-54;Julho;2024;11/07/2024
-32;57;Histeroscopia Diagnóstica;Indicação cirúrgica ;Sem dados;Sem dados;55-64;Julho;2024;25/07/2024
+32;57;Histeroscopia Diagnóstica;Indicação cirúrgica;Sem dados;Sem dados;55-64;Julho;2024;25/07/2024
 33;74;Histeroscopia Diagnóstica;Solicitação médica;Sem dados;Sem dados;65+;Dezembro;2023;28/12/2023
 34;44;Histeroscopia Diagnóstica;Solicitação médica;Sem dados;Sem dados;35-44;Setembro;2024;12/09/2024
 35;48;Histeroscopia Diagnóstica;Sangramento contínuo + dores intensas;Sem dados;Sem dados;45-54;Novembro;2024;21/11/2024
@@ -45,8 +45,8 @@ PatientID;Age;HealthArea;Symptom;DiagnosedDisease;RecommendedTreatment;AgeRange;
 44;31;Histeroscopia Diagnóstica;Sangramento na relação sexual;Sem dados;Sem dados;25-34;Julho;2023;27/07/2023
 45;51;Histeroscopia Diagnóstica;Fluxo intenso + coágulo;Sem dados;Sem dados;45-54;Setembro;2024;19/09/2024
 56;52;Histeroscopia Diagnóstica;Solicitação médica;Sem dados;Sem dados;45-54;Agosto;2023;24/08/2023
-47;59;Histeroscopia Diagnóstica;Indicação cirúrgica ;NÓDULOS MIOMATOSOS+LÍQUIDO NO INTERIOR DA CAVIDADE ENDOMETRIAL+PROCESSO INFLAMATÓRIO/INFECCIOSO;Sem dados;55-64;Julho;2023;13/07/2023
-48;60;Histeroscopia Diagnóstica;Indicação cirúrgica ;Perinioplastia +Suspensão de bexiga + Endometriose + Pólipo endometrial;Sem dados;55-64;Julho;2023;13/07/2023
+47;59;Histeroscopia Diagnóstica;Indicação cirúrgica;NÓDULOS MIOMATOSOS+LÍQUIDO NO INTERIOR DA CAVIDADE ENDOMETRIAL+PROCESSO INFLAMATÓRIO/INFECCIOSO;Sem dados;55-64;Julho;2023;13/07/2023
+48;60;Histeroscopia Diagnóstica;Indicação cirúrgica;Perinioplastia +Suspensão de bexiga + Endometriose + Pólipo endometrial;Sem dados;55-64;Julho;2023;13/07/2023
 49;32;Histeroscopia Diagnóstica;Cistos simples ovário direito;Sem dados;Sem dados;25-34;Junho;2023;22/06/2023
 50;67;Histeroscopia Diagnóstica;Sangramento na menopausa + dores na pelve;Sem dados;Sem dados;65+;Junho;2023;22/06/2023
 51;56;Histeroscopia Diagnóstica;Solicitação médica;Sem dados;Sem dados;55-64;Junho;2023;08/06/2023
@@ -58,7 +58,7 @@ PatientID;Age;HealthArea;Symptom;DiagnosedDisease;RecommendedTreatment;AgeRange;
 57;56;Histeroscopia Diagnóstica;Dores intensas;Sem dados;Sem dados;55-64;Junho;2023;15/06/2023
 58;46;Histeroscopia Diagnóstica;Solicitação médica;Pólipo endometrial;Sem dados;45-54;Janeiro;2024;25/01/2024
 59;59;Histeroscopia Diagnóstica;Nódulo uterino + espessamento;Espessamento endometrial;Sem dados;55-64;Julho;2023;06/07/2023
-60;52;Histeroscopia Diagnóstica;Indicação cirúrgica ;Sem dados;Sem dados;45-54;Dezembro;2024;12/12/2024
+60;52;Histeroscopia Diagnóstica;Indicação cirúrgica;Sem dados;Sem dados;45-54;Dezembro;2024;12/12/2024
 61;50;Histeroscopia Diagnóstica;Solicitação médica;Sem dados;Sem dados;45-54;Junho;2023;15/06/2023
 62;42;Histeroscopia Diagnóstica;Sangramento na relação sexual;Pólipo endometrial;Sem dados;35-44;Julho;2023;06/07/2023
 63;58;Histeroscopia Diagnóstica;Sangramento na menopausa ;Espessamento endometrial + mioma;Sem dados;55-64;Agosto;2023;03/08/2023
@@ -81,7 +81,7 @@ PatientID;Age;HealthArea;Symptom;DiagnosedDisease;RecommendedTreatment;AgeRange;
 82;54;Histeroscopia Diagnóstica;Dores no útero  ;Sem dados;Sem dados;45-54;Agosto;2023;03/08/2023
 83;58;Histeroscopia Diagnóstica;Pólipo ;Sem dados;Sem dados;55-64;Novembro;2023;30/11/2023
 84;43;Histeroscopia Diagnóstica;Sangramento contínuo;Sem dados;Sem dados;35-44;Julho;2023;20/07/2023
-85;52;Histeroscopia Diagnóstica;Indicação cirúrgica  ;Sem dados;Sem dados;45-54;Julho;2023;27/07/2023
+85;52;Histeroscopia Diagnóstica;Indicação cirúrgica;Sem dados;Sem dados;45-54;Julho;2023;27/07/2023
 86;61;Histeroscopia Diagnóstica;Solicitação médica;Sem dados;Sem dados;55-64;Junho;2024;20/06/2024
 87;53;Histeroscopia Diagnóstica;Solicitação médica;Sem dados;Sem dados;45-54;Novembro;2023;09/11/2023
 88;50;Histeroscopia Diagnóstica;Dores intensas + Pólipo e Mioma;Pólipo endometrial e mioma;Sem dados;45-54;Fevereiro;2025;06/02/2025
@@ -364,3 +364,43 @@ M852;34;Planejamento Reprodutivo;Revisão do DIU ;Sem dados;Sem dados;25-34;Sem 
 M853;33;Planejamento Reprodutivo;Inserção DIU ;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados
 M854;20;Planejamento Reprodutivo;Revisão do DIU ;Sem dados;Sem dados;18-24;Sem dados;Sem dados;Sem dados
 M855;41;Planejamento Reprodutivo;Inserção DIU ;Sem dados;Sem dados;35-44;Sem dados;Sem dados;Sem dados
+Homem 1;49;Odontologia;Restauração caiu;;Restauração dentária + clareamento dentário + endodontia;45-54;Julho;2023
+Mulher 1;32;Odontologia;;;Restauração dentária + exodontia;25-34;Agosto;2023
+Mulher 2;24;Odontologia;Dor de dente + sensibilidade;;;18-24;Março;2023
+Mulher 3;27;Odontologia;Dor de dente;;;25-34;Agosto;2023
+Homem 2;6;Odontologia;Dente furado;;;18-;Março;2023
+Mulher 4;51;Odontologia;;;Restauração dentária + exodontia;45-54;Agosto;2023
+Mulher 5;41;Odontologia;Dor de dente;;;35-44;Agosto;2023
+Mulher 6;28;Odontologia;;;Exodontia;25-34;Março;2023
+Mulher 7;31;Odontologia;Dor de dente + dente quebrado;;;25-34;Julho;2023
+Mulher 8;57;Odontologia;Dente quebrado;;;55-64;Outubro;2023
+Mulher 9;26;Odontologia;Dente quebrado;;;25-34;Março;2023
+Mulher 10;32;Odontologia;;;Exodontia;25-34;Março;2023
+Homem 3;66;Odontologia;Dor de dente;;;65+;Março;2023
+Mulher 11;46;Odontologia;Dente furado;;;45-54;Agosto;2023
+Mulher 12;51;Odontologia;;;Restauração dentária + exodontia;45-54;Maio;2023
+Mulher 13;38;Odontologia;Dente quebrado;;;35-44;Março;2023
+Mulher 14;30;Odontologia;Dor de dente;;;25-34;Março;2023
+Homem 4;8;Odontologia;Dor de dente;;;18-;Março;2023
+Homem 5;64;Odontologia;;;Exodontia;55-64;Outubro;2023
+Mulher 15;23;Odontologia;;;Restauração dentária + endodontia + clareamento;18-24;Março;2023
+Mulher 16;43;Odontologia;Dor + sensibilidade + retração na gengiva;;Restauração dentária + clareamento dentário;35-44;Março;2023
+Homem 6;41;Odontologia;Nenhum;;Rotina;35-44;Março;2023
+Mulher 17;46;Odontologia;Dente quebrado + dor de dente;;;45-54;Abril;2023
+Mulher 18;30;Odontologia;Traumatismo dentoalveolar + abcesso;;Restauração dentária + clareamento dentário + endodontia;25-34;Abril;2023
+Mulher 19;27;Odontologia;Nenhum;;Restauração dentária + clareamento dentário;25-34;Maio;2023
+Mulher 20;58;Odontologia;Nenhum;;Restauração dentária + clareamento dentário;55-64;Maio;2023
+Mulher 21;50;Odontologia;;;Restauração dentária + clareamento dentário;45-54;Maio;2023
+Mulher 22;34;Odontologia;Dor muscular + sensação de desoclusão;;Restauração dentária + clareamento dentário;25-34;Abril;2023
+Mulher 23;48;Odontologia;Sensação de mobilidade dental;;Restauração dentária + clareamento dentário + endodontia;45-54;Abril;2023
+Homem 7;36;Odontologia;Dente quebrado;;Restauração dentária + clareamento dentário;35-44;Maio;2023
+Homem 8;24;Odontologia;Necessidade de clareamento;;Restauração dentária + clareamento dentário;18-24;Junho;2023
+Mulher 24;34;Odontologia;Necessidade de clareamento;;Restauração dentária + clareamento dentário;25-34;Junho;2023
+Homem 9;33;Odontologia;Necessidade de clareamento;;Restauração dentária + clareamento dentário;25-34;Junho;2023
+Mulher 25;56;Odontologia;Bruxismo;;Restauração dentária + clareamento dentário;55-64;Junho;2023
+Mulher 26;27;Odontologia;Necessidade de clareamento + limpeza + restauração;;Restauração dentária + clareamento dentário;25-34;Junho;2023
+Mulher 27;32;Odontologia;Erupção dentária;;Restauração dentária + clareamento dentário;25-34;Julho;2023
+Mulher 28;41;Odontologia;Necessidade de restauração;;Restauração dentária + clareamento dentário + endodontia;35-44;Agosto;2023
+Mulher 29;34;Odontologia;Sangramento ao escovar;;Endodontia;25-34;Julho;2023
+Mulher 30;64;Odontologia;Retirada de restos radiculares;;Endodontia;55-64;Agosto;2023
+Mulher 31;44;Odontologia;Dente com cheiro desagradável;;Restauração dentária + clareamento dentário + endodontia;35-44;Dezembro;2023
