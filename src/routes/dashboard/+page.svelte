@@ -8,18 +8,22 @@
 	import SymptomCountChart from '$lib/components/dashboard/SymptomCountChart.svelte';
 	import DiseaseByAreaChart from '$lib/components/dashboard/DiseaseByAreaChart.svelte';
 
-	// Novos componentes para a visão GERAL
+	//componentes para a visão GERAL
 	import KPIs from '$lib/components/dashboard/KPIs.svelte';
 	import AreaDistributionChart from '$lib/components/dashboard/AreaDistributionChart.svelte';
 	import AgeDistributionChart from '$lib/components/dashboard/AgeDistributionChart.svelte';
 	import TopComplaintsChart from '$lib/components/dashboard/TopComplaintsChart.svelte';
+
+	import CityDistributionChart from '$lib/components/dashboard/CityDistributionChart.svelte';
+	import MenstrualStatusChart from '$lib/components/dashboard/MenstrualStatusChart.svelte';
 
 	import HisteroscopiaKPIs from '$lib/components/dashboard/HisteroscopiaKPIs.svelte';
 	import ComorbidityChart from '$lib/components/dashboard/ComorbidityChart.svelte';
 	import ObstetricProfileChart from '$lib/components/dashboard/ObstetricProfileChart.svelte';
 	import MedicationChart from '$lib/components/dashboard/MedicationChart.svelte';
 	import BasicKPIs from '$lib/components/dashboard/BasicKPIs.svelte';
-	
+
+	import IndicationChart from '$lib/components/dashboard/IndicationChart.svelte';
 
 	// Variáveis de estado
 	let allData = [];
@@ -60,7 +64,7 @@
 				filteredData = allData;
 			}
 		});
-		Papa.parse('/hd-condicoes.csv', {
+		Papa.parse('/medical_data.csv', {
 			header: true,
 			skipEmptyLines: true,
 			delimiter: ';',
@@ -200,17 +204,20 @@
 				acc[item.Symptom] = (acc[item.Symptom] || 0) + 1;
 				return acc;
 			}, {});
+
+
+// ACABEI DE DESOCMENTAR ISSO AQUI
 			// operationalKPIs = [
 			// 	{
 			// 		label: 'Total de Procedimentos',
 			// 		value: filteredData.length,
 			// 		color: 'text-blue-400'
 			// 	},
-			// 	// {
-			// 	// 	label: 'Média de Idade',
-			// 	// 	value: `${(totalAge / filteredData.length).toFixed(1)} anos`,
-			// 	// 	color: 'text-green-400'
-			// 	// },
+			// 	{
+			// 		label: 'Média de Idade',
+			// 		value: `${(totalAge / filteredData.length).toFixed(1)} anos`,
+			// 		color: 'text-green-400'
+			// 	},
 			// 	{
 			// 		label: 'Principal Indicação',
 			// 		value: Object.keys(symptomCounts).reduce(
@@ -220,6 +227,8 @@
 			// 		color: 'text-yellow-400'
 			// 	}
 			// ];
+
+
 
 			if (allConditionsData.length > 0) {
 				const polypCount = allConditionsData.filter(
@@ -250,16 +259,16 @@
 	}
 </script>
 
-<div class="min-h-screen w-full bg-[#0f0f1a] text-gray-200 p-4 md:p-6 lg:p-8 flex flex-col gap-6">
+<div class="min-h-screen w-full bg-[#e3e7e8] text-gray-200 p-4 md:p-6 lg:p-8 flex flex-col gap-6">
 	<header class="text-center">
-		<h1 class="text-3xl font-bold font-primary text-white">Dashboard de Apoio à Decisão Médica</h1>
+		<h1 class="text-3xl font-bold font-primary text-black">Dashboard de Apoio à Decisão Médica</h1>
 	</header>
 
 	<main class="grid grid-cols-1 lg:grid-cols-4 gap-6 flex-grow">
-		<aside class="lg:col-span-1 bg-[#1e1e2f] p-6 rounded-xl shadow-lg">
+		<aside class="lg:col-span-1 bg-[#fcfeff] p-6 rounded-xl shadow-lg">
 			<div class="space-y-6">
 				<div class="flex justify-center mb-4">
-					<img src="/cisam-horizontal.png" alt="Logo NUTES CISAM" class="h-20" />
+					<img src="/cisam-color-horizontal.png" alt="Logo NUTES CISAM" class="h-20" />
 				</div>
 
 				<Filters
@@ -283,12 +292,15 @@
 				</div>
 
 				<MonthlyTrendChart data={filteredData} />
-				<TopComplaintsChart data={filteredData} />
+				<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+					<TopComplaintsChart data={filteredData} />
+					<CityDistributionChart data={filteredData} />
+				</div>
 			{:else if selectedAreas.length === 1 && selectedAreas[0] === 'Histeroscopia Diagnóstica'}
 				<div>
-					<h2 class="text-xl font-semibold text-gray-300 mb-4 border-b border-gray-700 pb-2">
+					<!-- <h2 class="text-xl font-semibold text-gray-300 mb-4 border-b border-gray-700 pb-2">
 						Visão Operacional (Atendimentos)
-					</h2>
+					</h2> -->
 					<BasicKPIs {totalAppointments} {avgAge} {peakSymptom} {peakMonth} />
 					<!-- <HisteroscopiaKPIs kpis={operationalKPIs} /> -->
 				</div>
@@ -296,15 +308,21 @@
 					<SymptomCountChart data={filteredData} />
 					<AgeDistributionChart data={filteredData} />
 				</div>
-				<div>
-					<MonthlyTrendChart data={filteredData} />
+				<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+					<IndicationChart data={filteredData} />
+					<MenstrualStatusChart data={filteredData} />
 				</div>
-				<div>
-					<DiseaseByAreaChart data={filteredData} />
-				</div>
-				<hr class="border-gray-700 my-4" />
 
-				<div>
+				<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+					<MonthlyTrendChart data={filteredData} />
+					<CityDistributionChart data={filteredData} />
+				</div>
+				<!-- <div>
+					<DiseaseByAreaChart data={filteredData} />
+				</div> -->
+				<!-- <hr class="border-gray-700 my-4" /> -->
+
+				<!-- <div>
 					<h2 class="text-xl font-semibold text-gray-300 mb-4 border-b border-gray-700 pb-2">
 						Visão Clínica (Amostra de Pacientes)
 					</h2>
@@ -316,13 +334,13 @@
 					<div class="md:col-span-2">
 						<MedicationChart data={allConditionsData} />
 					</div>
-				</div>
+				</div> -->
 			{:else if selectedAreas.length === 1 && selectedAreas[0] === 'Planejamento Reprodutivo'}
-				<div>
+				<!-- <div>
 					<h2 class="text-xl font-semibold text-gray-300 mb-4 border-b border-gray-700 pb-2">
 						Visão Operacional (Atendimentos)
 					</h2>
-				</div>
+				</div> -->
 				<BasicKPIs {totalAppointments} {avgAge} {peakSymptom} {peakMonth} />
 				<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 					<SymptomCountChart data={filteredData} />
@@ -330,14 +348,17 @@
 				</div>
 				<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 					<MonthlyTrendChart data={filteredData} />
-					<DiseaseByAreaChart data={filteredData} />
+					<CityDistributionChart data={filteredData} />
 				</div>
+				<!-- <div>
+					<DiseaseByAreaChart data={filteredData} />
+				</div> -->
 			{:else if selectedAreas.length === 1 && selectedAreas[0] === 'Odontologia'}
-				<div>
+				<!-- <div>
 					<h2 class="text-xl font-semibold text-gray-300 mb-4 border-b border-gray-700 pb-2">
 						Visão Operacional (Atendimentos)
 					</h2>
-				</div>
+				</div> -->
 				<BasicKPIs {totalAppointments} {avgAge} {peakSymptom} {peakMonth} />
 				<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 					<SymptomCountChart data={filteredData} />
@@ -345,8 +366,11 @@
 				</div>
 				<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 					<MonthlyTrendChart data={filteredData} />
-					<DiseaseByAreaChart data={filteredData} />
+					<CityDistributionChart data={filteredData} />
 				</div>
+				<!-- <div>
+					<DiseaseByAreaChart data={filteredData} />
+				</div> -->
 			{/if}
 
 			<!-- {#if selectedAreas.length === 1 && selectedAreas[0] === 'Histeroscopia Diagnóstica'}

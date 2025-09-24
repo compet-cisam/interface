@@ -46,7 +46,7 @@
     }
 </script>
 
-<div class="bg-[#1e1e2f] p-4 rounded-xl shadow-lg h-full flex flex-col">
+<div class="bg-[#fcfeff] p-4 rounded-xl shadow-lg h-full flex flex-col">
     <h3 class="text-center text-lg font-semibold mb-3 text-white">Prevalência de Comorbidades</h3>
     <div class="relative flex-grow min-h-[250px]">
         {#if data.length === 0}

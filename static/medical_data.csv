@@ -1,406 +1,438 @@
-PatientID;Age;HealthArea;Symptom;DiagnosedDisease;RecommendedTreatment;AgeRange;AppointmentMonth;AppointmentYear;FullDate
-1;37;Histeroscopia Diagnóstica;Desejo de engravidar + suspeita de um pólipo ;Endométrio padrão secretor;Sem dados;35-44;Março;2023;23/03/2023
-2;52;Histeroscopia Diagnóstica;Indisposição e cansaço;Pólipo endocervical e suspeita de mioma;Sem dados;45-54;Abril;2023;20/04/2023
-3;73;Histeroscopia Diagnóstica;Indicação cirúrgica;Sem dados;Sem dados;65+;Fevereiro;2023;09/02/2023
-4;36;Histeroscopia Diagnóstica;Sangramento contínuo;Espessamento endometrial;Sem dados;35-44;Abril;2023;27/04/2023
-5;54;Histeroscopia Diagnóstica;Dores no baixo ventre + pólipos;Sem dados;Sem dados;45-54;Outubro;2023;05/10/2023
-6;63;Histeroscopia Diagnóstica;Sangramento na menopausa ;Pólipo endometrial + pólipo endocervical; mucometra por estenose cervical;55-64;Março;2023;02/03/2023
-7;68;Histeroscopia Diagnóstica;Nódulo no reto e no colo do útero ;Pólipo cervical e pólipo endometrial;Sem dados;65+;Março;2023;03/03/2023
-8;50;Histeroscopia Diagnóstica;Mioma;Leiomioma intramural (submucoso)?;Sem dados;45-54;Maio;2023;04/05/2023
-9;52;Histeroscopia Diagnóstica;Espessamento endometrial;Sem dados;Sem dados;45-54;Fevereiro;2023;24/02/2023
-10;55;Histeroscopia Diagnóstica;Cisto endométrio ;Sem dados;Sem dados;55-64;Setembro;2024;12/09/2024
-11;48;Histeroscopia Diagnóstica;Sangramento contínuo;Sem dados;Sem dados;45-54;Junho;2023;08/06/2023
-12;49;Histeroscopia Diagnóstica;Fluxo menstrual desconfortável;Pólipo endometrial e endocervical;Sem dados;45-54;Novembro;2023;23/11/2023
-13;59;Histeroscopia Diagnóstica;Solicitação médica;Sem dados;Sem dados;55-64;Junho;2023;01/06/2023
-14;50;Histeroscopia Diagnóstica;Remoção de pólipos;Pólipo endometrial;Sem dados;45-54;Outubro;2023;05/10/2023
-15;51;Histeroscopia Diagnóstica;Menstruação longa / fluxo intenso;Pólipo endometrial e endocervical;Sem dados;45-54;Abril;2023;20/04/2023
-16;39;Histeroscopia Diagnóstica;dores e sangramentos iregulares;Leiomioma submucoso intramural.;Sem dados;35-44;Maio;2023;11/05/2023
-17;51;Histeroscopia Diagnóstica;Sangramento contínuo + Pólipos ;Pólipo endometrial e (endometrite? hiperplásico?);Sem dados;45-54;Março;2023;30/03/2023
-18;58;Histeroscopia Diagnóstica;Solicitação médica;Sem dados;Sem dados;55-64;Maio;2023;10/05/2023
-19;76;Histeroscopia Diagnóstica;Sangramento na menopausa ;Sem dados;Sem dados;65+;Março;2023;30/03/2023
-20;61;Histeroscopia Diagnóstica;Dores intensas + infecção urinária;Sem dados;Sem dados;55-64;Novembro;2023;23/11/2023
-21;61;Histeroscopia Diagnóstica;Dores intensas + infecção urinária;Sem dados;Sem dados;55-64;Novembro;2023;23/11/2023
-22;42;Histeroscopia Diagnóstica;Sangramento exagerado + Policisto;Sem dados;Sem dados;35-44;Março;2024;30/03/2024
-23;60;Histeroscopia Diagnóstica;Dores intensas;USG ENDOVAGINAL;Sem dados;55-64;Agosto;2024;01/08/2024
-24;35;Histeroscopia Diagnóstica;REVERTER LIGAÇÃO TUBÁRIA;Sem dados;Sem dados;35-44;Março;2024;07/03/2024
-25;37;Histeroscopia Diagnóstica;Solicitação médica;Exame normal;Sem dados;35-44;Dezembro;2023;28/12/2023
-26;40;Histeroscopia Diagnóstica;Sangramento contínuo;Sem dados;Sem dados;35-44;Junho;2024;06/06/2024
-27;59;Histeroscopia Diagnóstica;Sangramento contínuo;Sem dados;Sem dados;55-64;Novembro;2024;14/11/2024
-28;44;Histeroscopia Diagnóstica;Solicitação médica;Sem dados;Sem dados;35-44;Maio;2024;30/05/2024
-29;72;Histeroscopia Diagnóstica;sangramento na menopausa ;Sem dados;Sem dados;65+;Maio;2024;30/05/2024
-30;41;Histeroscopia Diagnóstica;Dores intensas +  sangramento contínuo;Espessamento endometrial;Sem dados;35-44;Dezembro;2023;21/12/2023
-31;46;Histeroscopia Diagnóstica;Pólipo endometrial + cólicas ;Pólipo endometrial;Sem dados;45-54;Julho;2024;11/07/2024
-32;57;Histeroscopia Diagnóstica;Indicação cirúrgica;Sem dados;Sem dados;55-64;Julho;2024;25/07/2024
-33;74;Histeroscopia Diagnóstica;Solicitação médica;Sem dados;Sem dados;65+;Dezembro;2023;28/12/2023
-34;44;Histeroscopia Diagnóstica;Solicitação médica;Sem dados;Sem dados;35-44;Setembro;2024;12/09/2024
-35;48;Histeroscopia Diagnóstica;Sangramento contínuo + dores intensas;Sem dados;Sem dados;45-54;Novembro;2024;21/11/2024
-36;46;Histeroscopia Diagnóstica;Sangramento contínuo;Sem dados;Sem dados;45-54;Maio;2023;04/05/2023
-37;46;Histeroscopia Diagnóstica;Solicitação médica;Pólipo endometrial;Sem dados;45-54;Maio;2023;16/05/2023
-38;33;Histeroscopia Diagnóstica;Indicação cirúrgica + sangramento intenso;Sem dados;Sem dados;25-34;Junho;2024;06/06/2024
-39;37;Histeroscopia Diagnóstica;Desejo de engravidar  ;Mioma;Sem dados;35-44;Maio;2023;25/05/2023
-40;53;Histeroscopia Diagnóstica;Pólido menstrual;Sem dados;Sem dados;45-54;Julho;2023;27/07/2023
-41;55;Histeroscopia Diagnóstica;Sangramento contínuo;Pólipo endometrial;Sem dados;55-64;Junho;2023;22/06/2023
-42;53;Histeroscopia Diagnóstica;Dores intensas;Sem dados;Sem dados;45-54;Junho;2023;08/06/2023
-43;56;Histeroscopia Diagnóstica;Dores intensas;Pólipo endometrial e endometriose;Sem dados;55-64;Junho;2023;08/06/2023
-44;31;Histeroscopia Diagnóstica;Sangramento na relação sexual;Sem dados;Sem dados;25-34;Julho;2023;27/07/2023
-45;51;Histeroscopia Diagnóstica;Fluxo intenso + coágulo;Sem dados;Sem dados;45-54;Setembro;2024;19/09/2024
-56;52;Histeroscopia Diagnóstica;Solicitação médica;Sem dados;Sem dados;45-54;Agosto;2023;24/08/2023
-47;59;Histeroscopia Diagnóstica;Indicação cirúrgica;NÓDULOS MIOMATOSOS+LÍQUIDO NO INTERIOR DA CAVIDADE ENDOMETRIAL+PROCESSO INFLAMATÓRIO/INFECCIOSO;Sem dados;55-64;Julho;2023;13/07/2023
-48;60;Histeroscopia Diagnóstica;Indicação cirúrgica;Perinioplastia +Suspensão de bexiga + Endometriose + Pólipo endometrial;Sem dados;55-64;Julho;2023;13/07/2023
-49;32;Histeroscopia Diagnóstica;Cistos simples ovário direito;Sem dados;Sem dados;25-34;Junho;2023;22/06/2023
-50;67;Histeroscopia Diagnóstica;Sangramento na menopausa + dores na pelve;Sem dados;Sem dados;65+;Junho;2023;22/06/2023
-51;56;Histeroscopia Diagnóstica;Solicitação médica;Sem dados;Sem dados;55-64;Junho;2023;08/06/2023
-52;71;Histeroscopia Diagnóstica;Solicitação médica;Sem dados;Sem dados;65+;Junho;2023;08/06/2023
-53;39;Histeroscopia Diagnóstica;Pólipo endometrial;Pólipo endometrial;Sem dados;35-44;Junho;2023;15/06/2023
-54;48;Histeroscopia Diagnóstica;Indicação cirúrgica + sangramento com dores abdominais intensas;Sem dados;Sem dados;45-54;Junho;2023;08/06/2023
-55;43;Histeroscopia Diagnóstica;Solicitação médica;Sem dados;Sem dados;35-44;Junho;2023;22/06/2023
-56;40;Histeroscopia Diagnóstica;Solicitação médica;Sem dados;Sem dados;35-44;Junho;2023;15/06/2023
-57;56;Histeroscopia Diagnóstica;Dores intensas;Sem dados;Sem dados;55-64;Junho;2023;15/06/2023
-58;46;Histeroscopia Diagnóstica;Solicitação médica;Pólipo endometrial;Sem dados;45-54;Janeiro;2024;25/01/2024
-59;59;Histeroscopia Diagnóstica;Nódulo uterino + espessamento;Espessamento endometrial;Sem dados;55-64;Julho;2023;06/07/2023
-60;52;Histeroscopia Diagnóstica;Indicação cirúrgica;Sem dados;Sem dados;45-54;Dezembro;2024;12/12/2024
-61;50;Histeroscopia Diagnóstica;Solicitação médica;Sem dados;Sem dados;45-54;Junho;2023;15/06/2023
-62;42;Histeroscopia Diagnóstica;Sangramento na relação sexual;Pólipo endometrial;Sem dados;35-44;Julho;2023;06/07/2023
-63;58;Histeroscopia Diagnóstica;Sangramento na menopausa ;Espessamento endometrial + mioma;Sem dados;55-64;Agosto;2023;03/08/2023
-64;53;Histeroscopia Diagnóstica;Exame de histeroscopia ;Sem dados;Sem dados;45-54;Julho;2023;06/07/2023
-65;51;Histeroscopia Diagnóstica;Pólipo ;Sem dados;Sem dados;45-54;Agosto;2023;10/08/2023
-66;63;Histeroscopia Diagnóstica;Solicitação médica;Sem dados;Sem dados;55-64;Julho;2023;06/07/2023
-69;68;Histeroscopia Diagnóstica;ESPESSAMENTO ENDOMETRIAL;Sem dados;Sem dados;65+;Agosto;2023;03/08/2023
-70;47;Histeroscopia Diagnóstica;tenho polipo endometrial; SUA;Pólipo endometrial;45-54;Julho;2023;11/07/2023
-71;32;Histeroscopia Diagnóstica;Solicitação médica;Sem dados;Sem dados;25-34;Julho;2023;06/07/2023
-72;46;Histeroscopia Diagnóstica;Solicitação médica;Pólipo endometrial;Sem dados;45-54;Maio;2025;15/05/2025
-73;35;Histeroscopia Diagnóstica;Pólipo + sangramento e dores;Sem dados;Sem dados;35-44;Julho;2023;13/07/2023
-74;36;Histeroscopia Diagnóstica;dores no útero + cólicas intensas;Sem dados;Sem dados;35-44;Fevereiro;2024;08/02/2024
-75;40;Histeroscopia Diagnóstica;Espessamento endometrial + Pólipo  ;Sem dados;Sem dados;35-44;Julho;2023;27/07/2023
-76;55;Histeroscopia Diagnóstica;Dores pélvicas constantes;Sem dados;Sem dados;55-64;Julho;2023;27/07/2023
-77;36;Histeroscopia Diagnóstica;Sangramento em ovário + coágulo;Sem dados;Sem dados;35-44;Maio;2024;02/05/2024
-78;67;Histeroscopia Diagnóstica;Espessamento endometrial  ;Sem dados;Sem dados;65+;Fevereiro;2024;01/02/2024
-79;72;Histeroscopia Diagnóstica;Sangramento na menopausa;Sem dados;Sem dados;65+;Julho;2023;10/07/2023
-80;66;Histeroscopia Diagnóstica;Solicitação médica;Sem dados;Sem dados;65+;Julho;2023;06/07/2023
-81;55;Histeroscopia Diagnóstica;Mioma;Mioma;Sem dados;55-64;Janeiro;2024;25/01/2024
-82;54;Histeroscopia Diagnóstica;Dores no útero  ;Sem dados;Sem dados;45-54;Agosto;2023;03/08/2023
-83;58;Histeroscopia Diagnóstica;Pólipo ;Sem dados;Sem dados;55-64;Novembro;2023;30/11/2023
-84;43;Histeroscopia Diagnóstica;Sangramento contínuo;Sem dados;Sem dados;35-44;Julho;2023;20/07/2023
-85;52;Histeroscopia Diagnóstica;Indicação cirúrgica;Sem dados;Sem dados;45-54;Julho;2023;27/07/2023
-86;61;Histeroscopia Diagnóstica;Solicitação médica;Sem dados;Sem dados;55-64;Junho;2024;20/06/2024
-87;53;Histeroscopia Diagnóstica;Solicitação médica;Sem dados;Sem dados;45-54;Novembro;2023;09/11/2023
-88;50;Histeroscopia Diagnóstica;Dores intensas + Pólipo e Mioma;Pólipo endometrial e mioma;Sem dados;45-54;Fevereiro;2025;06/02/2025
-89;59;Histeroscopia Diagnóstica;Mioma;Mioma;Sem dados;55-64;Fevereiro;2024;15/02/2024
-90;42;Histeroscopia Diagnóstica;Solicitação médica;Sem dados;Sem dados;35-44;Maio;2024;09/05/2024
-91;58;Histeroscopia Diagnóstica;Espessamento endometrial + nódulo miometral sugestivo de linhagem leiomiomatose;Sem dados;Sem dados;55-64;Agosto;2023;03/08/2023
-92;67;Histeroscopia Diagnóstica;Dores intensas;Espessamento endometrial + pólipo;Sem dados;65+;Julho;2024;18/07/2024
-93;69;Histeroscopia Diagnóstica;Sangramento na menopausa;Sem dados;Sem dados;65+;Agosto;2023;17/08/2023
-94;73;Histeroscopia Diagnóstica;Sangramento anormal;Sem dados;Sem dados;65+;Agosto;2023;17/08/2023
-95;60;Histeroscopia Diagnóstica;Sangramento na menopausa + Pólipo;Sem dados;Sem dados;55-64;Julho;2023;13/07/2023
-96;64;Histeroscopia Diagnóstica;Sangramento uterino anormal;Sem dados;Sem dados;55-64;Agosto;2023;10/08/2023
-M1;54;Planejamento Reprodutivo;Inserção DIU Mirena;Mioma;Sem dados;45-54;Março;2023;09/03/2023
-M3;26;Planejamento Reprodutivo;Inserção DIU  ;Sem dados;Sem dados;25-34;Abril;2023;28/04/2023
-M4;31;Planejamento Reprodutivo;Inserção DIU Mirena;Sem dados;Sem dados;25-34;Abril;2023;25/04/2023
-M5;25;Planejamento Reprodutivo;Inserção DIU Mirena;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados
-M6;24;Planejamento Reprodutivo;Inserção DIU Mirena;Sem dados;Sem dados;18-24;Abril;2023;28/04/2023
-M8;31;Planejamento Reprodutivo;Inserção DIU ;Sem dados;Sem dados;25-34;Abril;2023;20/04/2023
-M9;28;Planejamento Reprodutivo;Inserção DIU Mirena;Sem dados;Sem dados;25-34;Abril;2023;20/04/2023
-M11;30;Planejamento Reprodutivo;Inserção DIU;Sem dados;Sem dados;25-34;Abril;2023;20/04/2023
-M13;31;Planejamento Reprodutivo;Inserção DIU ;Sem dados;Sem dados;25-34;Abril;2023;20/04/2023
-M14;23;Planejamento Reprodutivo;Inserção DIU Mirena;Sem dados;Sem dados;18-24;Abril;2023;20/04/2023
-M15;21;Planejamento Reprodutivo;Inserção DIU ;Sem dados;Sem dados;18-24;Maio;2023;15/05/2023
-M17;46;Planejamento Reprodutivo;Inserção DIU Mirena;Sem dados;Sem dados;45-54;Sem dados;Sem dados;Sem dados
-M18;25;Planejamento Reprodutivo;Inserção DIU ;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados
-M20;30;Planejamento Reprodutivo;Inserção DIU ;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados
-M21;25;Planejamento Reprodutivo;Acompanhamento ;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados
-M22;32;Planejamento Reprodutivo;Sangramento;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados
-M23;31;Planejamento Reprodutivo;Implanon;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados
-M24;54;Planejamento Reprodutivo;Acompanhamento ;Sem dados;Sem dados;45-54;Sem dados;Sem dados;Sem dados
-M25;26;Planejamento Reprodutivo;Inserção DIU ;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados
-M26;23;Planejamento Reprodutivo;;Endometriose;Sem dados;18-24;Sem dados;Sem dados;Sem dados
-M27;44;Planejamento Reprodutivo;Inserção DIU ;Sem dados;Sem dados;35-44;Sem dados;Sem dados;Sem dados
-M28;26;Planejamento Reprodutivo;Inserção DIU ;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados
-M29;41;Planejamento Reprodutivo;Inserção DIU ;Sem dados;Sem dados;35-44;Sem dados;Sem dados;Sem dados
-M31;23;Planejamento Reprodutivo;Retirada DIU;Sem dados;Sem dados;18-24;Sem dados;Sem dados;Sem dados
-M32;20;Planejamento Reprodutivo;Inserção DIU ;Sem dados;Sem dados;18-24;fevereiro;2023;06/02/2023
-M33;21;Planejamento Reprodutivo;Inserção DIU ;Sem dados;Sem dados;18-24;Março;2023;29/03/2023
-M34;21;Planejamento Reprodutivo;Dúvida ;Sem dados;Sem dados;65+;Sem dados;Sem dados;Sem dados
-M35;24;Planejamento Reprodutivo;Inserção DIU ;Sem dados;Sem dados;18-24;Março;2023;29/03/2023
-M36;29;Planejamento Reprodutivo;Inserção DIU ;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados
-M37;35;Planejamento Reprodutivo;Inserção DIU ;Sem dados;Sem dados;35-44;Março;2023;03/03/2023
-M38;23;Planejamento Reprodutivo;Acompanhamento;Sem dados;Sem dados;18-24;Abril;2023;11/04/2023
-M39;31;Planejamento Reprodutivo;Laqueadura;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados
-M40;28;Planejamento Reprodutivo;Inserção DIU ;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados
-M41;22;Planejamento Reprodutivo;Inserção DIU ;Sem dados;Sem dados;18-24;Sem dados;Sem dados;Sem dados
-M42;42;Planejamento Reprodutivo;Inserção DIU ;Sem dados;Sem dados;35-44;Sem dados;Sem dados;Sem dados
-M43;29;Planejamento Reprodutivo;Inserção DIU ;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados
-M44;34;Planejamento Reprodutivo;Inserção DIU ;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados
-M46;27;Planejamento Reprodutivo;Inserção DIU Mirena;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados
-M47;30;Planejamento Reprodutivo;Dúvida ;Sem dados;Sem dados;25-34;Março;2023;28/03/2023
-M48;33;Planejamento Reprodutivo;Inserção DIU ;Sem dados;Sem dados;25-34;Março;2023;10/03/2023
-M50;47;Planejamento Reprodutivo;Inserção DIU ;Sem dados;Sem dados;45-54;Maio;2023;02/05/2023
-M51;31;Planejamento Reprodutivo;Aborto espontâneo;Sem dados;Sem dados;25-34;Março;2023;21/03/2023
-M52;23;Planejamento Reprodutivo;;Sem dados;Sem dados;18-24;Março;2023;28/03/2023
-M53;48;Planejamento Reprodutivo;Troca DIU;Sem dados;Sem dados;45-54;Abril;2023;12/04/2023
-M54;30;Planejamento Reprodutivo;Inserção DIU ;Sem dados;Sem dados;25-34;Março;2023;28/03/2023
-M55;25;Planejamento Reprodutivo;Inserção DIU ;Sem dados;Sem dados;25-34;Abril;2023;27/04/23
-M56;28;Planejamento Reprodutivo;Laqueadura;Sem dados;Sem dados;25-34;Abril;2023;24/04/23
-M58;34;Planejamento Reprodutivo;Acompanhamento;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados
-M59;30;Planejamento Reprodutivo;Inserção DIU ;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados
-M61;38;Planejamento Reprodutivo;Inserção DIU Mirena;Adenomiose;Sem dados;35-44;Sem dados;Sem dados;Sem dados
-M62;43;Planejamento Reprodutivo;Inserção DIU ;Sem dados;Sem dados;35-44;Abril;2023;25/04/2023
-M63;41;Planejamento Reprodutivo;Inserção DIU ;Sem dados;Sem dados;35-44;Março;2023;16/03/2023
-M64;35;Planejamento Reprodutivo;Gravidez;Sem dados;Sem dados;35-44;Março;2023;16/03/2023
-M65;21;Planejamento Reprodutivo;"Acompanhamento; Inserção DIU";Sem dados;Sem dados;18-24;Sem dados;Sem dados;Sem dados
-M66;31;Planejamento Reprodutivo;Inserção DIU ;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados
-M67;45;Planejamento Reprodutivo;Inserção DIU Mirena;Sem dados;Sem dados;45-54;Sem dados;Sem dados;Sem dados
-M70;31;Planejamento Reprodutivo;Inserção DIU ;Sem dados;Sem dados;25-34;Março;2023;30/03/2023
-M71;36;Planejamento Reprodutivo;Troca DIU;Sem dados;Sem dados;35-44;Sem dados;Sem dados;Sem dados
-M73;26;Planejamento Reprodutivo;"Acompanhamento; Inserção DIU";Sem dados;Sem dados;25-34;Março;2023;30/03/2023
-M75;25;Planejamento Reprodutivo;Inserção DIU ;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados
-M76;45;Planejamento Reprodutivo;Opção 1;Sem dados;Sem dados;45-54;Sem dados;Sem dados;Sem dados
-M77;35;Planejamento Reprodutivo;Opção 1;Sem dados;Sem dados;35-44;Sem dados;Sem dados;Sem dados
-M78;48;Planejamento Reprodutivo;Opção 1;Sem dados;Sem dados;45-54;Abril;2023;26/04/2023
-M79;41;Planejamento Reprodutivo;Opção 1;Sem dados;Sem dados;35-44;Sem dados;Sem dados;Sem dados
-M80;25;Planejamento Reprodutivo;Opção 1;Sem dados;Sem dados;25-34;Abril;2023;26/04/2023
-M81;23;Planejamento Reprodutivo;Opção 1;Sem dados;Sem dados;18-24;Abril;2023;26/04/2023
-M82;33;Planejamento Reprodutivo;Opção 1;Sem dados;Sem dados;25-34;Abril;2023;25/04/2023
-M83;50;Planejamento Reprodutivo;Opção 1;Sem dados;Sem dados;45-54;Abril;2023;27/04/2023
-M84;28;Planejamento Reprodutivo;Opção 1;Sem dados;Sem dados;25-34;Abril;2023;26/04/2023
-M85;30;Planejamento Reprodutivo;Opção 1;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados
-M86;21;Planejamento Reprodutivo;Opção 1;Sem dados;Sem dados;18-24;Abril;2023;26/04/2023
-M87;24;Planejamento Reprodutivo;Opção 1;Sem dados;Sem dados;18-24;Abril;2023;28/04/2023
-M88;34;Planejamento Reprodutivo;Opção 1;Sem dados;Sem dados;25-34;Abril;2023;28/04/2023
-M89;31;Planejamento Reprodutivo;Opção 1;Sem dados;Sem dados;25-34;Abril;2023;28/04/2023
-M90;25;Planejamento Reprodutivo;Opção 1;Sem dados;Sem dados;25-34;Maio;2023;04/05/2023
-M93;24;Planejamento Reprodutivo;Opção 1;Sem dados;Sem dados;18-24;Sem dados;Sem dados;Sem dados
-M94;29;Planejamento Reprodutivo;Opção 1;Sem dados;Sem dados;25-34;Maio;2023;04/05/2023
-M95;28;Planejamento Reprodutivo;Opção 1;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados
-M96;26;Planejamento Reprodutivo;Opção 1;Sem dados;Sem dados;25-34;Maio;2023;09/05/2023
-M97;20;Planejamento Reprodutivo;Opção 1;Sem dados;Sem dados;18-24;Maio;2023;09/05/2023
-M98;25;Planejamento Reprodutivo;Opção 1;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados
-M99;30;Planejamento Reprodutivo;Opção 1;Sem dados;Sem dados;25-34;Junho;2023;09/06/2023
-M100;37;Planejamento Reprodutivo;Opção 1;Sem dados;Sem dados;35-44;Sem dados;Sem dados;Sem dados
-M101;30;Planejamento Reprodutivo;Opção 1;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados
-M102;43;Planejamento Reprodutivo;Opção 1;Sem dados;Sem dados;35-44;Sem dados;Sem dados;Sem dados
-M103;36;Planejamento Reprodutivo;Opção 1;Sem dados;Sem dados;35-44;Sem dados;Sem dados;Sem dados
-M104;39;Planejamento Reprodutivo;Opção 1;Sem dados;Sem dados;35-44;Maio;2023;11/05/2023
-M105;35;Planejamento Reprodutivo;Opção 1;Sem dados;Sem dados;35-44;Maio;2023;12/05/2023
-M106;25;Planejamento Reprodutivo;Opção 1;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados
-M107;28;Planejamento Reprodutivo;Opção 1;Sem dados;Sem dados;25-34;Maio;2023;15/05/2023
-M108;33;Planejamento Reprodutivo;Opção 1;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados
-M109;26;Planejamento Reprodutivo;Opção 1;Sem dados;Sem dados;25-34;Maio;2023;22/05/2023
-M110;39;Planejamento Reprodutivo;Opção 1;Sem dados;Sem dados;35-44;Maio;2023;22/05/2023
-M111;24;Planejamento Reprodutivo;Opção 1;Sem dados;Sem dados;18-24;Sem dados;Sem dados;Sem dados
-M112;31;Planejamento Reprodutivo;Opção 1;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados
-M113;24;Planejamento Reprodutivo;Opção 1;Sem dados;Sem dados;18-24;Maio;2023;22/05/2023
-M114;33;Planejamento Reprodutivo;Opção 1;Sem dados;Sem dados;25-34;Maio;2023;22/05/2023
-M115;26;Planejamento Reprodutivo;Opção 1;Sem dados;Sem dados;25-34;Maio;2023;29/05/2023
-M116;35;Planejamento Reprodutivo;Opção 1;Sem dados;Sem dados;35-44;Sem dados;Sem dados;Sem dados
-M117;37;Planejamento Reprodutivo;Opção 1;Sem dados;Sem dados;35-44;Sem dados;Sem dados;Sem dados
-M118;33;Planejamento Reprodutivo;Opção 1;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados
-M119;29;Planejamento Reprodutivo;Opção 1;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados
-M120;29;Planejamento Reprodutivo;Opção 1;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados
-M121;30;Planejamento Reprodutivo;Opção 1;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados
-M122;40;Planejamento Reprodutivo;Opção 1;Sem dados;Sem dados;35-44;Sem dados;Sem dados;Sem dados
-M123;28;Planejamento Reprodutivo;Opção 1;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados
-M124;44;Planejamento Reprodutivo;Opção 1;Sem dados;Sem dados;35-44;Sem dados;Sem dados;Sem dados
-M125;35;Planejamento Reprodutivo;Opção 1;Sem dados;Sem dados;35-44;Sem dados;Sem dados;Sem dados
-M126;28;Planejamento Reprodutivo;Opção 1;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados
-M127;27;Planejamento Reprodutivo;Opção 1;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados
-M128;41;Planejamento Reprodutivo;Opção 1;Sem dados;Sem dados;35-44;Sem dados;Sem dados;Sem dados
-M129;27;Planejamento Reprodutivo;Opção 1;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados
-M130;18;Planejamento Reprodutivo;Opção 1;Sem dados;Sem dados;18-24;Sem dados;Sem dados;Sem dados
-M131;20;Planejamento Reprodutivo;Opção 1;Sem dados;Sem dados;18-24;Sem dados;Sem dados;Sem dados
-M132;41;Planejamento Reprodutivo;Opção 1;Sem dados;Sem dados;35-44;Agosto;2023;08/08/2023
-M133;28;Planejamento Reprodutivo;Opção 1;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados
-M134;21;Planejamento Reprodutivo;Opção 1;Sem dados;Sem dados;18-24;Sem dados;Sem dados;Sem dados
-M135;21;Planejamento Reprodutivo;Opção 1;Sem dados;Sem dados;18-24;Sem dados;Sem dados;Sem dados
-M136;27;Planejamento Reprodutivo;Opção 1;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados
-M137;25;Planejamento Reprodutivo;Opção 1;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados
-M138;22;Planejamento Reprodutivo;Opção 1;Sem dados;Sem dados;18-24;Sem dados;Sem dados;Sem dados
-M139;24;Planejamento Reprodutivo;Opção 1;Sem dados;Sem dados;18-24;Sem dados;Sem dados;Sem dados
-M140;25;Planejamento Reprodutivo;Opção 1;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados
-M141;43;Planejamento Reprodutivo;Opção 1;Sem dados;Sem dados;35-44;Sem dados;Sem dados;Sem dados
-M142;29;Planejamento Reprodutivo;Opção 1;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados
-M143;24;Planejamento Reprodutivo;Acompanhamento;Sem dados;Sem dados;18-24;Sem dados;Sem dados;Sem dados
-M146;36;Planejamento Reprodutivo;Inserção DIU mirena;Sem dados;Sem dados;35-44;Sem dados;Sem dados;Sem dados
-M188;22;Planejamento Reprodutivo;Sem dados;Endometriose;Diogenestese;18-24;Sem dados;Sem dados;Sem dados
-M211;22;Planejamento Reprodutivo;Sem dados;Endometriose;Diogenestese;18-24;Sem dados;Sem dados;Sem dados
-M222;21;Planejamento Reprodutivo;Não menstrua;Sem dados;Sem dados;18-24;Sem dados;Sem dados;Sem dados
-M261;49;Planejamento Reprodutivo;Não menstrua;Sem dados;Sem dados;45-54;Sem dados;Sem dados;Sem dados
-M282;27;Planejamento Reprodutivo;Não menstrua;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados
-M289;22;Planejamento Reprodutivo;Não menstrua ;Sem dados;Sem dados;18-24;Sem dados;Sem dados;Sem dados
-M293;32;Planejamento Reprodutivo;Dúvida;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados
-M396;36;Planejamento Reprodutivo;Inserção DIU Mirena ;Sem dados;Sem dados;35-44;Sem dados;Sem dados;Sem dados
-M406;32;Planejamento Reprodutivo;Não menstrua;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados
-M419;32;Planejamento Reprodutivo;Não menstrua;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados
-M431;25;Planejamento Reprodutivo;Sem dados;Endometriose;Dienogeste;25-34;Sem dados;Sem dados;Sem dados
-M451;28;Planejamento Reprodutivo;Acompanhamento;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados
-M482;27;Planejamento Reprodutivo;AMIU;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados
-M520;24;Planejamento Reprodutivo;Sem dados;Endometriose;Dienogeste;18-24;Agosto;2024;09/08/2024
-M542;37;Planejamento Reprodutivo;Não menstrua;Sem dados;Sem dados;35-44;Novembro;2024;28/11/2024
-M574;24;Planejamento Reprodutivo;Não menstrua;Sem dados;Sem dados;18-24;Setembro;2024;25/09/2024
-M586;49;Planejamento Reprodutivo;Sem dados;Adenomiose;Sem dados;45-54;Setembro;2024;11/09/2024
-M587;53;Planejamento Reprodutivo;Não tem mestruação;Sem dados;Sem dados;45-54;Dezembro;2024;26/12/2024
-M607;35;Planejamento Reprodutivo;Inserção DIU Mirena;Sem dados;Sem dados;35-44;Outubro;2024;01/10/2024
-M629;50;Planejamento Reprodutivo;Não menstrua;Sem dados;Sem dados;45-54;Sem dados;Sem dados;Sem dados
-M731;27;Planejamento Reprodutivo;Dúvida;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados
-M732;19;Planejamento Reprodutivo;Dúvida;Sem dados;Sem dados;18-24;Sem dados;Sem dados;Sem dados
-M733;18;Planejamento Reprodutivo;Inserção do inplanom;Sem dados;Sem dados;18-24;Sem dados;Sem dados;Sem dados
-M734;29;Planejamento Reprodutivo;Inserção DIU Mirena ;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados
-M735;40;Planejamento Reprodutivo;Revisão do DIU;Sem dados;Sem dados;35-44;Sem dados;Sem dados;Sem dados
-M736;33;Planejamento Reprodutivo;Retirada do DIU;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados
-M737;31;Planejamento Reprodutivo;revisão do DIU ;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados
-M738;39;Planejamento Reprodutivo;Revisão do DIU;Sem dados;Sem dados;35-44;Sem dados;Sem dados;Sem dados
-M739;46;Planejamento Reprodutivo;Retirada do DIU;Sem dados;Sem dados;45-54;Sem dados;Sem dados;Sem dados
-M740;27;Planejamento Reprodutivo;Inserção DIU Mirena ;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados
-M741;34;Planejamento Reprodutivo;Reversão tubária;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados
-M742;23;Planejamento Reprodutivo;Revisão do DIU ;Sem dados;Sem dados;18-24;Sem dados;Sem dados;Sem dados
-M743;32;Planejamento Reprodutivo;Inserção DIU Mirena ;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados
-M744;45;Planejamento Reprodutivo;Retirada do DIU;Sem dados;Sem dados;45-54;Sem dados;Sem dados;Sem dados
-M745;25;Planejamento Reprodutivo;Inserção DIU Mirena ;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados
-M746;23;Planejamento Reprodutivo;Inserção DIU ;Sem dados;Sem dados;18-24;Sem dados;Sem dados;Sem dados
-M747;38;Planejamento Reprodutivo;Revisão do DIU ;Sem dados;Sem dados;35-44;Sem dados;Sem dados;Sem dados
-M748;36;Planejamento Reprodutivo;Troca do DIU ;Sem dados;Sem dados;35-44;Sem dados;Sem dados;Sem dados
-M749;27;Planejamento Reprodutivo;Inserção DIU Mirena ;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados
-M750;23;Planejamento Reprodutivo;Retirada do DIU;Sem dados;Sem dados;18-24;Sem dados;Sem dados;Sem dados
-M751;29;Planejamento Reprodutivo;Duvida;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados
-M752;29;Planejamento Reprodutivo;Inserção DIU Mirena ;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados
-M753;21;Planejamento Reprodutivo;Revisão do DIU ;Sem dados;Sem dados;18-24;Sem dados;Sem dados;Sem dados
-M754;20;Planejamento Reprodutivo;Inserção DIU Mirena ;Sem dados;Sem dados;18-24;Sem dados;Sem dados;Sem dados
-M755;29;Planejamento Reprodutivo;Revisão do DIU ;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados
-M756;46;Planejamento Reprodutivo;Laqueadura;Sem dados;Sem dados;45-54;Sem dados;Sem dados;Sem dados
-M757;45;Planejamento Reprodutivo;Troca de DIU ;Sem dados;Sem dados;45-54;Sem dados;Sem dados;Sem dados
-M758;19;Planejamento Reprodutivo;Revisão do DIU ;Sem dados;Sem dados;18-24;Sem dados;Sem dados;Sem dados
-M759;46;Planejamento Reprodutivo;implanon;Sem dados;Sem dados;45-54;Sem dados;Sem dados;Sem dados
-M760;26;Planejamento Reprodutivo;Duvida;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados
-M761;28;Planejamento Reprodutivo;Inserção DIU ;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados
-M762;24;Planejamento Reprodutivo;Troca DIU ;Sem dados;Sem dados;18-24;Sem dados;Sem dados;Sem dados
-M763;39;Planejamento Reprodutivo;Duvida;Sem dados;Sem dados;35-44;Sem dados;Sem dados;Sem dados
-M764;24;Planejamento Reprodutivo;Revisão do DIU;Sem dados;Sem dados;18-24;Sem dados;Sem dados;Sem dados
-M765;45;Planejamento Reprodutivo;Duvida;Sem dados;Sem dados;45-54;Sem dados;Sem dados;Sem dados
-M766;40;Planejamento Reprodutivo;Revisão do DIU ;Sem dados;Sem dados;35-44;Sem dados;Sem dados;Sem dados
-M767;32;Planejamento Reprodutivo;Revisão do DIU;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados
-M768;32;Planejamento Reprodutivo;Retirada do DIU;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados
-M769;38;Planejamento Reprodutivo;Revisão do DIU;Sem dados;Sem dados;35-44;Sem dados;Sem dados;Sem dados
-M770;24;Planejamento Reprodutivo;Inserção DIU Mirena ;Sem dados;Sem dados;18-24;Sem dados;Sem dados;Sem dados
-M771;18;Planejamento Reprodutivo;Revisão do DIU ;Sem dados;Sem dados;18-24;Sem dados;Sem dados;Sem dados
-M772;21;Planejamento Reprodutivo;Inserção DIU Mirena ;Sem dados;Sem dados;18-24;Sem dados;Sem dados;Sem dados
-M773;46;Planejamento Reprodutivo;Acompanhamento;Sem dados;Sem dados;45-54;Sem dados;Sem dados;Sem dados
-M774;44;Planejamento Reprodutivo;Troca de DIU;Sem dados;Sem dados;35-44;Sem dados;Sem dados;Sem dados
-M775;30;Planejamento Reprodutivo;Inserção DIU Mirena ;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados
-M776;30;Planejamento Reprodutivo;Retirada do DIU;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados
-M777;30;Planejamento Reprodutivo;Retirada do DIU;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados
-M778;31;Planejamento Reprodutivo;Retirada do DIU;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados
-M779;16;Planejamento Reprodutivo;Inserção DIU Mirena ;Sem dados;Sem dados;18-;Sem dados;Sem dados;Sem dados
-M780;46;Planejamento Reprodutivo;Inserção DIU Mirena ;Sem dados;Sem dados;45-54;Sem dados;Sem dados;Sem dados
-M781;53;Planejamento Reprodutivo;Inserção DIU Mirena ;Sem dados;Sem dados;45-54;Sem dados;Sem dados;Sem dados
-M782;27;Planejamento Reprodutivo;Inserção DIU Mirena ;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados
-M783;35;Planejamento Reprodutivo;Inserção DIU ;Sem dados;Sem dados;35-44;Sem dados;Sem dados;Sem dados
-M784;22;Planejamento Reprodutivo;Inserção DIU;Sem dados;Sem dados;18-24;Sem dados;Sem dados;Sem dados
-M786;47;Planejamento Reprodutivo;Inserção DIU Mirena ;Sem dados;Sem dados;45-54;Sem dados;Sem dados;Sem dados
-M787;46;Planejamento Reprodutivo;Revisão do DIU ;Sem dados;Sem dados;45-54;Sem dados;Sem dados;Sem dados
-M788;31;Planejamento Reprodutivo;Troca de DIU ;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados
-M789;20;Planejamento Reprodutivo;Troca de DIU ;Sem dados;Sem dados;18-24;Sem dados;Sem dados;Sem dados
-M790;44;Planejamento Reprodutivo;Revisão do DIU;Sem dados;Sem dados;35-44;Sem dados;Sem dados;Sem dados
-M791;35;Planejamento Reprodutivo;Revisão do DIU;Sem dados;Sem dados;35-44;Sem dados;Sem dados;Sem dados
-M792;31;Planejamento Reprodutivo;Inserção DIU ;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados
-M793;37;Planejamento Reprodutivo;Retirada do DIU;Sem dados;Sem dados;35-44;Sem dados;Sem dados;Sem dados
-M794;50;Planejamento Reprodutivo;Revisão do DIU ;Sem dados;Sem dados;45-54;Sem dados;Sem dados;Sem dados
-M795;35;Planejamento Reprodutivo;Inserção DIU Mirena ;Sem dados;Sem dados;35-44;Sem dados;Sem dados;Sem dados
-M796;28;Planejamento Reprodutivo;Retirada do DIU;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados
-M797;49;Planejamento Reprodutivo;Inserção DIU Mirena ;Sem dados;Sem dados;45-54;Sem dados;Sem dados;Sem dados
-M798;25;Planejamento Reprodutivo;Inserção DIU Mirena ;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados
-M799;41;Planejamento Reprodutivo;Duvida;Sem dados;Sem dados;35-44;Sem dados;Sem dados;Sem dados
-M800;42;Planejamento Reprodutivo;Sem dados;Sem dados;Sem dados;35-44;Sem dados;Sem dados;Sem dados
-M801;33;Planejamento Reprodutivo;Inserção DIU Mirena ;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados
-M802;39;Planejamento Reprodutivo;Acompanhamento;Sem dados;Sem dados;35-44;Sem dados;Sem dados;Sem dados
-M803;22;Planejamento Reprodutivo;Revisão do DIU ;Sem dados;Sem dados;18-24;Sem dados;Sem dados;Sem dados
-M804;24;Planejamento Reprodutivo;Inserção do DIU;Sem dados;Sem dados;18-24;Sem dados;Sem dados;Sem dados
-M805;21;Planejamento Reprodutivo;Duvida;Sem dados;Sem dados;18-24;Sem dados;Sem dados;Sem dados
-M806;22;Planejamento Reprodutivo;implanon;Sem dados;Sem dados;18-24;Sem dados;Sem dados;Sem dados
-M807;31;Planejamento Reprodutivo;Revisão do Diu;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados
-M808;20;Planejamento Reprodutivo;Inserção DIU Mirena ;Sem dados;Sem dados;18-24;Sem dados;Sem dados;Sem dados
-M809;32;Planejamento Reprodutivo;Inserção DIU ;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados
-M810;35;Planejamento Reprodutivo;Inserção DIU Mirena;Sem dados;Sem dados;35-44;Sem dados;Sem dados;Sem dados
-M811;42;Planejamento Reprodutivo;Inserção DIU Mirena ;Sem dados;Sem dados;35-44;Sem dados;Sem dados;Sem dados
-M812;17;Planejamento Reprodutivo;Duvida;Sem dados;Sem dados;18-;Sem dados;Sem dados;Sem dados
-M813;18;Planejamento Reprodutivo;Inserção DIU Mirena ;Sem dados;Sem dados;18-24;Sem dados;Sem dados;Sem dados
-M814;17;Planejamento Reprodutivo;Revisão do DIU ;Sem dados;Sem dados;18-;Sem dados;Sem dados;Sem dados
-M815;26;Planejamento Reprodutivo;Inserção de DIU;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados
-M816;24;Planejamento Reprodutivo;Inserção DIU Mirena ;Sem dados;Sem dados;18-24;Sem dados;Sem dados;Sem dados
-M817;18;Planejamento Reprodutivo;implanon;Sem dados;Sem dados;18-24;Sem dados;Sem dados;Sem dados
-M818;50;Planejamento Reprodutivo;Inserção DIU Mirena ;Sem dados;Sem dados;45-54;Sem dados;Sem dados;Sem dados
-M819;41;Planejamento Reprodutivo;Troca de DIU ;Sem dados;Sem dados;35-44;Sem dados;Sem dados;Sem dados
-M820;20;Planejamento Reprodutivo;Duvida;Sem dados;Sem dados;18-24;Sem dados;Sem dados;Sem dados
-M821;35;Planejamento Reprodutivo;Sem dados;Sem dados;Sem dados;35-44;Sem dados;Sem dados;Sem dados
-M822;47;Planejamento Reprodutivo;Duvida;Sem dados;Sem dados;45-54;Sem dados;Sem dados;Sem dados
-M823;22;Planejamento Reprodutivo;Inserção DIU Mirena ;Sem dados;Sem dados;18-24;Sem dados;Sem dados;Sem dados
-M824;35;Planejamento Reprodutivo;Inserção DIU Mirena ;Sem dados;Sem dados;35-44;Sem dados;Sem dados;Sem dados
-M825;25;Planejamento Reprodutivo;Retirada do DIU;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados
-M826;53;Planejamento Reprodutivo;Inserção DIU Mirena;Sem dados;Sem dados;45-54;Sem dados;Sem dados;Sem dados
-M827;20;Planejamento Reprodutivo;Inserção DIU Mirena;Sem dados;Sem dados;18-24;Sem dados;Sem dados;Sem dados
-M828;21;Planejamento Reprodutivo;Inserção DIU Mirena;Sem dados;Sem dados;18-24;Sem dados;Sem dados;Sem dados
-M829;50;Planejamento Reprodutivo;Retirada do DIU;Sem dados;Sem dados;45-54;Sem dados;Sem dados;Sem dados
-M830;25;Planejamento Reprodutivo;Revisão do DIU;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados
-M831;40;Planejamento Reprodutivo;Inserção DIU Mirena;Sem dados;Sem dados;35-44;Sem dados;Sem dados;Sem dados
-M832;34;Planejamento Reprodutivo;Revisão do DIU ;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados
-M833;25;Planejamento Reprodutivo;Duvida;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados
-M834;40;Planejamento Reprodutivo;Inserção DIU Mirena;Sem dados;Sem dados;35-44;Sem dados;Sem dados;Sem dados
-M835;25;Planejamento Reprodutivo;Inserção DIU Mirena;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados
-M836;46;Planejamento Reprodutivo;Inserção DIU Mirena;Sem dados;Sem dados;45-54;Sem dados;Sem dados;Sem dados
-M837;36;Planejamento Reprodutivo;Inserção DIU Mirena;Sem dados;Sem dados;35-44;Sem dados;Sem dados;Sem dados
-M838;23;Planejamento Reprodutivo;Laqueadura;Sem dados;Sem dados;18-24;Sem dados;Sem dados;Sem dados
-M839;23;Planejamento Reprodutivo;Inserção DIU Mirena;Sem dados;Sem dados;18-24;Sem dados;Sem dados;Sem dados
-M840;45;Planejamento Reprodutivo;Troca do DIU;Sem dados;Sem dados;45-54;Sem dados;Sem dados;Sem dados
-M841;42;Planejamento Reprodutivo;Revisão do DIU;Sem dados;Sem dados;35-44;Sem dados;Sem dados;Sem dados
-M842;37;Planejamento Reprodutivo;Inserção DIU Mirena;Sem dados;Sem dados;35-44;Sem dados;Sem dados;Sem dados
-M843;37;Planejamento Reprodutivo;Inserção DIU Mirena ;Sem dados;Sem dados;35-44;Sem dados;Sem dados;Sem dados
-M844;22;Planejamento Reprodutivo;Inserção DIU Mirena ;Sem dados;Sem dados;18-24;Sem dados;Sem dados;Sem dados
-M845;24;Planejamento Reprodutivo;Dúvida;Sem dados;Sem dados;18-24;Sem dados;Sem dados;Sem dados
-M846;29;Planejamento Reprodutivo;Inserção DIU Mirena ;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados
-M847;26;Planejamento Reprodutivo;Dúvida;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados
-M848;36;Planejamento Reprodutivo;Inserção DIU Mirena ;Sem dados;Sem dados;35-44;Sem dados;Sem dados;Sem dados
-M849;18;Planejamento Reprodutivo;Dúvida;Sem dados;Sem dados;18-24;Sem dados;Sem dados;Sem dados
-M850;17;Planejamento Reprodutivo;Inserção DIU Mirena ;Sem dados;Sem dados;18-;Sem dados;Sem dados;Sem dados
-M851;31;Planejamento Reprodutivo;Dúvida;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados
-M852;34;Planejamento Reprodutivo;Revisão do DIU ;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados
-M853;33;Planejamento Reprodutivo;Inserção DIU ;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados
-M854;20;Planejamento Reprodutivo;Revisão do DIU ;Sem dados;Sem dados;18-24;Sem dados;Sem dados;Sem dados
-M855;41;Planejamento Reprodutivo;Inserção DIU ;Sem dados;Sem dados;35-44;Sem dados;Sem dados;Sem dados
-Homem 1;49;Odontologia;Restauração caiu;;Restauração dentária + clareamento dentário + endodontia;45-54;Julho;2023
-Mulher 1;32;Odontologia;;;Restauração dentária + exodontia;25-34;Agosto;2023
-Mulher 2;24;Odontologia;Dor de dente + sensibilidade;;;18-24;Março;2023
-Mulher 3;27;Odontologia;Dor de dente;;;25-34;Agosto;2023
-Homem 2;6;Odontologia;Dente furado;;;18-;Março;2023
-Mulher 4;51;Odontologia;;;Restauração dentária + exodontia;45-54;Agosto;2023
-Mulher 5;41;Odontologia;Dor de dente;;;35-44;Agosto;2023
-Mulher 6;28;Odontologia;;;Exodontia;25-34;Março;2023
-Mulher 7;31;Odontologia;Dor de dente + dente quebrado;;;25-34;Julho;2023
-Mulher 8;57;Odontologia;Dente quebrado;;;55-64;Outubro;2023
-Mulher 9;26;Odontologia;Dente quebrado;;;25-34;Março;2023
-Mulher 10;32;Odontologia;;;Exodontia;25-34;Março;2023
-Homem 3;66;Odontologia;Dor de dente;;;65+;Março;2023
-Mulher 11;46;Odontologia;Dente furado;;;45-54;Agosto;2023
-Mulher 12;51;Odontologia;;;Restauração dentária + exodontia;45-54;Maio;2023
-Mulher 13;38;Odontologia;Dente quebrado;;;35-44;Março;2023
-Mulher 14;30;Odontologia;Dor de dente;;;25-34;Março;2023
-Homem 4;8;Odontologia;Dor de dente;;;18-;Março;2023
-Homem 5;64;Odontologia;;;Exodontia;55-64;Outubro;2023
-Mulher 15;23;Odontologia;;;Restauração dentária + endodontia + clareamento;18-24;Março;2023
-Mulher 16;43;Odontologia;Dor + sensibilidade + retração na gengiva;;Restauração dentária + clareamento dentário;35-44;Março;2023
-Homem 6;41;Odontologia;Nenhum;;Rotina;35-44;Março;2023
-Mulher 17;46;Odontologia;Dente quebrado + dor de dente;;;45-54;Abril;2023
-Mulher 18;30;Odontologia;Traumatismo dentoalveolar + abcesso;;Restauração dentária + clareamento dentário + endodontia;25-34;Abril;2023
-Mulher 19;27;Odontologia;Nenhum;;Restauração dentária + clareamento dentário;25-34;Maio;2023
-Mulher 20;58;Odontologia;Nenhum;;Restauração dentária + clareamento dentário;55-64;Maio;2023
-Mulher 21;50;Odontologia;;;Restauração dentária + clareamento dentário;45-54;Maio;2023
-Mulher 22;34;Odontologia;Dor muscular + sensação de desoclusão;;Restauração dentária + clareamento dentário;25-34;Abril;2023
-Mulher 23;48;Odontologia;Sensação de mobilidade dental;;Restauração dentária + clareamento dentário + endodontia;45-54;Abril;2023
-Homem 7;36;Odontologia;Dente quebrado;;Restauração dentária + clareamento dentário;35-44;Maio;2023
-Homem 8;24;Odontologia;Necessidade de clareamento;;Restauração dentária + clareamento dentário;18-24;Junho;2023
-Mulher 24;34;Odontologia;Necessidade de clareamento;;Restauração dentária + clareamento dentário;25-34;Junho;2023
-Homem 9;33;Odontologia;Necessidade de clareamento;;Restauração dentária + clareamento dentário;25-34;Junho;2023
-Mulher 25;56;Odontologia;Bruxismo;;Restauração dentária + clareamento dentário;55-64;Junho;2023
-Mulher 26;27;Odontologia;Necessidade de clareamento + limpeza + restauração;;Restauração dentária + clareamento dentário;25-34;Junho;2023
-Mulher 27;32;Odontologia;Erupção dentária;;Restauração dentária + clareamento dentário;25-34;Julho;2023
-Mulher 28;41;Odontologia;Necessidade de restauração;;Restauração dentária + clareamento dentário + endodontia;35-44;Agosto;2023
-Mulher 29;34;Odontologia;Sangramento ao escovar;;Endodontia;25-34;Julho;2023
-Mulher 30;64;Odontologia;Retirada de restos radiculares;;Endodontia;55-64;Agosto;2023
-Mulher 31;44;Odontologia;Dente com cheiro desagradável;;Restauração dentária + clareamento dentário + endodontia;35-44;Dezembro;2023
+PatientID;Age;HealthArea;Symptom;DiagnosedDisease;RecommendedTreatment;AgeRange;AppointmentMonth;AppointmentYear;FullDate;hd_indicada;Bleeding;Polipo;Menopausa;extra0;extra1;extra2;extra3;extra4;extra5;extra6;cidade
+1;37;Histeroscopia Diagnóstica;Desejo de engravidar + Pólipo;Endométrio padrão secretor;;35-44;Março;2023;23/03/2023;Agendado;nao;sim;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;;Mata Pernambucana
+2;52;Histeroscopia Diagnóstica;Indisposição e cansaço;Pólipo endocervical + suspeita de mioma;;45-54;Abril;2023;20/04/2023;Agendado;nao;sim;Estou com sangramento ativo (não é fluxo menstrual);;;;;;;;Mata Pernambucana
+3;73;Histeroscopia Diagnóstica;Indicação cirúrgica ;;;65+;Fevereiro;2023;09/02/2023;Agendado;sem dados;nao;Estou na Menopausa (não menstruo mais);;;;;;;
+4;36;Histeroscopia Diagnóstica;Sangramento contínuo;Espessamento endometrial;;35-44;Abril;2023;27/04/2023;Agendado;sim;nao;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;;Mata Pernambucana
+5;54;Histeroscopia Diagnóstica;Dores no baixo ventre + Pólipo;;;45-54;Outubro;2023;05/10/2023;;sem dados;sim;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;;Mata Pernambucana
+6;63;Histeroscopia Diagnóstica;Sangramento na menopausa;Pólipo endometrial + Pólipo endocervical + mucometra por estenose cervical;;55-64;Março;2023;02/03/2023;Agendado;sim;sim;Estou com sangramento ativo (não é fluxo menstrual);;;;;;;;Mata Pernambucana
+7;68;Histeroscopia Diagnóstica;Nódulo no reto e no colo do útero ;Pólipo cervical + Pólipo endometrial;;65+;Março;2023;03/03/2023;Agendado;nao;sim;Estou na Menopausa (não menstruo mais);;;;;;;;Mata Pernambucana
+8;50;Histeroscopia Diagnóstica;Mioma;Leiomioma intramural;acompanhamento clínico;45-54;Maio;2023;04/05/2023;Agendado;nao;nao;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;;Mata Pernambucana
+9;52;Histeroscopia Diagnóstica;Espessamento endometrial;;;45-54;Fevereiro;2023;24/02/2023;Agendado;sem dados;nao;Estou na Menopausa (não menstruo mais);;;;;;;
+10;55;Histeroscopia Diagnóstica;Cisto endometrial;;;55-64;Setembro;2024;12/09/2024;Não foi indicada;sem dados;nao;Estou na Menopausa (não menstruo mais);;;;;;;;Mata Pernambucana
+11;48;Histeroscopia Diagnóstica;Sangramento contínuo;;;45-54;Junho;2023;08/06/2023;Agendado;sim;nao;Estou com sangramento ativo (não é fluxo menstrual);;;;;;;;Metropolitana de Recife
+12;49;Histeroscopia Diagnóstica;Fluxo menstrual desconfortável;Pólipo endometrial + Pólipo endocervical;;45-54;Novembro;2023;23/11/2023;Agendado;nao;sim;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;;Metropolitana de Recife
+13;59;Histeroscopia Diagnóstica;Solicitação médica;;;55-64;Junho;2023;01/06/2023;;sem dados;nao;Estou na Menopausa (não menstruo mais),  cólicas leves a intensa, atrofia vaginal, fio do DIU (mal posicionado);;;;;;;
+14;50;Histeroscopia Diagnóstica;Pólipo endometrial ;Pólipo endometrial;;45-54;Outubro;2023;05/10/2023;Agendado;nao;sim;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;;Metropolitana de Recife
+15;51;Histeroscopia Diagnóstica;Menstruação longa + fluxo intenso;Pólipo endometrial + Pólipo endocervical;;45-54;Abril;2023;20/04/2023;Agendado;nao;sim;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;;Metropolitana de Recife
+16;39;Histeroscopia Diagnóstica;Sangramento irregular + Dores intensas;Leiomioma submucoso intramural;;35-44;Maio;2023;11/05/2023;Agendado;sim;nao;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;;Metropolitana de Recife
+17;51;Histeroscopia Diagnóstica;Sangramento contínuo + Pólipo;Pólipo endometrial e (endometrite? hiperplásico?);;45-54;Março;2023;30/03/2023;Agendado;sim;sim;Estou com sangramento ativo (não é fluxo menstrual);;;;;;;;Metropolitana de Recife
+18;58;Histeroscopia Diagnóstica;Solicitação médica;;;55-64;Maio;2023;10/05/2023;Agendado;sem dados;sem dados;Estou com sangramento ativo (não é fluxo menstrual);;;;;;;;Metropolitana de Recife
+19;76;Histeroscopia Diagnóstica;Sangramento na menopausa ;;;65+;Março;2023;30/03/2023;Agendado;sim;sem dados;Estou na Menopausa (não menstruo mais), Estou com sangramento ativo (não é fluxo menstrual);;;;;;;;Metropolitana de Recife
+20;61;Histeroscopia Diagnóstica;Dores intensas + infecção urinária;;;55-64;Novembro;2023;23/11/2023;Pendente;sem dados;sem dados;Estou na Menopausa (não menstruo mais);;;;;;;;Metropolitana de Recife
+21;61;Histeroscopia Diagnóstica;Dores intensas + infecção urinária;;;55-64;Novembro;2023;23/11/2023;;sem dados;sem dados;Estou na Menopausa (não menstruo mais);;;;;;;;Metropolitana de Recife
+22;42;Histeroscopia Diagnóstica;Sangramento exagerado + Policisto;;;35-44;Março;2024;30/03/2024;Agendado;sim;sem dados;Ciclo menstrual ativo anormal;;;;;;;;Metropolitana de Recife
+23;60;Histeroscopia Diagnóstica;Dores intensas;USG ENDOVAGINAL;;55-64;Agosto;2024;01/08/2024;Agendado;nao;nao;Estou na Menopausa (não menstruo mais);;;;;;;
+24;35;Histeroscopia Diagnóstica;Reverter ligação tubária;;;35-44;Março;2024;07/03/2024;Não foi indicada;sem dados;sem dados;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;;Metropolitana de Recife
+25;37;Histeroscopia Diagnóstica;Solicitação médica;Exame normal;;35-44;Dezembro;2023;28/12/2023;Agendado;nao;nao;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;;Metropolitana de Recife
+26;40;Histeroscopia Diagnóstica;Sangramento contínuo;;;35-44;Junho;2024;06/06/2024;;sim;sem dados;Estou com sangramento ativo (não é fluxo menstrual);;;;;;;
+27;59;Histeroscopia Diagnóstica;Sangramento contínuo;;;55-64;Novembro;2024;14/11/2024;Agendado;sim;sem dados;Estou com sangramento ativo (não é fluxo menstrual);;;;;;;;Metropolitana de Recife
+28;44;Histeroscopia Diagnóstica;Solicitação médica;;;35-44;Maio;2024;30/05/2024;Agendado;sem dados;sem dados;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;;Metropolitana de Recife
+29;72;Histeroscopia Diagnóstica;sangramento na menopausa ;;;65+;Maio;2024;30/05/2024;Agendado;sim;sem dados;Estou com sangramento ativo (não é fluxo menstrual);;;;;;;;Metropolitana de Recife
+30;41;Histeroscopia Diagnóstica;Dores intensas +  Sangramento contínuo;Espessamento endometrial;;35-44;Dezembro;2023;21/12/2023;;sim;nao;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;
+31;46;Histeroscopia Diagnóstica;Pólipo endometrial + cólicas ;Pólipo endometrial;;45-54;Julho;2024;11/07/2024;Agendado;nao;sim;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;;Metropolitana de Recife
+32;71;Histeroscopia Diagnóstica;.;;;65+;Julho;2024;04/07/2024;Agendado;sem dados;sem dados;Não sei responder;;;;;;;;Metropolitana de Recife
+33;57;Histeroscopia Diagnóstica;Indicação cirúrgica ;;;55-64;Julho;2024;25/07/2024;Agendado;sem dados;sem dados;Estou com sangramento ativo (não é fluxo menstrual);;;;;;;;Metropolitana de Recife
+34;74;Histeroscopia Diagnóstica;Solicitação médica;;;65+;Dezembro;2023;28/12/2023;Remarcar;sem dados;sem dados;Estou na Menopausa (não menstruo mais);;;;;;;
+35;44;Histeroscopia Diagnóstica;Solicitação médica;;;35-44;Setembro;2024;12/09/2024;Agendado;sem dados;sem dados;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;;Metropolitana de Recife
+36;48;Histeroscopia Diagnóstica;Sangramento contínuo + dores intensas;;;45-54;Novembro;2024;21/11/2024;Agendado;sim;sem dados;Estou com sangramento ativo (não é fluxo menstrual);;;;;;;;Agreste Pernambucano
+37;46;Histeroscopia Diagnóstica;Sangramento contínuo;;;45-54;Maio;2023;04/05/2023;Agendado;sim;sem dados;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;;Agreste Pernambucano
+38;46;Histeroscopia Diagnóstica;Solicitação médica;Pólipo endometrial;;45-54;Maio;2023;16/05/2023;Agendado;nao;sim;Estou na Menopausa (não menstruo mais);;;;;;;;Agreste Pernambucano
+39;33;Histeroscopia Diagnóstica;Indicação cirúrgica + Sangramento intenso;;;25-34;Junho;2024;06/06/2024;Não foi indicada;sim;sem dados;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;;Mata Pernambucana
+40;37;Histeroscopia Diagnóstica;Desejo de engravidar  ;Mioma;;35-44;Maio;2023;25/05/2023;;nao;nao;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;;Agreste Pernambucano
+41;53;Histeroscopia Diagnóstica;Pólido menstrual;;;45-54;Julho;2023;27/07/2023;Não foi indicada;sem dados;sem dados;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente), Não sei responder;;;;;;;;Agreste Pernambucano
+42;55;Histeroscopia Diagnóstica;Sangramento contínuo;Pólipo endometrial;;55-64;Junho;2023;22/06/2023;Agendado;sim;sim;Estou na Menopausa (não menstruo mais);;;;;;;;Sertão Pernambucano
+43;53;Histeroscopia Diagnóstica;Dores intensas;;;45-54;Junho;2023;08/06/2023;Agendado;sem dados;sem dados;Estou na Menopausa (não menstruo mais);;;;;;;;Sertão Pernambucano
+44;56;Histeroscopia Diagnóstica;Dores intensas;Pólipo endometrial + Endometriose;;55-64;Junho;2023;08/06/2023;Agendado;nao;sim;Estou na Menopausa (não menstruo mais);;;;;;;;Sertão Pernambucano
+45;31;Histeroscopia Diagnóstica;Sangramento na relação sexual;;;25-34;Julho;2023;27/07/2023;Agendado;sim;sem dados;Menstruação irregular ; tive um aborto recentemente por conta de um pólipo emdometrial visto na endovaginal;;;;;;
+46;51;Histeroscopia Diagnóstica;Fluxo intenso + coágulo;;;45-54;Setembro;2024;19/09/2024;Agendado;sem dados;sem dados;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;;Sertão Pernambucano
+47;52;Histeroscopia Diagnóstica;Solicitação médica;;;45-54;Agosto;2023;24/08/2023;;sem dados;sem dados;Não sei responder;;;;;;;;Sertão Pernambucano
+48;59;Histeroscopia Diagnóstica;Indicação cirúrgica ;NÓDULOS MIOMATOSOS+LÍQUIDO NO INTERIOR DA CAVIDADE ENDOMETRIAL+PROCESSO INFLAMATÓRIO/INFECCIOSO;;55-64;Julho;2023;13/07/2023;Agendado;nao;nao;Estou na Menopausa (não menstruo mais);;;;;;;;São Francisco Pernambucano
+49;60;Histeroscopia Diagnóstica;Indicação cirúrgica ;Perinioplastia +Suspensão de bexiga + Endometriose + Pólipo endometrial;;55-64;Julho;2023;13/07/2023;Agendado;nao;sim;Estou na Menopausa (não menstruo mais);teve cancer  ;;;;;;
+50;32;Histeroscopia Diagnóstica;Cistos simples ovário direito;;;25-34;Junho;2023;22/06/2023;;sem dados;sem dados;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;;São Francisco Pernambucano
+51;67;Histeroscopia Diagnóstica;Sangramento na menopausa + dores na pelve;;;65+;Junho;2023;22/06/2023;Agendado;sim;sem dados;Estou na Menopausa (não menstruo mais);menst. 1 vez p ano;;;;;;;São Francisco Pernambucano
+52;56;Histeroscopia Diagnóstica;Solicitação médica;;;55-64;Junho;2023;08/06/2023;Agendado;sem dados;sem dados;Estou na Menopausa (não menstruo mais);teve cancer mama;;;;;;;São Francisco Pernambucano
+53;71;Histeroscopia Diagnóstica;Solicitação médica;;;65+;Junho;2023;08/06/2023;Agendado;sem dados;sem dados;Estou na Menopausa (não menstruo mais);;;;;;;
+54;39;Histeroscopia Diagnóstica;Pólipo endometrial;Pólipo endometrial;;35-44;Junho;2023;15/06/2023;;nao;sim;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;;São Francisco Pernambucano
+55;48;Histeroscopia Diagnóstica;Indicação cirúrgica + sangramento com dores abdominais intensas;;;45-54;Junho;2023;08/06/2023;Agendado;sim;sem dados;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente), Estou com sangramento ativo (não é fluxo menstrual);;;;;;;;São Francisco Pernambucano
+56;43;Histeroscopia Diagnóstica;Solicitação médica;;;35-44;Junho;2023;22/06/2023;;sem dados;sem dados;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;
+57;40;Histeroscopia Diagnóstica;Solicitação médica;;;35-44;Junho;2023;15/06/2023;Agendado;sem dados;sem dados;Não sei responder;;;;;;;;São Francisco Pernambucano
+58;56;Histeroscopia Diagnóstica;Dores intensas;;;55-64;Junho;2023;15/06/2023;Agendado;sem dados;sem dados;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;;São Francisco Pernambucano
+59;46;Histeroscopia Diagnóstica;Solicitação médica;Pólipo endometrial;;45-54;Janeiro;2024;25/01/2024;Agendado;nao;sim;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;
+60;59;Histeroscopia Diagnóstica;Nódulo uterino + espessamento;Espessamento endometrial;;55-64;Julho;2023;06/07/2023;Agendado;nao;nao;Estou na Menopausa (não menstruo mais);;;;;;;
+61;52;Histeroscopia Diagnóstica;Indicação cirúrgica ;;;45-54;Dezembro;2024;12/12/2024;Não foi indicada;sem dados;sem dados;;teve cancer mama;;;;;;
+62;50;Histeroscopia Diagnóstica;Solicitação médica;;;45-54;Junho;2023;15/06/2023;Agendado;sem dados;sem dados;Não sei responder;;;;;;;;Mata Pernambucana
+63;42;Histeroscopia Diagnóstica;Sangramento na relação sexual;Pólipo endometrial;;35-44;Julho;2023;06/07/2023;Agendado;sim;sim;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;;Mata Pernambucana
+64;58;Histeroscopia Diagnóstica;Sangramento na menopausa ;Espessamento endometrial + mioma;;55-64;Agosto;2023;03/08/2023;Agendado;sim;nao;Estou na Menopausa (não menstruo mais);;;;;;;;Mata Pernambucana
+65;53;Histeroscopia Diagnóstica;Exame de histeroscopia ;;;45-54;Julho;2023;06/07/2023;Agendado;sem dados;sem dados;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;;Mata Pernambucana
+66;51;Histeroscopia Diagnóstica;Pólipo ;;;45-54;Agosto;2023;10/08/2023;Agendado;sem dados;sim;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;;Mata Pernambucana
+67;63;Histeroscopia Diagnóstica;Solicitação médica;;;55-64;Julho;2023;06/07/2023;Agendado;sem dados;sem dados;Estou na Menopausa (não menstruo mais);;;;;;;
+68;68;Histeroscopia Diagnóstica;Espessamento endometrial;;;65+;Agosto;2023;03/08/2023;Agendado;sem dados;sem dados;Estou na Menopausa (não menstruo mais);;;;;;;
+69;47;Histeroscopia Diagnóstica;Pólipo endometrial;Pólipo endometrial;;45-54;Julho;2023;11/07/2023;Agendado;nao;sim;Estou com sangramento ativo (não é fluxo menstrual);;;;;;;
+70;32;Histeroscopia Diagnóstica;Solicitação médica;;;25-34;Julho;2023;06/07/2023;;sem dados;sem dados;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;
+71;46;Histeroscopia Diagnóstica;Solicitação médica;Pólipo endometrial;;45-54;Maio;2025;15/05/2025;Pendente;nao;sim;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;
+72;35;Histeroscopia Diagnóstica;Pólipo + sangramento e dores;;;35-44;Julho;2023;13/07/2023;Não foi indicada;sim;sim;Estou com sangramento ativo (não é fluxo menstrual);;;;;;;
+73;36;Histeroscopia Diagnóstica;dores no útero + cólicas intensas;;;35-44;Fevereiro;2024;08/02/2024;;sem dados;sem dados;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;
+74;40;Histeroscopia Diagnóstica;Espessamento endometrial + Pólipo  ;;;35-44;Julho;2023;27/07/2023;Agendado;sem dados;sim;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;
+75;55;Histeroscopia Diagnóstica;Dores pélvicas constantes;;;55-64;Julho;2023;27/07/2023;Agendado;sem dados;sem dados;Estou com sangramento ativo (não é fluxo menstrual);;;;;;;
+76;36;Histeroscopia Diagnóstica;Sangramento em ovário + coágulo;;;35-44;Maio;2024;02/05/2024;;sim;sem dados;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;
+77;67;Histeroscopia Diagnóstica;Espessamento endometrial  ;;;65+;Fevereiro;2024;01/02/2024;Agendado;sem dados;sem dados;Estou na Menopausa (não menstruo mais);;;;;;;
+78;72;Histeroscopia Diagnóstica;Sangramento na menopausa;;;65+;Julho;2023;10/07/2023;Agendado;sim;sem dados;Estou com sangramento ativo (não é fluxo menstrual);;;;;;;
+79;66;Histeroscopia Diagnóstica;Solicitação médica;;;65+;Julho;2023;06/07/2023;Agendado;sem dados;sem dados;Estou na Menopausa (não menstruo mais);;;;;;;
+80;55;Histeroscopia Diagnóstica;Mioma;Mioma;;55-64;Janeiro;2024;25/01/2024;;nao;nao;Estou na Menopausa (não menstruo mais);;;;;;;
+81;54;Histeroscopia Diagnóstica;Dores no útero  ;;;45-54;Agosto;2023;03/08/2023;Agendado;sem dados;sem dados;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;
+82;58;Histeroscopia Diagnóstica;Pólipo ;;;55-64;Novembro;2023;30/11/2023;Agendado;sem dados;sim;Estou na Menopausa (não menstruo mais);;;;;;;
+83;43;Histeroscopia Diagnóstica;Sangramento contínuo;;;35-44;Julho;2023;20/07/2023;Agendado;sim;sem dados;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente), Fora a menstruação tô tentando sangramento constantemente.;;;;;;;
+84;52;Histeroscopia Diagnóstica;Indicação cirúrgica  ;;;45-54;Julho;2023;27/07/2023;;sem dados;sem dados;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;
+85;61;Histeroscopia Diagnóstica;Solicitação médica;;;55-64;Junho;2024;20/06/2024;;sem dados;sem dados;Estou na Menopausa (não menstruo mais);;;;;;;
+86;53;Histeroscopia Diagnóstica;Solicitação médica;;;45-54;Novembro;2023;09/11/2023;;sem dados;sem dados;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;
+87;50;Histeroscopia Diagnóstica;Dores intensas + Pólipo e Mioma;Pólipo endometrial + Mioma;;45-54;Fevereiro;2025;06/02/2025;Agendado;nao;sim;A dois anos fui diagnosticada com polipo endometrial e mioma sinto dores constante ,a dois anos espero pela cirurgia , até o mioma e o polipo aumetaram de tamanho. Me ajude.;;;;;;;
+88;59;Histeroscopia Diagnóstica;Mioma;Mioma;;55-64;Fevereiro;2024;15/02/2024;;nao;nao;Estou na Menopausa (não menstruo mais);;;;;;;
+89;42;Histeroscopia Diagnóstica;Solicitação médica;;;35-44;Maio;2024;09/05/2024;;sem dados;sem dados;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;
+90;58;Histeroscopia Diagnóstica;Espessamento endometrial + nódulo miometral sugestivo de linhagem leiomiomatose;;;55-64;Agosto;2023;03/08/2023;Agendado;sem dados;sem dados;Estou na Menopausa (não menstruo mais);;;;;;;
+91;67;Histeroscopia Diagnóstica;Dores intensas;Espessamento endometrial + Pólipo;;65+;Julho;2024;18/07/2024;Agendado;nao;nao;Estou na Menopausa (não menstruo mais);;;;;;;
+92;69;Histeroscopia Diagnóstica;Sangramento na menopausa;;;65+;Agosto;2023;17/08/2023;Agendado;sim;sem dados;Estou na Menopausa (não menstruo mais);;;;;;;
+93;73;Histeroscopia Diagnóstica;Sangramento anormal;;;65+;Agosto;2023;17/08/2023;Agendado;sim;sem dados;Estou na Menopausa (não menstruo mais);;;;;;;
+94;60;Histeroscopia Diagnóstica;Sangramento na menopausa + Pólipo;;;55-64;Julho;2023;13/07/2023;Agendado;sim;sim;Estou na Menopausa (não menstruo mais);passado de retirada de polipo;;;;;;
+95;64;Histeroscopia Diagnóstica;Sangramento uterino anormal;;;55-64;Agosto;2023;10/08/2023;Agendado;sim;sem dados;ESTOU NA MENOPAUSA ( COM SANGRAMENTO ANORMAL ,PACIENTE JÁ REALIZOU CIRURGIA NO ANO 2014 );JÁ AVIALA REALIZADO CIRURGIA DE RETIRADA DE LEIOMIOMA;;;;;;
+96;74;Histeroscopia Diagnóstica;Cólicas pélvicas + Sangramento anormal + Espessamento endometrial;;;65+;Agosto;2023;10/08/2023;Agendado;sim;sem dados;Estou na Menopausa (não menstruo mais);;;;;;;
+97;37;Histeroscopia Diagnóstica;Solicitação médica;;;35-44;Junho;2024;27/06/2024;;sem dados;sem dados;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;
+98;52;Histeroscopia Diagnóstica;Hidrossalpinge bilateral ;;;45-54;Fevereiro;2024;08/02/2024;Agendado;sem dados;sem dados;Estou entrando na menor pausa ;;;;;;;
+99;53;Histeroscopia Diagnóstica;Espessamento endometrial + Sangramento anormal;Pólipo endometrial;;45-54;Março;2024;07/03/2024;Agendado;sim;nao;Estou na Menopausa (não menstruo mais);;;;;;;
+100;39;Histeroscopia Diagnóstica;Pólipo endocervical;;;35-44;Outubro;2023;05/10/2023;Agendado;sem dados;sim;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;
+101;61;Histeroscopia Diagnóstica;Pólipo endometrial;;;55-64;Fevereiro;2024;08/02/2024;;sem dados;sim;Estou na Menopausa (não menstruo mais);;;;;;;
+102;61;Histeroscopia Diagnóstica;Solicitação médica;Pólipo endometrial + Pólipo endocervical;;55-64;Maio;2024;02/05/2024;Agendado;nao;nao;Não sei responder;;;;;;;
+103;48;Histeroscopia Diagnóstica;Hiperplasia glandular endometrial.;;;45-54;Fevereiro;2024;15/02/2024;Agendado;sem dados;sem dados;O ciclo menstrual foi interrompido em virtude da quimioterapia.;Estou fazendo tratamento de CA de Mama com Tamoxiufeno.;;;;;;
+104;39;Histeroscopia Diagnóstica;Dores intensas;;;35-44;Março;2024;21/03/2024;Agendado;sem dados;sem dados;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;
+105;62;Histeroscopia Diagnóstica;Solicitação médica;;;55-64;Agosto;2023;24/08/2023;Agendado;sem dados;sem dados;Estou na Menopausa (não menstruo mais);;;;;;;
+106;69;Histeroscopia Diagnóstica;dores abdominais + Urina escura + perca de peso + Sangramento uterino + cisto;;;65+;Agosto;2023;10/08/2023;Agendado;sim;sem dados;Estou na Menopausa (não menstruo mais), Estou com sangramento ativo (não é fluxo menstrual);;;;;;;
+107;53;Histeroscopia Diagnóstica;Pólipo endometrial;;;45-54;Outubro;2023;26/10/2023;Agendado;sem dados;sim;Não sei responder;;;;;;;
+108;66;Histeroscopia Diagnóstica;Mioma + Espessamento endometrial;;;65+;Abril;2024;04/04/2024;Agendado;sem dados;sem dados;Estou na Menopausa (não menstruo mais);;;;;;;
+109;26;Histeroscopia Diagnóstica;Pólipo endometrial + folículo no ovário direito;;;25-34;Fevereiro;2024;08/02/2024;;sem dados;sim;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;
+110;55;Histeroscopia Diagnóstica;Sangramento constante + Cólica intensa + dores no quadril e nas pernas;;;55-64;Agosto;2023;10/08/2023;Agendado;sim;sem dados;Estou com sangramento ativo (não é fluxo menstrual);;;;;;;
+111;43;Histeroscopia Diagnóstica;Mioma;;;35-44;Fevereiro;2024;08/02/2024;Agendado;sem dados;sem dados;Estou com sangramento ativo (não é fluxo menstrual);;;;;;;
+112;41;Histeroscopia Diagnóstica;Menstruação irregular + Dores intensas + Mal estar + Dor de cabeça;;;35-44;Fevereiro;2024;08/02/2024;Agendado;sem dados;sem dados;MENSTRUAÇÃO IRREGULAR;;;;;;;
+113;60;Histeroscopia Diagnóstica;Solicitação médica;;;55-64;Fevereiro;2024;08/02/2024;Agendado;sem dados;sem dados;Estou na Menopausa (não menstruo mais);;;;;;;
+114;47;Histeroscopia Diagnóstica;Sangramento constante + Pólipo;;;45-54;Fevereiro;2024;08/02/2024;;sim;sim;Estou com sangramento ativo (não é fluxo menstrual);;;;;;;
+115;67;Histeroscopia Diagnóstica;Solicitação médica;;;65+;Agosto;2023;17/08/2023;Agendado;sem dados;sem dados;Estou na Menopausa (não menstruo mais);;;;;;;
+116;51;Histeroscopia Diagnóstica;Solicitação médica;;;45-54;Agosto;2023;17/08/2023;Agendado;sem dados;sem dados;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;
+117;53;Histeroscopia Diagnóstica;Solicitação médica;;;45-54;Agosto;2023;17/08/2023;Agendado;sem dados;sem dados;Estou com sangramento ativo (não é fluxo menstrual);;;;;;;
+118;59;Histeroscopia Diagnóstica;Solicitação médica;;;55-64;Agosto;2023;17/08/2023;Agendado;sem dados;sem dados;Não sei responder;;;;;;;
+119;62;Histeroscopia Diagnóstica;Dores pélvicas constantes;;;55-64;Dezembro;2024;19/12/2024;Agendado;sem dados;sem dados;dores pélvicas ;;;;;;;
+120;35;Histeroscopia Diagnóstica;Solicitação médica;;;35-44;Fevereiro;2024;15/02/2024;;sem dados;sem dados;Não estou mestrunado a 5 anos;;;;;;;
+121;60;Histeroscopia Diagnóstica;Solicitação médica;;;55-64;Agosto;2023;24/08/2023;;sem dados;sem dados;Estou na Menopausa (não menstruo mais);;;;;;;
+122;54;Histeroscopia Diagnóstica;Fluxo menstrual anormal;;;45-54;Julho;2024;04/07/2024;Agendado;sem dados;sem dados;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;
+123;63;Histeroscopia Diagnóstica;Sangramento anormal + Dores intensas + Espessamento endometrial;;;55-64;Março;2024;14/03/2024;;sim;sem dados;Estou na Menopausa (não menstruo mais);;;;;;;
+124;58;Histeroscopia Diagnóstica;Solicitação médica;;;55-64;Agosto;2023;17/08/2023;Agendado;sem dados;sem dados;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;
+125;46;Histeroscopia Diagnóstica;Fluxo menstrual anormal + Coágulos;;;45-54;Março;2024;14/03/2024;Agendado;sem dados;sem dados;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;
+126;53;Histeroscopia Diagnóstica;Sangramento anormal + Pólipo endometrial;;;45-54;Julho;2024;04/07/2024;;sim;sim;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;
+127;44;Histeroscopia Diagnóstica;Sangramento contínuo;;;35-44;Março;2024;14/03/2024;Não foi indicada;sim;sem dados;Estou com sangramento ativo (não é fluxo menstrual);;;;;;;
+128;56;Histeroscopia Diagnóstica;Espessamento endometrial;;;55-64;Julho;2024;25/07/2024;Agendado;sem dados;sem dados;Estou na Menopausa (não menstruo mais);;;;;;;
+129;31;Histeroscopia Diagnóstica;Pólipo ;;;25-34;Março;2024;14/03/2024;;sem dados;sim;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;
+130;57;Histeroscopia Diagnóstica;Solicitação médica;;;55-64;Março;2024;14/03/2024;;sem dados;sem dados;Estou na Menopausa (não menstruo mais);;;;;;;
+131;59;Histeroscopia Diagnóstica;Sangramento na menopausa;;;55-64;Fevereiro;2024;29/02/2024;Agendado;sim;sem dados;Estou na Menopausa (não menstruo mais);;;;;;;
+132;58;Histeroscopia Diagnóstica;Pólipo uterino;;;55-64;Maio;2024;02/05/2024;Agendado;sem dados;sim;Estou na Menopausa (não menstruo mais);;;;;;;
+133;49;Histeroscopia Diagnóstica;Menstruação irregular;;;45-54;Julho;2024;11/07/2024;Agendado;sem dados;sem dados;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;
+134;75;Histeroscopia Diagnóstica;Pólipo;;;65+;Fevereiro;2024;29/02/2024;Não foi indicada;sem dados;sim;Estou na Menopausa (não menstruo mais);;;;;;;
+135;79;Histeroscopia Diagnóstica;Solicitação médica;;;65+;Março;2024;14/03/2024;;sem dados;sem dados;Não sei responder;;;;;;;
+136;44;Histeroscopia Diagnóstica;Pólipo endometrial;;;35-44;Outubro;2023;26/10/2023;;sem dados;sim;Não sei responder;;;;;;;
+137;52;Histeroscopia Diagnóstica;Coágulos;;;45-54;Março;2024;14/03/2024;Agendado;sem dados;sem dados;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;
+138;42;Histeroscopia Diagnóstica;Dor e sangramento ;;;35-44;Março;2024;07/03/2024;Agendado;sim;sem dados;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;
+139;32;Histeroscopia Diagnóstica;Pólipo endometrial + Menstruação é irregular + Dores intensas;;;25-34;Julho;2024;11/07/2024;;sem dados;sim;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;
+140;41;Histeroscopia Diagnóstica;Mioma  ;;;35-44;Julho;2024;11/07/2024;Agendado;sem dados;sem dados;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;
+141;36;Histeroscopia Diagnóstica;Espessamento endometrial;;;35-44;Dezembro;2024;19/12/2024;Não foi indicada;sem dados;sem dados;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;
+142;70;Histeroscopia Diagnóstica;Espessamento endometrial;;;65+;Junho;2024;13/06/2024;Agendado;sem dados;sem dados;Sangramento, dor, diagnóstico de espessamento endometrial,solicitação de histeroscopia diagnóstica.;;;;;;;
+143;45;Histeroscopia Diagnóstica;Pólipo endometrial + Sangramento anormal;Pólipo endometrial;;45-54;Março;2024;14/03/2024;Agendado;sim;sim;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;
+144;57;Histeroscopia Diagnóstica;Solicitação médica;;;55-64;Julho;2024;18/07/2024;Agendado;sem dados;sem dados;Não metrou mais ;;;;;;;
+145;41;Histeroscopia Diagnóstica;Solicitação médica;;;35-44;Fevereiro;2024;29/02/2024;Agendado;sem dados;sem dados;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;
+146;31;Histeroscopia Diagnóstica;Pólipo + Menstruação irregular;NÃO INFORMADO;;25-34;Março;2024;14/03/2024;Agendado;nao;sim;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;
+147;43;Histeroscopia Diagnóstica;Menstruação longa + Pólipo;;;35-44;Outubro;2023;19/10/2023;Agendado;sem dados;sim;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;
+148;61;Histeroscopia Diagnóstica;Sangramento na menopausa + Espessamento endometrial;;;55-64;Julho;2024;11/07/2024;Agendado;sim;sem dados;Estou com sangramento ativo (não é fluxo menstrual);;;;;;;
+149;60;Histeroscopia Diagnóstica;Espessamento endometrial;;;55-64;Março;2024;14/03/2024;Agendado;sem dados;sem dados;Estou na Menopausa (não menstruo mais);;;;;;;
+150;28;Histeroscopia Diagnóstica;Dores no pé da barriga;;;25-34;Outubro;2023;26/10/2023;Agendado;sem dados;sem dados;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;
+151;60;Histeroscopia Diagnóstica;Solicitação médica + Dores intensas;;;55-64;Dezembro;2024;19/12/2024;Agendado;sem dados;sem dados;Sinto dores o abdômen crescido o médico encaminhou p/fazer uma transvaginal ele viu encaminhou para fazer uma histeroscopia com biópsia de endométrio mim ajude por favor;;;;;;;
+152;43;Histeroscopia Diagnóstica;Menstruação irregular;;;35-44;Fevereiro;2024;01/02/2024;Agendado;sem dados;sem dados;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;
+153;60;Histeroscopia Diagnóstica;"Dores intensas + Mioma
+";;;55-64;Dezembro;2023;28/12/2023;Agendado;sem dados;sem dados;Estou na Menopausa (não menstruo mais);;;;;;;
+154;77;Histeroscopia Diagnóstica;Sangramento intercorrente ;;;65+;Outubro;2023;26/10/2023;Agendado;sim;sem dados;Estou na Menopausa (não menstruo mais), Estou com sangramento ativo (não é fluxo menstrual);;;;;;;
+155;64;Histeroscopia Diagnóstica;Solicitação médica;;;55-64;Outubro;2023;05/10/2023;;sem dados;sem dados;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;
+156;48;Histeroscopia Diagnóstica;Pólipo endometrial;;;45-54;Julho;2024;04/07/2024;Agendado;sem dados;sim;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;
+157;44;Histeroscopia Diagnóstica;Pólipo endometrial;;;35-44;Fevereiro;2024;15/02/2024;Agendado;sem dados;sim;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;
+158;60;Histeroscopia Diagnóstica;Pólipo endometrial;;;55-64;Outubro;2023;05/10/2023;;sem dados;sim;Estou na Menopausa (não menstruo mais);;;;;;;
+159;74;Histeroscopia Diagnóstica;Solicitação médica;;;65+;Maio;2024;09/05/2024;Agendado;sem dados;sem dados;Estou na Menopausa (não menstruo mais);;;;;;;
+160;35;Histeroscopia Diagnóstica;Solicitação médica;;;35-44;Fevereiro;2024;15/02/2024;;sem dados;sem dados;Nao tenho menstruação por causa ja injeção para evita filhos;;;;;;;
+161;33;Histeroscopia Diagnóstica;Menstruação irregular + Cólicas intensas + Pólipo endometrial + Infertilidade;Pólipo endometrial;;25-34;Março;2024;07/03/2024;Agendado;nao;sim;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;
+162;46;Histeroscopia Diagnóstica;Pólipo;;;45-54;Novembro;2023;23/11/2023;Agendado;sem dados;sim;Tenho o ciclo ativo, mas com irregularidades;;;;;;;
+163;71;Histeroscopia Diagnóstica;Espessamento endometrial;;;65+;Junho;2024;20/06/2024;Agendado;sem dados;sem dados;Estou na Menopausa (não menstruo mais);;;;;;;
+164;45;Histeroscopia Diagnóstica;Sangramento uterino anormal + Espessamento endometrial;;;45-54;Fevereiro;2024;29/02/2024;;sim;sem dados;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;
+165;51;Histeroscopia Diagnóstica;Mioma;;;45-54;Setembro;2024;05/09/2024;Não foi indicada;sem dados;sem dados;Estou com sangramento ativo (não é fluxo menstrual);;;;;;;
+166;57;Histeroscopia Diagnóstica;Solicitação médica;;;55-64;Outubro;2023;26/10/2023;Agendado;sem dados;sem dados;Estou na Menopausa (não menstruo mais);;;;;;;
+167;39;Histeroscopia Diagnóstica;Pólipo endometrial;;;35-44;Outubro;2023;26/10/2023;;sem dados;sim;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;
+168;48;Histeroscopia Diagnóstica;Solicitação médica;;;45-54;Outubro;2023;19/10/2023;Agendado;sem dados;sem dados;Não sei responder;;;;;;;
+169;55;Histeroscopia Diagnóstica;Pólipo endometrial + Sangramento anormal;;;55-64;Outubro;2023;19/10/2023;Agendado;sim;sim;Estou com sangramento ativo (não é fluxo menstrual);;;;;;;
+170;52;Histeroscopia Diagnóstica;Espessamento endometrial + Mioma + Pólipo;Pólipo endometrial;;45-54;Fevereiro;2024;29/02/2024;Agendado;nao;sim;Estou na Menopausa (não menstruo mais), leve sangramento 1 vez por ano por alguns dias desde o climatério que iniciou há 3 anos;;;;;;;
+171;53;Histeroscopia Diagnóstica;Sangramento intercorrente ;;;45-54;Outubro;2023;26/10/2023;;sim;sem dados;Estou com sangramento ativo (não é fluxo menstrual);;;;;;;
+172;53;Histeroscopia Diagnóstica;Sangramento contínuo;;;45-54;Outubro;2023;26/10/2023;Não foi indicada;sim;sem dados;Estou com sangramento ativo (não é fluxo menstrual);;;;;;;
+173;66;Histeroscopia Diagnóstica;Solicitação médica;;;65+;Fevereiro;2024;29/02/2024;Agendado;sem dados;sem dados;Estou na Menopausa (não menstruo mais);;;;;;;
+174;54;Histeroscopia Diagnóstica;Pólipo endometrial + Dores intensas;;;45-54;Dezembro;2023;07/12/2023;;sem dados;sim;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;
+175;52;Histeroscopia Diagnóstica;Pólipo endometrial + Mioma + Dores pélvicas;;;45-54;Fevereiro;2024;29/02/2024;Agendado;sem dados;sim;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;
+176;82;Histeroscopia Diagnóstica;Sangramento anormal + Ressecamento;;;65+;Outubro;2023;26/10/2023;Agendado;sim;sem dados;Não sei responder;;;;;;;
+177;73;Histeroscopia Diagnóstica;Espessamento endometrial;;;65+;Janeiro;2024;11/01/2024;Agendado;sem dados;sem dados;Estou na Menopausa (não menstruo mais);;;;;;;
+178;61;Histeroscopia Diagnóstica;Sangramento na menopausa + Espessamento endometrial;;;55-64;Novembro;2023;23/11/2023;Agendado;sim;sem dados;Estou com sangramento ativo (não é fluxo menstrual);;;;;;;
+179;34;Histeroscopia Diagnóstica;Mioma + Aborto + Vontade de engravidar + Fluxo menstrual intenso;;;25-34;Março;2024;21/03/2024;Agendado;sem dados;sem dados;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;
+180;50;Histeroscopia Diagnóstica;Ciclo menstrual irregular + Fluxo menstrual intenso + Espessamento endometrial;;;45-54;Novembro;2023;23/11/2023;Agendado;sem dados;sem dados;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;
+181;49;Histeroscopia Diagnóstica;Solicitação médica;;;45-54;Outubro;2023;19/10/2023;Agendado;sem dados;sem dados;Não sei responder;;;;;;;
+182;53;Histeroscopia Diagnóstica;Dores intensas + Espessamento endometrial;;;45-54;Outubro;2024;10/10/2024;;sem dados;sem dados;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;
+183;48;Histeroscopia Diagnóstica;Pólipo endometrial;;;45-54;Março;2024;07/03/2024;Agendado;sem dados;sim;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;
+184;26;Histeroscopia Diagnóstica;Sangramento intenso + DIU invisível;;;25-34;Março;2024;07/03/2024;;sim;sem dados;Estou com sangramento ativo (não é fluxo menstrual);;;;;;;
+185;26;Histeroscopia Diagnóstica;DIU invisível;;;25-34;Março;2024;07/03/2024;;sem dados;sem dados;Estou com sangramento ativo (não é fluxo menstrual);;;;;;;
+186;73;Histeroscopia Diagnóstica;Sangramento uterino anormal;;;65+;Dezembro;2023;21/12/2023;Agendado;sim;sem dados;Estou na Menopausa (não menstruo mais);;;;;;;
+187;47;Histeroscopia Diagnóstica;Pólipo endometrial;;;45-54;Março;2024;07/03/2024;Agendado;sem dados;sim;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;
+188;49;Histeroscopia Diagnóstica;Sangramento constante + Pólipo;;;45-54;Dezembro;2023;28/12/2023;;sim;sim;Estou com sangramento ativo (não é fluxo menstrual);;;;;;;
+189;59;Histeroscopia Diagnóstica;Solicitação médica;;;55-64;Maio;2024;16/05/2024;Agendado;sem dados;sem dados;Estou na Menopausa (não menstruo mais);;;;;;;
+190;58;Histeroscopia Diagnóstica;Solicitação médica;;;55-64;Novembro;2023;09/11/2023;Agendado;sem dados;sem dados;Estou na Menopausa (não menstruo mais);;;;;;;
+191;73;Histeroscopia Diagnóstica;Sangramento na menopausa;;;65+;Janeiro;2024;11/01/2024;;sim;sem dados;Não menstruo e estou com desconforto na região uterina.;;;;;;;
+192;25;Histeroscopia Diagnóstica;Pólipo endometrial;;;25-34;Setembro;2024;19/09/2024;Agendado;sem dados;sim;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;
+193;45;Histeroscopia Diagnóstica;Espessamento endometrial;;;45-54;Agosto;2024;01/08/2024;Não foi indicada;sem dados;sem dados;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;
+194;30;Histeroscopia Diagnóstica;Pólipo endometrial;;;25-34;Agosto;2024;01/08/2024;Não foi indicada;sem dados;sim;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;
+195;65;Histeroscopia Diagnóstica;Espessamento endometrial;;;65+;Março;2024;07/03/2024;Agendado;sem dados;sem dados;Estou na Menopausa (não menstruo mais);;;;;;;
+196;68;Histeroscopia Diagnóstica;Pólipo endometrial;;;65+;Junho;2024;27/06/2024;Agendado;sem dados;sim;Estou na Menopausa (não menstruo mais);;;;;;;
+197;24;Histeroscopia Diagnóstica;Pólipo endometrial;;;18-24;Março;2024;21/03/2024;Não foi indicada;sem dados;sim;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;
+198;61;Histeroscopia Diagnóstica;Pólipo endometrial;;;55-64;Novembro;2023;30/11/2023;Agendado;sem dados;sim;Estou na Menopausa (não menstruo mais);;;;;;;
+199;50;Histeroscopia Diagnóstica;Indicação cirúrgica;;;45-54;Março;2024;21/03/2024;;sem dados;sem dados;Estou com sangramento ativo (não é fluxo menstrual);;;;;;;
+200;48;Histeroscopia Diagnóstica;Sangramento anormal + Pólipo endometrial;;;45-54;Março;2024;07/03/2024;;sim;sim;Estou com sangramento ativo (não é fluxo menstrual);;;;;;;
+201;81;Histeroscopia Diagnóstica;Espessamento endometrial + Teve câncer (mama) + idosa;;;65+;Novembro;2023;09/11/2023;Agendado;sem dados;sem dados;Estou na Menopausa (não menstruo mais);;;;;;;
+202;47;Histeroscopia Diagnóstica;Espessamento endometrial + Sangramento intenso;;;45-54;Novembro;2023;23/11/2023;Agendado;sim;sem dados;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;
+203;35;Histeroscopia Diagnóstica;Pólipo endometrial;;;35-44;Novembro;2023;09/11/2023;Agendado;sem dados;sim;Sem muito fluxo mas com duração mais de 7 dias;;;;;;;
+204;53;Histeroscopia Diagnóstica;Sangramento na menopausa;;;45-54;março;2024;07/03/2024;;sem dados;sem dados;Estou na Menopausa (não menstruo mais);;;;;;;
+205;35;Histeroscopia Diagnóstica;Pólipo endometrial;;;35-44;novembro;2023;09/11/2023;;sem dados;sem dados;Pouco fluxo de menstruação ;;;;;;;
+206;43;Histeroscopia Diagnóstica;Cólicas intensas;;;35-44;dezembro;2023;14/12/2023;Agendado;nao;nao;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;
+207;61;Histeroscopia Diagnóstica;Cisto + Histórico cancerígeno;;;55-64;julho;2024;18/07/2024;Agendado;nao;nao;Estou na Menopausa (não menstruo mais);;;;;;;
+208;46;Histeroscopia Diagnóstica;Fluxo intenso + Dores intensas + Pólipo;;;45-54;julho;2024;25/07/2024;Pendente;nao;nao;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;
+209;63;Histeroscopia Diagnóstica;Hiperplasia endometrial;;;55-64;dezembro;2023;07/12/2023;Agendado;nao;nao;Estou na Menopausa (não menstruo mais);;;;;;;
+210;58;Histeroscopia Diagnóstica;Líquido uterino anormal;;;55-64;Janeiro;2024;11/01/2024;Não foi indicada;nao;nao;Estou na Menopausa (não menstruo mais);;;;;;;
+211;61;Histeroscopia Diagnóstica;Espessamento endometrial;;;55-64;março;2024;21/03/2024;Agendado;nao;nao;Estou na Menopausa (não menstruo mais);;;;;;;
+212;64;Histeroscopia Diagnóstica;Sangramento na menopausa + endometrial + Dores intensas;;;55-64;março;2024;21/03/2024;Agendado;nao;nao;Estou com sangramento ativo (não é fluxo menstrual);;;;;;;
+213;54;Histeroscopia Diagnóstica;Solicitação médica;;;45-54;novembro;2023;23/11/2023;Agendado;nao;nao;Não sei responder;;;;;;;
+214;44;Histeroscopia Diagnóstica;Pólipo + Cistos de naboth ;;;35-44;novembro;2023;30/11/2023;Agendado;nao;nao;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;
+215;42;Histeroscopia Diagnóstica;Cólicas intensas + Infecção uterina + Pólipo endocervical;;;35-44;novembro;2023;30/11/2023;Agendado;nao;nao;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;
+216;55;Histeroscopia Diagnóstica;Pólipo cervical;;;55-64;Janeiro;2024;04/01/2024;Agendado;nao;nao;Estou na Menopausa (não menstruo mais);;;;;;;
+217;37;Histeroscopia Diagnóstica;Dores + Fluxo intenso + Fluxo constante;;;35-44;novembro;2024;07/11/2024;Não foi indicada;nao;nao;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;
+218;67;Histeroscopia Diagnóstica;Policisto ;;;65+;maio;2024;16/05/2024;Agendado;nao;nao;Estou na Menopausa (não menstruo mais);;;;;;;
+219;65;Histeroscopia Diagnóstica;Espessamento heterogênio com áreas císticas;;;65+;dezembro;2023;07/12/2023;Agendado;nao;nao;Estou na Menopausa (não menstruo mais);;;;;;;
+220;49;Histeroscopia Diagnóstica;Solicitação médica;;;45-54;abril;2024;20/04/2024;Agendado;nao;nao;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;
+221;60;Histeroscopia Diagnóstica;Corrimento + Ardência +  Dores pélvicas;;;55-64;dezembro;2023;14/12/2023;Agendado;nao;nao;Estou na Menopausa (não menstruo mais), Corrimento amarelado de odor desagradável, ardência após relação sexual.;;;;;;;
+222;42;Histeroscopia Diagnóstica;Cólicas intensas + desmaios + Infecção uterina + Pólipo uterino;;;35-44;novembro;2023;30/11/2023;;sem dados;sem dados;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;
+223;55;Histeroscopia Diagnóstica;Pólipo;;;55-64;Janeiro;2024;04/01/2024;Agendado;nao;nao;Estou na Menopausa (não menstruo mais);;;;;;;
+224;53;Histeroscopia Diagnóstica;Solicitação médica;;;45-54;novembro;2023;30/11/2023;Agendado;nao;nao;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;
+225;66;Histeroscopia Diagnóstica;Útero policístico;;;65+;novembro;2023;30/11/2023;Agendado;nao;nao;Estou na Menopausa (não menstruo mais);;;;;;;
+226;72;Histeroscopia Diagnóstica;Solicitação médica;;;65+;dezembro;2023;21/12/2023;Agendado;nao;nao;Estou na Menopausa (não menstruo mais), Estou com sangramento ativo (não é fluxo menstrual);;;;;;;
+227;60;Histeroscopia Diagnóstica;Sangramento intenso + Menstruação irregular;;;55-64;dezembro;2023;14/12/2023;Agendado;nao;nao;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;
+228;29;Histeroscopia Diagnóstica;Candidíase recorrente + Ovário policístico + Sangramento sexual;;;25-34;maio;2024;23/05/2024;Não foi indicada;nao;nao;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;
+229;60;Histeroscopia Diagnóstica;Sangramento na menopausa;;;55-64;dezembro;2023;14/12/2023;Agendado;nao;nao;Estou com sangramento ativo (não é fluxo menstrual);;;;;;;
+230;44;Histeroscopia Diagnóstica;Retirada de DIU;;;35-44;dezembro;2023;14/12/2023;Agendado;nao;nao;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;
+231;69;Histeroscopia Diagnóstica;Pólipo;;;65+;dezembro;2023;14/12/2023;Agendado;nao;nao;Estou na Menopausa (não menstruo mais);;;;;;;
+232;35;Histeroscopia Diagnóstica;Dores intensas;;;35-44;março;2024;07/03/2024;Não foi indicada;nao;nao;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;
+233;60;Histeroscopia Diagnóstica;Sangramento;;;55-64;maio;2024;23/05/2024;Agendado;nao;nao;Estou na Menopausa (não menstruo mais);;;;;;;
+234;31;Histeroscopia Diagnóstica;Dores intensas;;;25-34;maio;2024;23/05/2024;Agendado;nao;nao;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;
+235;78;Histeroscopia Diagnóstica;Solicitação médica;;;65+;dezembro;2023;14/12/2023;Agendado;nao;nao;Estou na Menopausa (não menstruo mais);;;;;;;
+236;55;Histeroscopia Diagnóstica;Pólipo cervical;;;55-64;Janeiro;2024;04/01/2024;Agendado;nao;nao;Estou na Menopausa (não menstruo mais);;;;;;;
+237;52;Histeroscopia Diagnóstica;Sangramento na menopausa + Sangramento uterino anormal;;;45-54;abril;2024;04/04/2024;Agendado;nao;nao;Estou na Menopausa (não menstruo mais);;;;;;;
+238;47;Histeroscopia Diagnóstica;Pólipo endometrial;;;45-54;dezembro;2023;07/12/2023;Agendado;nao;nao;Não sei responder;;;;;;;
+239;64;Histeroscopia Diagnóstica;Solicitação médica;;;55-64;fevereiro;2024;01/02/2024;Agendado;nao;nao;Estou na Menopausa (não menstruo mais);;;;;;;
+240;59;Histeroscopia Diagnóstica;Sangramento na menopausa;;;55-64;dezembro;2023;07/12/2023;Agendado;nao;nao;Estou com sangramento ativo (não é fluxo menstrual);;;;;;;
+241;52;Histeroscopia Diagnóstica;Pólipo endometrial;;;45-54;maio;2024;23/05/2024;Agendado;nao;nao;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;
+242;58;Histeroscopia Diagnóstica;Dores intensas + Sangramento constante;;;55-64;dezembro;2023;07/12/2023;Agendado;nao;nao;Estou com sangramento ativo (não é fluxo menstrual);;;;;;;
+243;50;Histeroscopia Diagnóstica;"Mioma + Pólipo + Sangramento + Cólicas intensas + Dores de cabeça
+";;;45-54;dezembro;2023;07/12/2023;;sem dados;sem dados;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;
+244;60;Histeroscopia Diagnóstica;Dores intensas + Ardência canal vaginal;;;55-64;dezembro;2023;14/12/2023;Agendado;nao;nao;Estou na Menopausa (não menstruo mais);;;;;;;
+245;57;Histeroscopia Diagnóstica;Solicitação médica;;;55-64;julho;2024;11/07/2024;Agendado;nao;nao;Estou na menopausa e recente teve a descoberta de pólipo endometrial, que precisa fazer cirugia para a retirada.;;;;;;;
+246;58;Histeroscopia Diagnóstica;Espessamento endometrial;;;55-64;março;2024;07/03/2024;Agendado;nao;nao;Estou na Menopausa (não menstruo mais);;;;;;;
+247;63;Histeroscopia Diagnóstica;Espessamento endometrial + Cistos;;;55-64;abril;2024;04/04/2024;Agendado;nao;nao;Estou na Menopausa (não menstruo mais);;;;;;;
+248;23;Histeroscopia Diagnóstica;Pólipo;;;18-24;dezembro;2023;14/12/2023;Agendado;nao;nao;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;
+249;62;Histeroscopia Diagnóstica;Solicitação médica;;;55-64;dezembro;2023;14/12/2023;Agendado;nao;nao;Estou na Menopausa (não menstruo mais);;;;;;;
+250;53;Histeroscopia Diagnóstica;Espessamento endometrial;;;45-54;fevereiro;2024;01/02/2024;Agendado;nao;nao;Estou com sangramento ativo (não é fluxo menstrual);;;;;;;
+251;54;Histeroscopia Diagnóstica;Solicitação médica;;;45-54;dezembro;2023;07/12/2023;Agendado;nao;nao;Não sei responder;;;;;;;
+253;60;Histeroscopia Diagnóstica;Sangramento + Cólicas intensas;;;55-64;dezembro;2023;28/12/2023;Agendado;nao;nao;Estou com sangramento ativo (não é fluxo menstrual);;;;;;;
+254;61;Histeroscopia Diagnóstica;Espessamento endometrial + Hiperplasia endometrial;;;55-64;junho;2024;27/06/2024;Agendado;nao;nao;Estou na Menopausa (não menstruo mais);;;;;;;
+255;58;Histeroscopia Diagnóstica;Pólipo endometrial ;;;55-64;Janeiro;2023;04/01/2023;;sem dados;sem dados;Estou na Menopausa (não menstruo mais);;;;;;;
+256;39;Histeroscopia Diagnóstica;Fluxo irregular + Sangramento contínuo + Dores intensas + Dores na relação sexual;;;35-44;abril;2024;04/04/2024;Agendado;nao;nao;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);Anticoncepcional;;;;;;
+258;57;Histeroscopia Diagnóstica;Solicitação médica;;;55-64;dezembro;2023;28/12/2023;Agendado;nao;nao;Estou na Menopausa (não menstruo mais);;;;;;;
+259;40;Histeroscopia Diagnóstica;Endometriose + Mioma + Cisto no ovário;;;35-44;abril;2024;04/04/2024;Não foi indicada;nao;nao;Estou com sangramento ativo (não é fluxo menstrual);;;;;;;
+261;53;Histeroscopia Diagnóstica;Espessamento endometrial + Câncer de mama;;;45-54;Janeiro;2024;18/01/2024;Agendado;nao;nao;Estou na Menopausa (não menstruo mais);;;;;;;
+262;38;Histeroscopia Diagnóstica;Solicitação médica;;;35-44;Janeiro;2024;04/01/2024;Agendado;nao;nao;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;
+263;53;Histeroscopia Diagnóstica;Sangramento na menopausa + Pólipo endometrial;;;45-54;fevereiro;2024;15/02/2024;;sem dados;sem dados;Estou na Menopausa (não menstruo mais);;;;;;;
+264;49;Histeroscopia Diagnóstica;Solicitação médica;;;45-54;Setembro;2024;05/09/2024;Agendado;nao;nao;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;
+265;47;Histeroscopia Diagnóstica;Solicitação médica;;;45-54;março;2024;21/03/2024;Agendado;nao;nao;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;
+266;47;Histeroscopia Diagnóstica;Pólipo endometrial;;;45-54;Setembro;2024;19/09/2024;Agendado;nao;nao;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;
+267;64;Histeroscopia Diagnóstica;Solicitação médica;;;55-64;junho;2024;20/06/2024;Agendado;nao;nao;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;
+268;45;Histeroscopia Diagnóstica;Miomas intramurais + Cisto endometrial + Dores intensas + Sangramento intenso;;;45-54;maio;2024;02/05/2024;Agendado;nao;nao;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;
+269;40;Histeroscopia Diagnóstica;Solicitação médica;;;35-44;Janeiro;2024;18/01/2024;;sem dados;sem dados;Não sei responder;;;;;;;
+270;50;Histeroscopia Diagnóstica;Solicitação médica;;;45-54;Janeiro;2024;25/01/2024;;sem dados;sem dados;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;
+271;73;Histeroscopia Diagnóstica;Solicitação médica;;;65+;Janeiro;2024;25/01/2024;Agendado;nao;nao;Não sei responder;;;;;;;
+272;53;Histeroscopia Diagnóstica;Nódulos uterinos + Adenomiose + Corpo lúteo hemorrágico ;;;45-54;dezembro;2024;19/12/2024;Não foi indicada;nao;nao;Estou com sangramento ativo (não é fluxo menstrual);;;;;;;
+274;43;Histeroscopia Diagnóstica;Pólipo endometrial;;;35-44;dezembro;2024;19/12/2024;Agendado;nao;nao;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;
+275;51;Histeroscopia Diagnóstica;Pólipo endometrial;;;45-54;maio;2024;02/05/2024;Agendado;nao;nao;Tomando medicação para suspender a menstruação.;;;;;;;
+276;61;Histeroscopia Diagnóstica;Pólipo endometrial + Dores + Sangramento na menopausa;;;55-64;fevereiro;2024;08/02/2024;Agendado;nao;nao;Estou na Menopausa (não menstruo mais);;;;;;;
+277;57;Histeroscopia Diagnóstica;Sangramento + Dores + Pólipo endometrial;;;55-64;Setembro;2024;26/09/2024;Agendado;nao;nao;Estou na Menopausa (não menstruo mais);;;;;;;
+278;48;Histeroscopia Diagnóstica; Histórico de miomatose + Pólipo endometrial;;;45-54;fevereiro;2024;01/02/2024;Agendado;nao;nao;fluxo aumentado de sangramento acompanhado de coágulos;;;;;;;
+279;46;Histeroscopia Diagnóstica;Solicitação médica;;;45-54;fevereiro;2024;01/02/2024;Agendado;nao;nao;Não sei responder;;;;;;;
+281;54;Histeroscopia Diagnóstica;Pólipo;;;45-54;maio;2024;05/05/2024;Pendente;nao;nao;Estou na Menopausa (não menstruo mais);;;;;;;
+282;62;Histeroscopia Diagnóstica;Útero volumoso;;;55-64;julho;2024;04/07/2024;Agendado;nao;nao;Estou na Menopausa (não menstruo mais);;;;;;;
+283;62;Histeroscopia Diagnóstica;Solicitação médica;;;55-64;fevereiro;2024;01/02/2024;Agendado;nao;nao;Estou na Menopausa (não menstruo mais);;;;;;;
+284;36;Histeroscopia Diagnóstica;Pólipo endometrial;;;35-44;maio;2024;30/05/2024;Não foi indicada;nao;nao;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;
+285;61;Histeroscopia Diagnóstica;Pólipo endometrial;;;55-64;abril;2024;18/04/2024;Agendado;nao;nao;Estou na Menopausa (não menstruo mais);;;;;;;
+286;84;Histeroscopia Diagnóstica;Espessamento endometrial;;;65+;abril;2024;18/04/2024;Agendado;nao;nao;Espessamento endometrial;;;;;;;
+287;40;Histeroscopia Diagnóstica;Pólipo endometrial;;;35-44;abril;2024;18/04/2024;Agendado;nao;nao;menstruação irregular;;;;;;;
+288;66;Histeroscopia Diagnóstica;Pólipo endometrial;;;65+;fevereiro;2024;15/02/2024;Agendado;nao;nao;Estou na Menopausa (não menstruo mais);;;;;;;
+289;47;Histeroscopia Diagnóstica;Cisto;;;45-54;abril;2024;18/04/2024;Agendado;nao;nao;NÃO, TOMO REMEDIO ;;;;;;;
+290;44;Histeroscopia Diagnóstica;Dores intensas + Sangramento constante;NÃO SE APLICA;;35-44;fevereiro;2024;29/02/2024;Não foi indicada;nao;nao;Estou com sangramento ativo (não é fluxo menstrual);;;;;;;
+291;49;Histeroscopia Diagnóstica;Dores intensas;;;45-54;abril;2024;18/04/2024;Não foi indicada;nao;nao;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;
+292;38;Histeroscopia Diagnóstica;Pólipo endometrial;;;35-44;maio;2024;23/05/2024;Agendado;nao;nao;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;
+293;70;Histeroscopia Diagnóstica;Nódulo;;;65+;maio;2024;23/05/2024;Agendado;nao;nao;Estou com sangramento ativo (não é fluxo menstrual);;;;;;;
+294;61;Histeroscopia Diagnóstica;Sangramento na menopausa;;;55-64;maio;2024;23/05/2024;Agendado;nao;nao;Estou com sangramento ativo (não é fluxo menstrual);;;;;;;
+295;56;Histeroscopia Diagnóstica;Espessamento endometrial + Sangramento;;;55-64;março;2024;21/03/2024;Agendado;nao;nao;Estou com sangramento ativo (não é fluxo menstrual);;;;;;;
+296;55;Histeroscopia Diagnóstica;Solicitação médica;;;55-64;dezembro;2024;19/12/2024;Pendente;nao;nao;Estou na Menopausa (não menstruo mais);;;;;;;
+297;64;Histeroscopia Diagnóstica;Dores + Sangramento na menopausa;;;55-64;abril;2024;18/04/2024;Agendado;nao;nao;Estou na Menopausa (não menstruo mais);;;;;;;
+298;55;Histeroscopia Diagnóstica;Pólipo;;;55-64;abril;2024;18/04/2024;Não foi indicada;nao;nao;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;
+299;45;Histeroscopia Diagnóstica;Pólipo endometrial;;;45-54;julho;2024;18/07/2024;Agendado;nao;nao;Ainda tenho ciclo menstrual ativo (ainda menstruo regularmente);;;;;;;
+300;56;Histeroscopia Diagnóstica;Dores intensas + Adenomiose uterina + Espessamento endometrial;;;55-64;março;2024;21/03/2024;;sem dados;sem dados;Estou na Menopausa (não menstruo mais);;;;;;;
+302;66;Histeroscopia Diagnóstica;Sangramento na menopausa;;;65+;abril;2024;25/04/2024;Agendado;nao;nao;Estou com sangramento ativo (não é fluxo menstrual);;;;;;;
+303;25;Histeroscopia Diagnóstica;Pólipo endometrial;;;25-34;abril;2024;25/04/2024;;sem dados;sem dados;Menstruo irregularmente ;;;;;;;
+204;54;Planejamento Reprodutivo;Inserção DIU;Mioma;Sem dados;45-54;Março;2023;09/03/2023;;;;;;;;;;;
+205;26;Planejamento Reprodutivo;Inserção DIU;Sem dados;Sem dados;25-34;Abril;2023;28/04/2023;;;;;;;;;;;
+206;31;Planejamento Reprodutivo;Inserção DIU;Sem dados;Sem dados;25-34;Abril;2023;25/04/2023;;;;;;;;;;;
+207;25;Planejamento Reprodutivo;Inserção DIU;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados;;;;;;;;;;;
+208;24;Planejamento Reprodutivo;Inserção DIU;Sem dados;Sem dados;18-24;Abril;2023;28/04/2023;;;;;;;;;;;
+209;31;Planejamento Reprodutivo;Inserção DIU;Sem dados;Sem dados;25-34;Abril;2023;20/04/2023;;;;;;;;;;;
+210;28;Planejamento Reprodutivo;Inserção DIU;Sem dados;Sem dados;25-34;Abril;2023;20/04/2023;;;;;;;;;;;
+211;30;Planejamento Reprodutivo;Inserção DIU;Sem dados;Sem dados;25-34;Abril;2023;20/04/2023;;;;;;;;;;;
+212;31;Planejamento Reprodutivo;Inserção DIU;Sem dados;Sem dados;25-34;Abril;2023;20/04/2023;;;;;;;;;;;
+213;23;Planejamento Reprodutivo;Inserção DIU;Sem dados;Sem dados;18-24;Abril;2023;20/04/2023;;;;;;;;;;;
+214;21;Planejamento Reprodutivo;Inserção DIU;Sem dados;Sem dados;18-24;Maio;2023;15/05/2023;;;;;;;;;;;
+215;46;Planejamento Reprodutivo;Inserção DIU;Sem dados;Sem dados;45-54;Sem dados;Sem dados;Sem dados;;;;;;;;;;;
+216;25;Planejamento Reprodutivo;Inserção DIU;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados;;;;;;;;;;;
+217;30;Planejamento Reprodutivo;Inserção DIU;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados;;;;;;;;;;;
+218;25;Planejamento Reprodutivo;Acompanhamento;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados;;;;;;;;;;;
+219;32;Planejamento Reprodutivo;Sangramento;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados;;;;;;;;;;;
+220;31;Planejamento Reprodutivo;Implanon;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados;;;;;;;;;;;
+221;54;Planejamento Reprodutivo;Acompanhamento;Sem dados;Sem dados;45-54;Sem dados;Sem dados;Sem dados;;;;;;;;;;;
+222;26;Planejamento Reprodutivo;Inserção DIU;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados;;;;;;;;;;;
+223;23;Planejamento Reprodutivo;;Endometriose;Sem dados;18-24;Sem dados;Sem dados;Sem dados;;;;;;;;;;;
+224;44;Planejamento Reprodutivo;Inserção DIU;Sem dados;Sem dados;35-44;Sem dados;Sem dados;Sem dados;;;;;;;;;;;
+225;26;Planejamento Reprodutivo;Inserção DIU;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados;;;;;;;;;;;
+226;41;Planejamento Reprodutivo;Inserção DIU;Sem dados;Sem dados;35-44;Sem dados;Sem dados;Sem dados;;;;;;;;;;;
+227;23;Planejamento Reprodutivo;Retirada DIU;Sem dados;Sem dados;18-24;Sem dados;Sem dados;Sem dados;;;;;;;;;;;
+228;20;Planejamento Reprodutivo;Inserção DIU;Sem dados;Sem dados;18-24;Fevereiro;2023;06/02/2023;;;;;;;;;;;
+229;21;Planejamento Reprodutivo;Inserção DIU;Sem dados;Sem dados;18-24;Março;2023;29/03/2023;;;;;;;;;;;
+230;21;Planejamento Reprodutivo;Dúvida;Sem dados;Sem dados;65+;Sem dados;Sem dados;Sem dados;;;;;;;;;;;
+231;24;Planejamento Reprodutivo;Inserção DIU;Sem dados;Sem dados;18-24;Março;2023;29/03/2023;;;;;;;;;;;
+232;29;Planejamento Reprodutivo;Inserção DIU;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados;;;;;;;;;;;
+233;35;Planejamento Reprodutivo;Inserção DIU;Sem dados;Sem dados;35-44;Março;2023;03/03/2023;;;;;;;;;;;
+234;23;Planejamento Reprodutivo;Acompanhamento;Sem dados;Sem dados;18-24;Abril;2023;11/04/2023;;;;;;;;;;;
+235;31;Planejamento Reprodutivo;Laqueadura;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados;;;;;;;;;;;
+236;28;Planejamento Reprodutivo;Inserção DIU;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados;;;;;;;;;;;
+237;22;Planejamento Reprodutivo;Inserção DIU;Sem dados;Sem dados;18-24;Sem dados;Sem dados;Sem dados;;;;;;;;;;;
+238;42;Planejamento Reprodutivo;Inserção DIU;Sem dados;Sem dados;35-44;Sem dados;Sem dados;Sem dados;;;;;;;;;;;
+239;29;Planejamento Reprodutivo;Inserção DIU;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados;;;;;;;;;;;
+240;34;Planejamento Reprodutivo;Inserção DIU;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados;;;;;;;;;;;
+241;27;Planejamento Reprodutivo;Inserção DIU;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados;;;;;;;;;;;
+242;30;Planejamento Reprodutivo;Dúvida ;Sem dados;Sem dados;25-34;Março;2023;28/03/2023;;;;;;;;;;;
+243;33;Planejamento Reprodutivo;Inserção DIU;Sem dados;Sem dados;25-34;Março;2023;10/03/2023;;;;;;;;;;;
+244;47;Planejamento Reprodutivo;Inserção DIU;Sem dados;Sem dados;45-54;Maio;2023;02/05/2023;;;;;;;;;;;
+245;31;Planejamento Reprodutivo;Aborto espontâneo;Sem dados;Sem dados;25-34;Março;2023;21/03/2023;;;;;;;;;;;
+246;23;Planejamento Reprodutivo;;Sem dados;Sem dados;18-24;Março;2023;28/03/2023;;;;;;;;;;;
+247;48;Planejamento Reprodutivo;Troca DIU;Sem dados;Sem dados;45-54;Abril;2023;12/04/2023;;;;;;;;;;;
+248;30;Planejamento Reprodutivo;Inserção DIU;Sem dados;Sem dados;25-34;Março;2023;28/03/2023;;;;;;;;;;;
+249;25;Planejamento Reprodutivo;Inserção DIU;Sem dados;Sem dados;25-34;Abril;2023;27/04/2023;;;;;;;;;;;
+250;28;Planejamento Reprodutivo;Laqueadura;Sem dados;Sem dados;25-34;Abril;2023;24/04/2023;;;;;;;;;;;
+251;34;Planejamento Reprodutivo;Acompanhamento;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados;;;;;;;;;;;
+252;30;Planejamento Reprodutivo;Inserção DIU;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados;;;;;;;;;;;
+253;38;Planejamento Reprodutivo;Inserção DIU;Adenomiose;Sem dados;35-44;Sem dados;Sem dados;Sem dados;;;;;;;;;;;
+254;43;Planejamento Reprodutivo;Inserção DIU;Sem dados;Sem dados;35-44;Abril;2023;25/04/2023;;;;;;;;;;;
+255;41;Planejamento Reprodutivo;Inserção DIU;Sem dados;Sem dados;35-44;Março;2023;16/03/2023;;;;;;;;;;;
+256;35;Planejamento Reprodutivo;Gravidez;Sem dados;Sem dados;35-44;Março;2023;16/03/2023;;;;;;;;;;;
+257;21;Planejamento Reprodutivo;Acompanhamento + Inserção DIU;Sem dados;Sem dados;18-24;Sem dados;Sem dados;Sem dados;;;;;;;;;;;
+258;31;Planejamento Reprodutivo;Inserção DIU;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados;;;;;;;;;;;
+259;45;Planejamento Reprodutivo;Inserção DIU;Sem dados;Sem dados;45-54;Sem dados;Sem dados;Sem dados;;;;;;;;;;;
+260;31;Planejamento Reprodutivo;Inserção DIU;Sem dados;Sem dados;25-34;Março;2023;30/03/2023;;;;;;;;;;;
+261;36;Planejamento Reprodutivo;Troca DIU;Sem dados;Sem dados;35-44;Sem dados;Sem dados;Sem dados;;;;;;;;;;;
+262;26;Planejamento Reprodutivo;Acompanhamento + Inserção DIU;Sem dados;Sem dados;25-34;Março;2023;30/03/2023;;;;;;;;;;;
+263;25;Planejamento Reprodutivo;Inserção DIU;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados;;;;;;;;;;;
+264;45;Planejamento Reprodutivo;;Sem dados;Sem dados;45-54;Sem dados;Sem dados;Sem dados;;;;;;;;;;;
+265;35;Planejamento Reprodutivo;;Sem dados;Sem dados;35-44;Sem dados;Sem dados;Sem dados;;;;;;;;;;;
+266;48;Planejamento Reprodutivo;;Sem dados;Sem dados;45-54;Abril;2023;26/04/2023;;;;;;;;;;;
+267;41;Planejamento Reprodutivo;;Sem dados;Sem dados;35-44;Sem dados;Sem dados;Sem dados;;;;;;;;;;;
+268;25;Planejamento Reprodutivo;;Sem dados;Sem dados;25-34;Abril;2023;26/04/2023;;;;;;;;;;;
+269;23;Planejamento Reprodutivo;;Sem dados;Sem dados;18-24;Abril;2023;26/04/2023;;;;;;;;;;;
+270;33;Planejamento Reprodutivo;;Sem dados;Sem dados;25-34;Abril;2023;25/04/2023;;;;;;;;;;;
+271;50;Planejamento Reprodutivo;;Sem dados;Sem dados;45-54;Abril;2023;27/04/2023;;;;;;;;;;;
+272;28;Planejamento Reprodutivo;;Sem dados;Sem dados;25-34;Abril;2023;26/04/2023;;;;;;;;;;;
+273;30;Planejamento Reprodutivo;;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados;;;;;;;;;;;
+274;21;Planejamento Reprodutivo;;Sem dados;Sem dados;18-24;Abril;2023;26/04/2023;;;;;;;;;;;
+275;24;Planejamento Reprodutivo;;Sem dados;Sem dados;18-24;Abril;2023;28/04/2023;;;;;;;;;;;
+276;34;Planejamento Reprodutivo;;Sem dados;Sem dados;25-34;Abril;2023;28/04/2023;;;;;;;;;;;
+277;31;Planejamento Reprodutivo;;Sem dados;Sem dados;25-34;Abril;2023;28/04/2023;;;;;;;;;;;
+278;25;Planejamento Reprodutivo;;Sem dados;Sem dados;25-34;Maio;2023;04/05/2023;;;;;;;;;;;
+279;24;Planejamento Reprodutivo;;Sem dados;Sem dados;18-24;Sem dados;Sem dados;Sem dados;;;;;;;;;;;
+280;29;Planejamento Reprodutivo;;Sem dados;Sem dados;25-34;Maio;2023;04/05/2023;;;;;;;;;;;
+281;28;Planejamento Reprodutivo;;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados;;;;;;;;;;;
+282;26;Planejamento Reprodutivo;;Sem dados;Sem dados;25-34;Maio;2023;09/05/2023;;;;;;;;;;;
+283;20;Planejamento Reprodutivo;;Sem dados;Sem dados;18-24;Maio;2023;09/05/2023;;;;;;;;;;;
+284;25;Planejamento Reprodutivo;;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados;;;;;;;;;;;
+285;30;Planejamento Reprodutivo;;Sem dados;Sem dados;25-34;Junho;2023;09/06/2023;;;;;;;;;;;
+286;37;Planejamento Reprodutivo;;Sem dados;Sem dados;35-44;Sem dados;Sem dados;Sem dados;;;;;;;;;;;
+287;30;Planejamento Reprodutivo;;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados;;;;;;;;;;;
+288;43;Planejamento Reprodutivo;;Sem dados;Sem dados;35-44;Sem dados;Sem dados;Sem dados;;;;;;;;;;;
+289;36;Planejamento Reprodutivo;;Sem dados;Sem dados;35-44;Sem dados;Sem dados;Sem dados;;;;;;;;;;;
+290;39;Planejamento Reprodutivo;;Sem dados;Sem dados;35-44;Maio;2023;11/05/2023;;;;;;;;;;;
+291;35;Planejamento Reprodutivo;;Sem dados;Sem dados;35-44;Maio;2023;12/05/2023;;;;;;;;;;;
+292;25;Planejamento Reprodutivo;;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados;;;;;;;;;;;
+293;28;Planejamento Reprodutivo;;Sem dados;Sem dados;25-34;Maio;2023;15/05/2023;;;;;;;;;;;
+294;33;Planejamento Reprodutivo;;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados;;;;;;;;;;;
+295;26;Planejamento Reprodutivo;;Sem dados;Sem dados;25-34;Maio;2023;22/05/2023;;;;;;;;;;;
+296;39;Planejamento Reprodutivo;;Sem dados;Sem dados;35-44;Maio;2023;22/05/2023;;;;;;;;;;;
+297;24;Planejamento Reprodutivo;;Sem dados;Sem dados;18-24;Sem dados;Sem dados;Sem dados;;;;;;;;;;;
+298;31;Planejamento Reprodutivo;;Sem dados;Sem dados;25-34;Sem dados;Sem dados;Sem dados;;;;;;;;;;;
+299;24;Planejamento Reprodutivo;;Sem dados;Sem dados;18-24;Maio;2023;22/05/2023;;;;;;;;;;;
+300;33;Planejamento Reprodutivo;;Sem dados;Sem dados;25-34;Maio;2023;22/05/2023;;;;;;;;;;;
+301;26;Planejamento Reprodutivo;;Sem dados;Sem dados;25-34;Maio;2023;29/05/2023;;;;;;;;;;;
+475;49;Odontologia;Restauração caiu;;Restauração dentária + clareamento dentário + endodontia;45-54;Julho;2023;;;;;;;;;;;;
+476;32;Odontologia;;;Restauração dentária + exodontia;25-34;Agosto;2023;;;;;;;;;;;;
+477;24;Odontologia;Dor de dente + Sensibilidade;;;18-24;Março;2023;;;;;;;;;;;;
+478;27;Odontologia;Dor de dente;;;25-34;Agosto;2023;;;;;;;;;;;;
+479;6;Odontologia;Dente furado;;;18-;Março;2023;;;;;;;;;;;;
+480;51;Odontologia;;;Restauração dentária + exodontia;45-54;Agosto;2023;;;;;;;;;;;;
+481;41;Odontologia;Dor de dente;;;35-44;Agosto;2023;;;;;;;;;;;;
+482;28;Odontologia;;;Exodontia;25-34;Março;2023;;;;;;;;;;;;
+483;31;Odontologia;Dor de dente + Dente quebrado;;;25-34;Julho;2023;;;;;;;;;;;;
+484;57;Odontologia;Dente quebrado;;;55-64;Outubro;2023;;;;;;;;;;;;
+485;26;Odontologia;Dente quebrado;;;25-34;Março;2023;;;;;;;;;;;;
+486;32;Odontologia;;;Exodontia;25-34;Março;2023;;;;;;;;;;;;
+487;66;Odontologia;Dor de dente;;;65+;Março;2023;;;;;;;;;;;;
+488;46;Odontologia;Dente furado;;;45-54;Agosto;2023;;;;;;;;;;;;
+489;51;Odontologia;;;Restauração dentária + exodontia;45-54;Maio;2023;;;;;;;;;;;;
+490;38;Odontologia;Dente quebrado;;;35-44;Março;2023;;;;;;;;;;;;
+491;30;Odontologia;Dor de dente;;;25-34;Março;2023;;;;;;;;;;;;
+492;8;Odontologia;Dor de dente;;;18-;Março;2023;;;;;;;;;;;;
+493;64;Odontologia;;;Exodontia;55-64;Outubro;2023;;;;;;;;;;;;
+494;23;Odontologia;;;Restauração dentária + endodontia + clareamento;18-24;Março;2023;;;;;;;;;;;;
+495;43;Odontologia;Dor + Sensibilidade + Retração na gengiva;;Restauração dentária + clareamento dentário;35-44;Março;2023;;;;;;;;;;;;
+496;41;Odontologia;Nenhum;;Rotina;35-44;Março;2023;;;;;;;;;;;;
+497;46;Odontologia;Dente quebrado + Dor de dente;;;45-54;Abril;2023;;;;;;;;;;;;
+498;30;Odontologia;Traumatismo dentoalveolar + Abcesso;;Restauração dentária + clareamento dentário + endodontia;25-34;Abril;2023;;;;;;;;;;;;
+499;27;Odontologia;Nenhum;;Restauração dentária + clareamento dentário;25-34;Maio;2023;;;;;;;;;;;;
+500;58;Odontologia;Nenhum;;Restauração dentária + clareamento dentário;55-64;Maio;2023;;;;;;;;;;;;
+501;50;Odontologia;;;Restauração dentária + clareamento dentário;45-54;Maio;2023;;;;;;;;;;;;
+502;34;Odontologia;Dor muscular + Sensação de desoclusão;;Restauração dentária + clareamento dentário;25-34;Abril;2023;;;;;;;;;;;;
+503;48;Odontologia;Sensação de mobilidade dental;;Restauração dentária + clareamento dentário + endodontia;45-54;Abril;2023;;;;;;;;;;;;
+504;36;Odontologia;Dente quebrado;;Restauração dentária + clareamento dentário;35-44;Maio;2023;;;;;;;;;;;;
+505;24;Odontologia;Necessidade de clareamento;;Restauração dentária + clareamento dentário;18-24;Junho;2023;;;;;;;;;;;;
+506;34;Odontologia;Necessidade de clareamento;;Restauração dentária + clareamento dentário;25-34;Junho;2023;;;;;;;;;;;;
+507;33;Odontologia;Necessidade de clareamento;;Restauração dentária + clareamento dentário;25-34;Junho;2023;;;;;;;;;;;;
+508;56;Odontologia;Bruxismo;;Restauração dentária + clareamento dentário;55-64;Junho;2023;;;;;;;;;;;;
+509;27;Odontologia;Necessidade de clareamento + limpeza + restauração;;Restauração dentária + clareamento dentário;25-34;Junho;2023;;;;;;;;;;;;
+510;32;Odontologia;Erupção dentária;;Restauração dentária + clareamento dentário;25-34;Julho;2023;;;;;;;;;;;;
+511;41;Odontologia;Necessidade de restauração;;Restauração dentária + clareamento dentário + endodontia;35-44;Agosto;2023;;;;;;;;;;;;
+512;34;Odontologia;Sangramento ao escovar;;Endodontia;25-34;Julho;2023;;;;;;;;;;;;
+513;64;Odontologia;Retirada de restos radiculares;;Endodontia;55-64;Agosto;2023;;;;;;;;;;;;
+514;44;Odontologia;Dente com cheiro desagradável;;Restauração dentária + clareamento dentário + endodontia;35-44;Dezembro;2023;;;;;;;;;;;;

@@ -10,7 +10,7 @@
 	let chartOptions = {
 		indexAxis: 'y',
 		responsive: true,
-		maintainAspectRatio: false, // permite que o gráfico use a altura disponível
+		maintainAspectRatio: false,
 		plugins: { legend: {
 			display: false },
 			tooltip: {
@@ -23,31 +23,52 @@
 		},
 		scales: {
 			x: {
-				ticks: { color: '#ccc', font: { family: 'Poppins', size: 12 } },
-				grid: { color: '#444' }
+				ticks: { color: 'gray', font: { family: 'Poppins', size: 12 } },
+				grid: { color: '#ccc' }
 			},
 			y: {
-				ticks: { color: '#ccc', font: { family: 'Poppins', size: 12 } },
-				grid: { color: '#444' }
+				ticks: { color: 'gray', font: { family: 'Poppins', size: 12 } },
+				grid: {display: false}
 			}
 		},
 		elements: {
 			bar: {
 				borderRadius: 6,
-				barThickness: 24 // aumentamos a espessura mínima das barras
+				barThickness: 24 
 			}
 		}
 	};
 
 	$: {
 		const counts = {};
-		data.forEach((item) => {
-			const symptom = item.Symptom;
-			counts[symptom] = (counts[symptom] || 0) + 1;
-		});
+        data.forEach((item) => {
+            if (item.Symptom && typeof item.Symptom === 'string') {
 
-		const labels = Object.keys(counts);
-		const dataPoints = Object.values(counts);
+                const individualSymptoms = item.Symptom.split('+');
+
+                individualSymptoms.forEach(symptomStr => {
+                    const cleanedSymptom = symptomStr.trim();
+
+                    if (cleanedSymptom) {
+                        counts[cleanedSymptom] = (counts[cleanedSymptom] || 0) + 1;
+                    }
+                });
+            }
+        });
+
+		// const labels = Object.keys(counts);
+		// const dataPoints = Object.values(counts);
+
+		const symptomEntries = Object.entries(counts);
+
+        // Filtra o array, mantendo apenas os que têm contagem >= 2
+        const filteredSymptoms = symptomEntries.filter(([symptom, count]) => count >= 2);
+        // Converte o objeto de contagens para um array [chave, valor]
+        // Ex: [['Infertilidade', 15], ['Dor pélvica', 10]]
+        const sortedSymptoms = filteredSymptoms.sort(([, a], [, b]) => b - a);
+
+        const labels = sortedSymptoms.map(item => item[0]);
+        const dataPoints = sortedSymptoms.map(item => item[1]);
 
 		chartData = {
 			labels,
@@ -65,11 +86,13 @@
 </script>
 
 {#if data.length > 0}
-	<div class="rounded-xl bg-[#1e1e2f] p-4 shadow-md">
-		<h3 class="text-center text-white text-lg font-semibold mb-3">Ocorrência por Motivação de Consulta</h3>
-		<div class="max-h-[500px] overflow-y-auto min-h-[300px]" style="height: {data.length * 30}px">
-			<Bar data={chartData} options={chartOptions} />
-		</div>
+	<div class="rounded-xl bg-[#fcfeff] p-4 shadow-md">
+		<h3 class="text-center text-black text-lg font-semibold mb-3">Ocorrência por Motivação de Consulta</h3>
+		<div class="relative flex-grow h-[450px] overflow-y-auto pr-2">
+            <div style="height: {Math.max(chartData.labels.length * 35, 450)}px">
+                <Bar data={chartData} options={chartOptions} />
+            </div>
+        </div>
 	</div>
 {:else}
 	<p class="text-center text-gray-400 italic">Sem dados para exibir nesta seleção.</p>

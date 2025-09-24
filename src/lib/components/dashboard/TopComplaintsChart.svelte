@@ -11,8 +11,8 @@
 		maintainAspectRatio: false,
 		plugins: { legend: { display: false } },
 		scales: {
-			x: { ticks: { color: '#ccc' }, grid: { color: '#444' } },
-			y: { ticks: { color: '#ccc' }, grid: { display: false } }
+			x: { ticks: { color: 'gray' }, grid: { color: 'gray' } },
+			y: { ticks: { color: 'gray' }, grid: { display: false } }
 		}
 	};
 
@@ -20,13 +20,11 @@
 		const counts = data.reduce((acc, item) => {
 			const symptom = item.Symptom;
 			if (symptom) {
-				// Garante que o sintoma não seja nulo/vazio
 				acc[symptom] = (acc[symptom] || 0) + 1;
 			}
 			return acc;
 		}, {});
 
-		// Pega os 10 sintomas mais comuns e ordena
 		const top10 = Object.entries(counts)
 			.sort(([, a], [, b]) => b - a)
 			.slice(0, 10);
@@ -51,8 +49,8 @@
 	}
 </script>
 
-<div class="bg-[#1e1e2f] p-4 rounded-xl shadow-lg h-full flex flex-col">
-	<h3 class="text-center text-lg font-semibold mb-3 text-white">Top 10 Queixas Gerais</h3>
+<div class="bg-[#fcfeff] p-4 rounded-xl shadow-lg h-full flex flex-col">
+	<h3 class="text-center text-lg font-semibold mb-3 text-black">Top 10 Queixas Gerais</h3>
 	<div class="max-h-[500px] overflow-y-auto min-h-[300px]" >
 		{#if data.length > 0}
             <Bar data={chartData} options={chartOptions} />

@@ -33,43 +33,47 @@
             x: {
                 stacked: false,
                 ticks: {
-                    color: '#ccc',
+                    color: '#gray',
                     font: { family: 'Poppins', size: 12 }
                 },
                 grid: {
-                    color: '#444'
+                    color: '#ccc'
                 },
                 title: {
                     display: true,
                     text: 'Número de Casos',
-                    color: '#aaa',
+                    color: '#gray',
                     font: { size: 14 }
                 }
             },
             y: {
                 stacked: false,
                 ticks: {
-                    color: '#ccc',
+                    color: '#gray',
                     font: { family: 'Poppins', size: 12 }
                 },
                 grid: {
-                    color: '#444'
+                    color: '#ccc'
                 }
             }
         }
     };
 
     $: {
-        const allDiseases = [...new Set(data.map(d => d.DiagnosedDisease))];
+
+        const valoresIgnorados = [undefined, null, '', 'Sem dados', 'sem dados'];
+        const allDiseases = [...new Set(data.map(d => d.DiagnosedDisease))].filter(disease => !valoresIgnorados.includes(disease));
 
         const dataByArea = data.reduce((acc, curr) => {
             const area = curr.HealthArea;
-            if (!acc[area]) acc[area] = [];
-            acc[area].push(curr);
+            if (area) { 
+                if (!acc[area]) acc[area] = [];
+                acc[area].push(curr);
+            }
             return acc;
         }, {});
 
-        const labels = Object.keys(dataByArea); // mantém ordem original
+        const labels = Object.keys(dataByArea);
 
         const datasets = allDiseases.map((disease, index) => ({
             label: disease,
@@ -98,8 +102,8 @@
 {:else}
     <p class="text-center text-gray-400 italic">Sem dados para exibir nesta seleção.</p>
 {/if} -->
-<div class="bg-[#1e1e2f] p-4 rounded-xl shadow-lg h-full flex flex-col">
-    <h3 class="text-center text-lg font-semibold mb-3 text-white">
+<div class="bg-[#fcfeff] p-4 rounded-xl shadow-lg h-full flex flex-col">
+    <h3 class="text-center text-lg font-semibold mb-3 text-black">
         Diagnósticos / Procedimentos
     </h3>
     {#if data.length > 0}

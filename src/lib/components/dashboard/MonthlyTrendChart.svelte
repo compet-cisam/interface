@@ -20,22 +20,20 @@
             }),
             fill: true,
 
-            backgroundColor: 'rgba(59, 130, 246, 0.2)', // Azul suave
+            backgroundColor: 'rgba(59, 130, 246, 0.2)',
             borderColor: 'rgba(59, 130, 246, 1)',
             pointBorderColor: 'rgba(59, 130, 246, 1)',
             pointBackgroundColor: '#fff',
-            // CORRIGIDO: Curvas mais suaves na linha.
             tension: 0.4
         }]
     };
 
-    // CORRIGIDO: Opções de estilo para um visual mais limpo.
     let chartOptions = {
         responsive: true,
-        maintainAspectRatio: false, // Permite que o gráfico se ajuste melhor ao container.
+        maintainAspectRatio: false,
         plugins: {
             legend: {
-                display: false // Legenda removida para um visual mais limpo, o título já é suficiente.
+                display: false
             },
             tooltip: {
                 backgroundColor: '#1e1e2f',
@@ -50,19 +48,17 @@
         scales: {
             x: {
                 ticks: { color: '#9CA3AF', font: { family: 'Poppins', size: 12 } },
-                // CORRIGIDO: Removida a linha de grade do eixo X.
                 grid: { 
-                    display: false 
+                    display: true 
                 }
             },
             y: {
                 ticks: { color: '#9CA3AF', font: { family: 'Poppins', size: 12 } },
-                // CORRIGIDO: Removida a linha de grade do eixo Y para um look minimalista.
                 grid: { 
-                    display: false 
+                    display: true 
                 },
                 border: {
-                    display: false // Remove a linha do eixo Y
+                    display: false
                 }
             }
         }
@@ -76,8 +72,8 @@
     <Line data={chartData} options={chartOptions} />
 </div> -->
 
-<div class="bg-[#1e1e2f] p-4 rounded-xl shadow-lg h-full flex flex-col">
-	<h3 class="text-center text-lg font-semibold mb-3 text-white">Tendência de Consultas por Mês</h3>
+<div class="bg-[#fcfeff] p-4 rounded-xl shadow-lg h-full flex flex-col">
+	<h3 class="text-center text-lg font-semibold mb-3 text-black">Tendência de Consultas por Mês</h3>
 	<div class="max-h-[500px] overflow-y-auto min-h-[300px]" >
 		<Line data={chartData} options={chartOptions} />
 	</div>
