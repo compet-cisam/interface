@@ -7,11 +7,15 @@
 
 	interface UserData {
 		fullName: string;
-		motherName: string;
-		fatherName: string;
 		birthDate: string;
 		cpf: string;
 		email: string;
+		medicalRecordNumber?: string;
+		zipCode?: string;
+		phoneNumber?: string;
+		cnsNumber?: string;
+		city?: string;
+		age?: string;
 	}
 
 	interface Exam {
@@ -26,6 +30,7 @@
 	let user: UserData | null = null;
 	let submittedExams: Exam[] = [];
 	let isDoctorViewing = false;
+	let isAdminImpersonating = false;
 
 	let showModal = false;
 	let selectedExam: Exam | null = null;
@@ -36,7 +41,12 @@
 	onMount(() => {
 		const viewingPatientStr = sessionStorage.getItem('viewingPatient');
 		const loggedInUserStr = sessionStorage.getItem('loggedInUser');
+		const adminSessionStr = sessionStorage.getItem('adminSession');
 		let patientCpf: string | null = null;
+
+		if (adminSessionStr) {
+			isAdminImpersonating = true;
+		}
 
 		if (viewingPatientStr) {
 			const viewingPatient = JSON.parse(viewingPatientStr);
@@ -118,12 +128,14 @@
 
 	function formatDate(dateString: string) {
 		if (!dateString) return '';
-		const [year, month, day] = dateString.split('-');
+		const date = new Date(dateString);
+		const day = String(date.getDate() + 1).padStart(2, '0');
+		const month = String(date.getMonth() + 1).padStart(2, '0');
+		const year = date.getFullYear();
 		return `${day}/${month}/${year}`;
 	}
 
 	function goBack() {
-		// Correção: Leva sempre de volta ao painel do paciente em visualização
 		goto('/painel');
 	}
 </script>
@@ -218,11 +230,11 @@
 	style="background: linear-gradient(to bottom, #FFFFFF, #EBF8FF);"
 >
 	<main class="container mx-auto p-4 sm:p-6 lg:p-8">
-		<div class="mx-auto max-w-3xl space-y-8">
+		<div class="mx-auto max-w-5xl space-y-8">
 			{#if user}
 				<div class="rounded-2xl bg-white p-6 sm:p-8 shadow-lg">
 					<h1 class="text-3xl font-bold text-gray-900">Dados Pessoais</h1>
-					<div class="mt-6 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-8 text-lg">
+					<div class="mt-6 grid grid-cols-1 gap-y-6 sm:grid-cols-2 md:grid-cols-3 sm:gap-x-8 text-lg">
 						<div>
 							<dt class="text-base font-semibold text-gray-500">Nome Completo</dt>
 							<dd class="mt-1 text-gray-900">{user.fullName}</dd>
@@ -232,20 +244,36 @@
 							<dd class="mt-1 text-gray-900">{formatCPF(user.cpf)}</dd>
 						</div>
 						<div>
-							<dt class="text-base font-semibold text-gray-500">Data de Nascimento</dt>
-							<dd class="mt-1 text-gray-900">{formatDate(user.birthDate)}</dd>
-						</div>
-						<div>
 							<dt class="text-base font-semibold text-gray-500">E-mail</dt>
 							<dd class="mt-1 text-gray-900">{user.email}</dd>
 						</div>
 						<div>
-							<dt class="text-base font-semibold text-gray-500">Nome da Mãe</dt>
-							<dd class="mt-1 text-gray-900">{user.motherName}</dd>
+							<dt class="text-base font-semibold text-gray-500">Data de Nascimento</dt>
+							<dd class="mt-1 text-gray-900">{formatDate(user.birthDate)}</dd>
 						</div>
 						<div>
-							<dt class="text-base font-semibold text-gray-500">Nome do Pai</dt>
-							<dd class="mt-1 text-gray-900">{user.fatherName}</dd>
+							<dt class="text-base font-semibold text-gray-500">Idade</dt>
+							<dd class="mt-1 text-gray-900">{user.age || 'Não informado'}</dd>
+						</div>
+						<div>
+							<dt class="text-base font-semibold text-gray-500">Nº de Celular</dt>
+							<dd class="mt-1 text-gray-900">{user.phoneNumber || 'Não informado'}</dd>
+						</div>
+						<div>
+							<dt class="text-base font-semibold text-gray-500">CNS</dt>
+							<dd class="mt-1 text-gray-900">{user.cnsNumber || 'Não informado'}</dd>
+						</div>
+						<div>
+							<dt class="text-base font-semibold text-gray-500">Nº do Prontuário</dt>
+							<dd class="mt-1 text-gray-900">{user.medicalRecordNumber || 'Não informado'}</dd>
+						</div>
+						<div>
+							<dt class="text-base font-semibold text-gray-500">CEP</dt>
+							<dd class="mt-1 text-gray-900">{user.zipCode || 'Não informado'}</dd>
+						</div>
+						<div>
+							<dt class="text-base font-semibold text-gray-500">Cidade</dt>
+							<dd class="mt-1 text-gray-900">{user.city || 'Não informado'}</dd>
 						</div>
 					</div>
 				</div>
@@ -309,7 +337,7 @@
 					on:click={goBack}
 					class="inline-block rounded-md border border-gray-300 bg-white px-10 py-4 text-lg font-bold text-gray-700 shadow-sm hover:bg-gray-50"
 				>
-					Voltar
+					Voltar ao Painel
 				</button>
 			</div>
 		</div>

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
 	import { goto } from '$app/navigation';
+	import type { Writable } from 'svelte/store';
 
 	const showToast: (message: string, type: 'success' | 'error') => void =
 		getContext('showToast');
@@ -8,15 +9,26 @@
 	type UserType = 'paciente' | 'medico' | 'admin';
 	let selectedUserType: UserType = 'paciente';
 
+	// Campos Comuns
 	let fullName = '';
-	let motherName = '';
-	let fatherName = '';
-	let birthDate = '';
-	let cpf = '';
 	let email = '';
 	let password = '';
 	let confirmPassword = '';
+
+	// Campos do Paciente
+	let birthDate = '';
+	let cpf = '';
+	let medicalRecordNumber = '';
+	let zipCode = '';
+	let phoneNumber = '';
+	let cnsNumber = '';
+	let city = '';
+	let age = '';
+
+	// Campos do Médico
 	let crm = '';
+	
+	// Campos do Admin
 	let adminCode = '';
 
 	let isLoading = false;
@@ -49,12 +61,16 @@
 				}
 				userData = {
 					fullName,
-					motherName,
-					fatherName,
 					birthDate,
 					cpf,
 					email,
-					password
+					password,
+					medicalRecordNumber,
+					zipCode,
+					phoneNumber,
+					cnsNumber,
+					city,
+					age
 				};
 				userKey = cpf;
 			} else if (selectedUserType === 'medico') {
@@ -217,21 +233,53 @@
 					/>
 				</div>
 				<div>
-					<label for="motherName" class="block text-base font-semibold text-gray-700"
-						>Nome da Mãe</label
+					<label for="age" class="block text-base font-semibold text-gray-700">Idade</label>
+					<input
+						bind:value={age}
+						type="number"
+						class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md"
+					/>
+				</div>
+				<div>
+					<label for="phoneNumber" class="block text-base font-semibold text-gray-700"
+						>Número de Celular</label
 					>
 					<input
-						bind:value={motherName}
+						bind:value={phoneNumber}
+						type="tel"
+						class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md"
+					/>
+				</div>
+				<div>
+					<label for="cnsNumber" class="block text-base font-semibold text-gray-700">CNS</label>
+					<input
+						bind:value={cnsNumber}
 						type="text"
 						class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md"
 					/>
 				</div>
 				<div>
-					<label for="fatherName" class="block text-base font-semibold text-gray-700"
-						>Nome do Pai</label
+					<label for="medicalRecordNumber" class="block text-base font-semibold text-gray-700"
+						>Número de Prontuário</label
 					>
 					<input
-						bind:value={fatherName}
+						bind:value={medicalRecordNumber}
+						type="text"
+						class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md"
+					/>
+				</div>
+				<div>
+					<label for="zipCode" class="block text-base font-semibold text-gray-700">CEP</label>
+					<input
+						bind:value={zipCode}
+						type="text"
+						class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md"
+					/>
+				</div>
+				<div>
+					<label for="city" class="block text-base font-semibold text-gray-700">Cidade</label>
+					<input
+						bind:value={city}
 						type="text"
 						class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md"
 					/>
