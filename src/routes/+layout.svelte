@@ -1,685 +1,80 @@
-<script>
-	import { io } from 'socket.io-client';
-	import { spring } from 'svelte/motion';
-	import PyodideWorker from '$lib/workers/pyodide.worker?worker';
-
-	let loadingProgress = spring(0, {
-		stiffness: 0.05
-	});
-
-	import { onMount, tick, setContext, onDestroy } from 'svelte';
-	import {
-		config,
-		user,
-		settings,
-		theme,
-		WEBUI_NAME,
-		mobile,
-		socket,
-		activeUserIds,
-		USAGE_POOL,
-		chatId,
-		chats,
-		currentChatPage,
-		tags,
-		temporaryChatEnabled,
-		isLastActiveTab,
-		isApp,
-		appInfo,
-		toolServers,
-		playingNotificationSound
-	} from '$lib/stores';
-	import { goto } from '$app/navigation';
-	import { page } from '$app/stores';
-	import { Toaster, toast } from 'svelte-sonner';
-
-	import { executeToolServer, getBackendConfig } from '$lib/apis';
-	import { getSessionUser, userSignOut } from '$lib/apis/auths';
-
+<script lang="ts">
+	import { setContext, onMount } from 'svelte';
+	import { writable } from 'svelte/store';
+	import { browser } from '$app/environment';
 	import '../tailwind.css';
-	import '../app.css';
 
-	import 'tippy.js/dist/tippy.css';
-
-	import { WEBUI_BASE_URL, WEBUI_HOSTNAME } from '$lib/constants';
-	import i18n, { initI18n, getLanguages, changeLanguage } from '$lib/i18n';
-	import { bestMatchingLanguage } from '$lib/utils';
-	import { getAllTags, getChatList } from '$lib/apis/chats';
-	import NotificationToast from '$lib/components/NotificationToast.svelte';
-	import AppSidebar from '$lib/components/app/AppSidebar.svelte';
-	import { chatCompletion } from '$lib/apis/openai';
-
-	import { beforeNavigate } from '$app/navigation';
-	import { updated } from '$app/state';
-
-	// handle frontend updates (https://svelte.dev/docs/kit/configuration#version)
-	beforeNavigate(({ willUnload, to }) => {
-		if (updated.current && !willUnload && to?.url) {
-			location.href = to.url.href;
-		}
-	});
-
-	setContext('i18n', i18n);
-
-	const bc = new BroadcastChannel('active-tab-channel');
-
-	let loaded = false;
-	let tokenTimer = null;
-
-	const BREAKPOINT = 768;
-
-	const setupSocket = async (enableWebsocket) => {
-		const _socket = io(`${WEBUI_BASE_URL}` || undefined, {
-			reconnection: true,
-			reconnectionDelay: 1000,
-			reconnectionDelayMax: 5000,
-			randomizationFactor: 0.5,
-			path: '/ws/socket.io',
-			transports: enableWebsocket ? ['websocket'] : ['polling', 'websocket'],
-			auth: { token: localStorage.token }
-		});
-
-		await socket.set(_socket);
-
-		_socket.on('connect_error', (err) => {
-			console.log('connect_error', err);
-		});
-
-		_socket.on('connect', () => {
-			console.log('connected', _socket.id);
-		});
-
-		_socket.on('reconnect_attempt', (attempt) => {
-			console.log('reconnect_attempt', attempt);
-		});
-
-		_socket.on('reconnect_failed', () => {
-			console.log('reconnect_failed');
-		});
-
-		_socket.on('disconnect', (reason, details) => {
-			console.log(`Socket ${_socket.id} disconnected due to ${reason}`);
-			if (details) {
-				console.log('Additional details:', details);
-			}
-		});
-
-		_socket.on('user-list', (data) => {
-			console.log('user-list', data);
-			activeUserIds.set(data.user_ids);
-		});
-
-		_socket.on('usage', (data) => {
-			console.log('usage', data);
-			USAGE_POOL.set(data['models']);
-		});
+	type Toast = {
+		id: number;
+		message: string;
+		type: 'success' | 'error';
 	};
+	const toasts = writable<Toast[]>([]);
 
-	const executePythonAsWorker = async (id, code, cb) => {
-		let result = null;
-		let stdout = null;
-		let stderr = null;
-
-		let executing = true;
-		let packages = [
-			code.includes('requests') ? 'requests' : null,
-			code.includes('bs4') ? 'beautifulsoup4' : null,
-			code.includes('numpy') ? 'numpy' : null,
-			code.includes('pandas') ? 'pandas' : null,
-			code.includes('matplotlib') ? 'matplotlib' : null,
-			code.includes('sklearn') ? 'scikit-learn' : null,
-			code.includes('scipy') ? 'scipy' : null,
-			code.includes('re') ? 'regex' : null,
-			code.includes('seaborn') ? 'seaborn' : null,
-			code.includes('sympy') ? 'sympy' : null,
-			code.includes('tiktoken') ? 'tiktoken' : null,
-			code.includes('pytz') ? 'pytz' : null
-		].filter(Boolean);
-
-		const pyodideWorker = new PyodideWorker();
-
-		pyodideWorker.postMessage({
-			id: id,
-			code: code,
-			packages: packages
-		});
-
+	function showToast(message: string, type: 'success' | 'error' = 'success') {
+		const newToast: Toast = { id: Date.now(), message, type };
+		toasts.update((all) => [newToast, ...all]);
 		setTimeout(() => {
-			if (executing) {
-				executing = false;
-				stderr = 'Execution Time Limit Exceeded';
-				pyodideWorker.terminate();
-
-				if (cb) {
-					cb(
-						JSON.parse(
-							JSON.stringify(
-								{
-									stdout: stdout,
-									stderr: stderr,
-									result: result
-								},
-								(_key, value) => (typeof value === 'bigint' ? value.toString() : value)
-							)
-						)
-					);
-				}
-			}
-		}, 60000);
-
-		pyodideWorker.onmessage = (event) => {
-			console.log('pyodideWorker.onmessage', event);
-			const { id, ...data } = event.data;
-
-			console.log(id, data);
-
-			data['stdout'] && (stdout = data['stdout']);
-			data['stderr'] && (stderr = data['stderr']);
-			data['result'] && (result = data['result']);
-
-			if (cb) {
-				cb(
-					JSON.parse(
-						JSON.stringify(
-							{
-								stdout: stdout,
-								stderr: stderr,
-								result: result
-							},
-							(_key, value) => (typeof value === 'bigint' ? value.toString() : value)
-						)
-					)
-				);
-			}
-
-			executing = false;
-		};
-
-		pyodideWorker.onerror = (event) => {
-			console.log('pyodideWorker.onerror', event);
-
-			if (cb) {
-				cb(
-					JSON.parse(
-						JSON.stringify(
-							{
-								stdout: stdout,
-								stderr: stderr,
-								result: result
-							},
-							(_key, value) => (typeof value === 'bigint' ? value.toString() : value)
-						)
-					)
-				);
-			}
-			executing = false;
-		};
-	};
-
-	const executeTool = async (data, cb) => {
-		const toolServer = $settings?.toolServers?.find((server) => server.url === data.server?.url);
-		const toolServerData = $toolServers?.find((server) => server.url === data.server?.url);
-
-		console.log('executeTool', data, toolServer);
-
-		if (toolServer) {
-			console.log(toolServer);
-			const res = await executeToolServer(
-				(toolServer?.auth_type ?? 'bearer') === 'bearer' ? toolServer?.key : localStorage.token,
-				toolServer.url,
-				data?.name,
-				data?.params,
-				toolServerData
-			);
-
-			console.log('executeToolServer', res);
-			if (cb) {
-				cb(JSON.parse(JSON.stringify(res)));
-			}
-		} else {
-			if (cb) {
-				cb(
-					JSON.parse(
-						JSON.stringify({
-							error: 'Tool Server Not Found'
-						})
-					)
-				);
-			}
-		}
-	};
-
-	const chatEventHandler = async (event, cb) => {
-		const chat = $page.url.pathname.includes(`/c/${event.chat_id}`);
-
-		let isFocused = document.visibilityState !== 'visible';
-		if (window.electronAPI) {
-			const res = await window.electronAPI.send({
-				type: 'window:isFocused'
-			});
-			if (res) {
-				isFocused = res.isFocused;
-			}
-		}
-
-		await tick();
-		const type = event?.data?.type ?? null;
-		const data = event?.data?.data ?? null;
-
-		if ((event.chat_id !== $chatId && !$temporaryChatEnabled) || isFocused) {
-			if (type === 'chat:completion') {
-				const { done, content, title } = data;
-
-				if (done) {
-					if ($settings?.notificationSoundAlways ?? false) {
-						playingNotificationSound.set(true);
-
-						const audio = new Audio(`/audio/notification.mp3`);
-						audio.play().finally(() => {
-							// Ensure the global state is reset after the sound finishes
-							playingNotificationSound.set(false);
-						});
-					}
-
-					if ($isLastActiveTab) {
-						if ($settings?.notificationEnabled ?? false) {
-							new Notification(`${title} • Open WebUI`, {
-								body: content,
-								icon: `${WEBUI_BASE_URL}/static/favicon.png`
-							});
-						}
-					}
-
-					toast.custom(NotificationToast, {
-						componentProps: {
-							onClick: () => {
-								goto(`/c/${event.chat_id}`);
-							},
-							content: content,
-							title: title
-						},
-						duration: 15000,
-						unstyled: true
-					});
-				}
-			} else if (type === 'chat:title') {
-				currentChatPage.set(1);
-				await chats.set(await getChatList(localStorage.token, $currentChatPage));
-			} else if (type === 'chat:tags') {
-				tags.set(await getAllTags(localStorage.token));
-			}
-		} else if (data?.session_id === $socket.id) {
-			if (type === 'execute:python') {
-				console.log('execute:python', data);
-				executePythonAsWorker(data.id, data.code, cb);
-			} else if (type === 'execute:tool') {
-				console.log('execute:tool', data);
-				executeTool(data, cb);
-			} else if (type === 'request:chat:completion') {
-				console.log(data, $socket.id);
-				const { session_id, channel, form_data, model } = data;
-
-				try {
-					const directConnections = $settings?.directConnections ?? {};
-
-					if (directConnections) {
-						const urlIdx = model?.urlIdx;
-
-						const OPENAI_API_URL = directConnections.OPENAI_API_BASE_URLS[urlIdx];
-						const OPENAI_API_KEY = directConnections.OPENAI_API_KEYS[urlIdx];
-						const API_CONFIG = directConnections.OPENAI_API_CONFIGS[urlIdx];
-
-						try {
-							if (API_CONFIG?.prefix_id) {
-								const prefixId = API_CONFIG.prefix_id;
-								form_data['model'] = form_data['model'].replace(`${prefixId}.`, ``);
-							}
-
-							const [res, controller] = await chatCompletion(
-								OPENAI_API_KEY,
-								form_data,
-								OPENAI_API_URL
-							);
-
-							if (res) {
-								// raise if the response is not ok
-								if (!res.ok) {
-									throw await res.json();
-								}
-
-								if (form_data?.stream ?? false) {
-									cb({
-										status: true
-									});
-									console.log({ status: true });
-
-									// res will either be SSE or JSON
-									const reader = res.body.getReader();
-									const decoder = new TextDecoder();
-
-									const processStream = async () => {
-										while (true) {
-											// Read data chunks from the response stream
-											const { done, value } = await reader.read();
-											if (done) {
-												break;
-											}
-
-											// Decode the received chunk
-											const chunk = decoder.decode(value, { stream: true });
-
-											// Process lines within the chunk
-											const lines = chunk.split('\n').filter((line) => line.trim() !== '');
-
-											for (const line of lines) {
-												console.log(line);
-												$socket?.emit(channel, line);
-											}
-										}
-									};
-
-									// Process the stream in the background
-									await processStream();
-								} else {
-									const data = await res.json();
-									cb(data);
-								}
-							} else {
-								throw new Error('An error occurred while fetching the completion');
-							}
-						} catch (error) {
-							console.error('chatCompletion', error);
-							cb(error);
-						}
-					}
-				} catch (error) {
-					console.error('chatCompletion', error);
-					cb(error);
-				} finally {
-					$socket.emit(channel, {
-						done: true
-					});
-				}
-			} else {
-				console.log('chatEventHandler', event);
-			}
-		}
-	};
-
-	const channelEventHandler = async (event) => {
-		if (event.data?.type === 'typing') {
-			return;
-		}
-
-		// check url path
-		const channel = $page.url.pathname.includes(`/channels/${event.channel_id}`);
-
-		let isFocused = document.visibilityState !== 'visible';
-		if (window.electronAPI) {
-			const res = await window.electronAPI.send({
-				type: 'window:isFocused'
-			});
-			if (res) {
-				isFocused = res.isFocused;
-			}
-		}
-
-		if ((!channel || isFocused) && event?.user?.id !== $user?.id) {
-			await tick();
-			const type = event?.data?.type ?? null;
-			const data = event?.data?.data ?? null;
-
-			if (type === 'message') {
-				if ($isLastActiveTab) {
-					if ($settings?.notificationEnabled ?? false) {
-						new Notification(`${data?.user?.name} (#${event?.channel?.name}) • Open WebUI`, {
-							body: data?.content,
-							icon: data?.user?.profile_image_url ?? `${WEBUI_BASE_URL}/static/favicon.png`
-						});
-					}
-				}
-
-				toast.custom(NotificationToast, {
-					componentProps: {
-						onClick: () => {
-							goto(`/channels/${event.channel_id}`);
-						},
-						content: data?.content,
-						title: event?.channel?.name
-					},
-					duration: 15000,
-					unstyled: true
-				});
-			}
-		}
-	};
-
-	const TOKEN_EXPIRY_BUFFER = 60; // seconds
-	const checkTokenExpiry = async () => {
-		const exp = $user?.expires_at; // token expiry time in unix timestamp
-		const now = Math.floor(Date.now() / 1000); // current time in unix timestamp
-
-		if (!exp) {
-			// If no expiry time is set, do nothing
-			return;
-		}
-
-		if (now >= exp - TOKEN_EXPIRY_BUFFER) {
-			const res = await userSignOut();
-			user.set(null);
-			localStorage.removeItem('token');
-
-			location.href = res?.redirect_url ?? '/auth';
-		}
-	};
-
-	onMount(async () => {
-		if (typeof window !== 'undefined' && window.applyTheme) {
-			window.applyTheme();
-		}
-
-		if (window?.electronAPI) {
-			const info = await window.electronAPI.send({
-				type: 'app:info'
-			});
-
-			if (info) {
-				isApp.set(true);
-				appInfo.set(info);
-
-				const data = await window.electronAPI.send({
-					type: 'app:data'
-				});
-
-				if (data) {
-					appData.set(data);
-				}
-			}
-		}
-
-		// Listen for messages on the BroadcastChannel
-		bc.onmessage = (event) => {
-			if (event.data === 'active') {
-				isLastActiveTab.set(false); // Another tab became active
-			}
-		};
-
-		// Set yourself as the last active tab when this tab is focused
-		const handleVisibilityChange = () => {
-			if (document.visibilityState === 'visible') {
-				isLastActiveTab.set(true); // This tab is now the active tab
-				bc.postMessage('active'); // Notify other tabs that this tab is active
-
-				// Check token expiry when the tab becomes active
-				checkTokenExpiry();
-			}
-		};
-
-		// Add event listener for visibility state changes
-		document.addEventListener('visibilitychange', handleVisibilityChange);
-
-		// Call visibility change handler initially to set state on load
-		handleVisibilityChange();
-
-		theme.set(localStorage.theme);
-
-		mobile.set(window.innerWidth < BREAKPOINT);
-
-		const onResize = () => {
-			if (window.innerWidth < BREAKPOINT) {
-				mobile.set(true);
-			} else {
-				mobile.set(false);
-			}
-		};
-		window.addEventListener('resize', onResize);
-
-		user.subscribe((value) => {
-			if (value) {
-				$socket?.off('chat-events', chatEventHandler);
-				$socket?.off('channel-events', channelEventHandler);
-
-				$socket?.on('chat-events', chatEventHandler);
-				$socket?.on('channel-events', channelEventHandler);
-
-				// Set up the token expiry check
-				if (tokenTimer) {
-					clearInterval(tokenTimer);
-				}
-				tokenTimer = setInterval(checkTokenExpiry, 15000);
-			} else {
-				$socket?.off('chat-events', chatEventHandler);
-				$socket?.off('channel-events', channelEventHandler);
-			}
-		});
-
-		let backendConfig = null;
-		try {
-			backendConfig = await getBackendConfig();
-			console.log('Backend config:', backendConfig);
-		} catch (error) {
-			console.error('Error loading backend config:', error);
-		}
-		// Initialize i18n even if we didn't get a backend config,
-		// so `/error` can show something that's not `undefined`.
-
-		initI18n(localStorage?.locale);
-		if (!localStorage.locale) {
-			const languages = await getLanguages();
-			const browserLanguages = navigator.languages
-				? navigator.languages
-				: [navigator.language || navigator.userLanguage];
-			const lang = backendConfig.default_locale
-				? backendConfig.default_locale
-				: bestMatchingLanguage(languages, browserLanguages, 'en-US');
-			changeLanguage(lang);
-		}
-
-		if (backendConfig) {
-			// Save Backend Status to Store
-			await config.set(backendConfig);
-			await WEBUI_NAME.set("Assistente Médico");
-
-			if ($config) {
-				await setupSocket($config.features?.enable_websocket ?? true);
-
-				const currentUrl = `${window.location.pathname}${window.location.search}`;
-				const encodedUrl = encodeURIComponent(currentUrl);
-
-				if (localStorage.token) {
-					// Get Session User Info
-					const sessionUser = await getSessionUser(localStorage.token).catch((error) => {
-						toast.error(`${error}`);
-						return null;
-					});
-
-					if (sessionUser) {
-						// Save Session User to Store
-						$socket.emit('user-join', { auth: { token: sessionUser.token } });
-
-						await user.set(sessionUser);
-						await config.set(await getBackendConfig());
-					} else {
-						// Redirect Invalid Session User to /auth Page
-						localStorage.removeItem('token');
-						await goto(`/auth?redirect=${encodedUrl}`);
-					}
-				} else {
-					// Don't redirect if we're already on the auth page
-					// Needed because we pass in tokens from OAuth logins via URL fragments
-					if ($page.url.pathname !== '/auth') {
-						await goto(`/auth?redirect=${encodedUrl}`);
-					}
-				}
-			}
-		} else {
-			// Redirect to /error when Backend Not Detected
-			await goto(`/error`);
-		}
-
-		await tick();
-
-		if (
-			document.documentElement.classList.contains('her') &&
-			document.getElementById('progress-bar')
-		) {
-			loadingProgress.subscribe((value) => {
-				const progressBar = document.getElementById('progress-bar');
-
-				if (progressBar) {
-					progressBar.style.width = `${value}%`;
-				}
-			});
-
-			await loadingProgress.set(100);
-
-			document.getElementById('splash-screen')?.remove();
-
-			// Removendo o audio de greeting
-			loaded = true;
-
-			loaded = true;
-		} else {
-			document.getElementById('splash-screen')?.remove();
-			loaded = true;
-		}
-
-		return () => {
-			window.removeEventListener('resize', onResize);
-		};
-	});
+			toasts.update((all) => all.filter((t) => t.id !== newToast.id));
+		}, 3000);
+	}
+	setContext('showToast', showToast);
 </script>
 
-<svelte:head>
-    <title>Assistente Médico</title>
-    <meta name="apple-mobile-web-app-title" content="Assistente Médico" />
-    <meta name="application-name" content="Assistente Médico" />
-    <link crossorigin="anonymous" rel="icon" href="{WEBUI_BASE_URL}/static/favicon.png" />
-</svelte:head>
+<style>
+	:global(html) {
+		--primary-color: #0038a8;
+		--primary-hover-color: #002b82;
+		--accent-color: #16a34a;
+		--accent-hover-color: #15803d;
+		--danger-color: #d8292f;
+		--danger-hover-color: #b91c1c;
+	}
+	:global(.bg-primary) { background-color: var(--primary-color); }
+	:global(.hover\:bg-primary-hover:hover) { background-color: var(--primary-hover-color); }
+	:global(.focus\:ring-primary:focus) { --tw-ring-color: var(--primary-color); }
+	:global(.bg-accent) { background-color: var(--accent-color); }
+	:global(.hover\:bg-accent-hover:hover) { background-color: var(--accent-hover-color); }
+	:global(.focus\:ring-accent:focus) { --tw-ring-color: var(--accent-color); }
+	:global(.text-primary) { color: var(--primary-color); }
+	:global(.hover\:text-primary-hover:hover) { color: var(--primary-hover-color); }
+    :global(.bg-danger) { background-color: var(--danger-color); }
+	:global(.hover\:bg-danger-hover:hover) { background-color: var(--danger-hover-color); }
+	:global(.text-danger) { color: var(--danger-color); }
+	:global(.hover\:text-danger-hover:hover) { color: var(--danger-hover-color); }
+	:global(body) {
+		min-height: 100vh;
+		display: flex;
+		flex-direction: column;
+	}
+	:global(.flex-grow) {
+		flex-grow: 1;
+	}
+</style>
 
-{#if loaded}
-	{#if $isApp}
-		<div class="flex flex-row h-screen">
-			<AppSidebar />
-
-			<div class="w-full flex-1 max-w-[calc(100%-4.5rem)]">
-				<slot />
+<div aria-live="assertive" class="pointer-events-none fixed inset-0 flex items-start px-4 py-6 sm:p-6 z-50">
+	<div class="flex w-full flex-col items-center space-y-4 sm:items-end">
+		{#each $toasts as toast (toast.id)}
+			<div class="pointer-events-auto w-full max-w-sm overflow-hidden rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5">
+				<div class="p-4">
+					<div class="flex items-start">
+						<div class="flex-shrink-0">
+							{#if toast.type === 'success'}
+								<svg class="h-6 w-6 text-green-400" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+							{:else}
+								<svg class="h-6 w-6 text-red-400" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" /></svg>
+							{/if}
+						</div>
+						<div class="ml-3 w-0 flex-1 pt-0.5">
+							<p class="text-sm font-medium text-gray-900">{toast.message}</p>
+						</div>
+					</div>
+				</div>
 			</div>
-		</div>
-	{:else}
-		<slot />
-	{/if}
-{/if}
+		{/each}
+	</div>
+</div>
 
-<Toaster
-	theme={$theme.includes('dark')
-		? 'dark'
-		: $theme === 'system'
-			? window.matchMedia('(prefers-color-scheme: dark)').matches
-				? 'dark'
-				: 'light'
-			: 'light'}
-	richColors
-	position="top-right"
-	closeButton
-/>
+<div class="flex-grow">
+	<slot />
+</div>

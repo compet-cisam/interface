@@ -8,6 +8,20 @@ export default {
 	theme: {
 		extend: {
 			colors: {
+
+				primary: {
+					DEFAULT: '#0038a8',
+					hover: '#002b82'
+				},
+				accent: {
+					DEFAULT: '#16a34a',
+					hover: '#15803d'
+				},
+				danger: {
+					DEFAULT: '#d8292f', 
+					hover: '#b91c1c'
+				},
+
 				gray: {
 					50: 'var(--color-gray-50, #f9f9f9)',
 					100: 'var(--color-gray-100, #ececec)',
