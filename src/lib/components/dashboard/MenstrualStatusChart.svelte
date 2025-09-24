@@ -6,7 +6,7 @@
     let chartData = {};
 
 
-    const chartColors = ['#e15759', '#76b7b2', '#4e79a7', '#bab0ab']; // Vermelho, Verde-água, Azul, Cinza
+    const chartColors = ['#e15759', '#76b7b2', '#008000', '#bab0ab']; // Vermelho, Verde-água, Azul, Cinza
 
     let chartOptions = {
         responsive: true,

@@ -23,11 +23,11 @@
 		},
 		scales: {
 			x: {
-				ticks: { color: 'gray', font: { family: 'Poppins', size: 12 } },
+				ticks: { color: 'black', font: { family: 'Poppins', size: 12 } },
 				grid: { color: '#ccc' }
 			},
 			y: {
-				ticks: { color: 'gray', font: { family: 'Poppins', size: 12 } },
+				ticks: { color: 'black', font: { family: 'Poppins', size: 12 } },
 				grid: {display: false}
 			}
 		},

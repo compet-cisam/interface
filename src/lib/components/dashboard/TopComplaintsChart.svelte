@@ -11,8 +11,8 @@
 		maintainAspectRatio: false,
 		plugins: { legend: { display: false } },
 		scales: {
-			x: { ticks: { color: 'gray' }, grid: { color: 'gray' } },
-			y: { ticks: { color: 'gray' }, grid: { display: false } }
+			x: { ticks: { color: 'black' }, grid: { color: 'gray' } },
+			y: { ticks: { color: 'black' }, grid: { display: false } }
 		}
 	};
 
@@ -50,7 +50,7 @@
 </script>
 
 <div class="bg-[#fcfeff] p-4 rounded-xl shadow-lg h-full flex flex-col">
-	<h3 class="text-center text-lg font-semibold mb-3 text-black">Top 10 Queixas Gerais</h3>
+	<h3 class="text-center text-lg font-semibold mb-3 text-black">Principais Motivações de Consultas</h3>
 	<div class="max-h-[500px] overflow-y-auto min-h-[300px]" >
 		{#if data.length > 0}
             <Bar data={chartData} options={chartOptions} />

@@ -11,15 +11,17 @@
 		maintainAspectRatio: false,
 		plugins: { legend: { display: false } },
 		scales: {
-			x: { ticks: { color: '#ccc' }, grid: { color: '#444' } },
-			y: { ticks: { color: '#ccc' }, grid: { display: false } }
+			x: { ticks: { color: '#gray' }, grid: { color: '#444' } },
+			y: { ticks: { color: '#black' }, grid: { display: false } }
 		}
 	};
 
 	$: {
 		const counts = data.reduce((acc, item) => {
-			if (item.Medicacao && item.Medicacao.toLowerCase() !== 'none') {
-				const medications = item.Medicacao.split('+').map((m) => m.trim());
+			if (item.medicacao && item.medicacao.toLowerCase() !== 'none' &&
+				item.medicacao.toLowerCase() !== 'nega' &&
+                item.medicacao.toLowerCase() !== 'outros') {
+				const medications = item.medicacao.split('+').map((m) => m.trim());
 				medications.forEach((m) => {
 					acc[m] = (acc[m] || 0) + 1;
 				});
@@ -47,11 +49,11 @@
 	}
 </script>
 
-<div class="bg-[#1e1e2f] p-4 rounded-xl shadow-lg h-full flex flex-col">
-	<h3 class="text-center text-lg font-semibold mb-3 text-white">Top 5 Medicações em Uso</h3>
+<div class="bg-[#fcfeff] p-4 rounded-xl shadow-lg h-full flex flex-col">
+	<h3 class="text-center text-lg font-semibold mb-3 text-black">Principais Medicações em Uso</h3>
 	<div class="relative flex-grow min-h-[250px]">
 		{#if data.length > 0}
-			<Bar {chartData} {chartOptions} />
+			<Bar data={chartData} options={chartOptions} />
 		{:else}
 			<p class="text-center text-gray-400 italic mt-10">Carregando dados...</p>
 		{/if}
