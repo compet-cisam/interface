@@ -11,8 +11,8 @@
     let uniqueYears = [];  
 
     const orderedMonths = [
-        'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 
-        'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
+        'janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 
+        'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'
     ];
 
     $: {
@@ -27,11 +27,11 @@
     }
 </script>
 
-<div class="bg-[#1e1e2f] text-gray-200 rounded-xl p-5 shadow-lg space-y-6 w-full">
+<div class="bg-[#fcfeff] text-black rounded-xl p-5 shadow-lg space-y-6 w-full">
     
     <!-- Área Médica -->
     <div>
-        <h3 class="text-md font-semibold mb-2 text-white">Área Médica</h3>
+        <h3 class="text-md font-semibold mb-2 text-black">Área Médica</h3>
         <div class="space-y-2">
             {#each uniqueAreas as area}
                 <label class="flex items-center space-x-2 cursor-pointer">
@@ -44,7 +44,7 @@
 
     <!-- Faixa Etária -->
     <div>
-        <h3 class="text-md font-semibold mb-2 text-white">Faixa Etária</h3>
+        <h3 class="text-md font-semibold mb-2 text-black">Faixa Etária</h3>
         <div class="space-y-2">
             {#each uniqueAgeRanges as range}
                 <label class="flex items-center space-x-2 cursor-pointer">
@@ -57,7 +57,7 @@
 
     <!-- Ano -->
     <div>
-        <h3 class="text-md font-semibold mb-2 text-white">Ano</h3>
+        <h3 class="text-md font-semibold mb-2 text-black">Ano</h3>
         <div class="space-y-2">
             {#each uniqueYears as year}
                 <label class="flex items-center space-x-2 cursor-pointer">
@@ -70,8 +70,8 @@
 
     <!-- Mês -->
     <div>
-        <h3 class="text-md font-semibold mb-2 text-white">Mês</h3>
-        <div class="border border-gray-600 rounded-lg bg-[#2a2a3d] p-3">
+        <h3 class="text-md font-semibold mb-2 text-black">Mês</h3>
+        <div class="border border-gray-600 rounded-lg bg-[#fcfeff] p-3">
             <div class="max-h-[200px] overflow-y-auto space-y-2 pr-2">
                 {#each uniqueMonths as month}
                     <label class="flex items-center space-x-2 cursor-pointer">

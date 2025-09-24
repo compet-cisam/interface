@@ -1,58 +1,97 @@
 <script>
-    import { Doughnut } from 'svelte-chartjs';
-    import 'chart.js/auto';
+	import { Bar } from 'svelte-chartjs';
+	import 'chart.js/auto';
 
-    export let data = [];
-    let chartData = {};
-    const chartColors = ['#e15759', '#76b7b2', '#59a14f', '#edc949', '#af7aa1', '#ff9da7', '#9c755f'];
+	export let data = [];
+	let chartData = {};
 
-    let chartOptions = {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-            legend: {
-                position: 'right',
-                labels: { color: '#ccc', font: { family: 'Poppins', size: 12 } }
-            }
-        }
-    };
+	let chartOptions = {
+		indexAxis: 'y', 
+		responsive: true,
+		maintainAspectRatio: false,
+		plugins: {
+			legend: { display: false },
+			tooltip: {
+				backgroundColor: '#333',
+				titleColor: '#fff',
+				bodyColor: '#eee',
+				padding: 10,
+				cornerRadius: 4
+			}
+		},
+		scales: {
+			x: {
+				ticks: { color: '#black', precision: 0 }, 
+				grid: { color: '#444' },
+				title: {
+					display: true,
+					text: 'Nº de Pacientes',
+					color: '#aaa'
+				}
+			},
+			y: {
+				ticks: { color: '#gray' },
+				grid: { display: false }
+			}
+		}
+	};
 
-    $: {
-        // Lógica para separar comorbidades unidas por "+"
-        const counts = data.reduce((acc, item) => {
-            if (item.Comorbidade && item.Comorbidade.toLowerCase() !== 'none') {
-                const comorbidities = item.Comorbidade.split('+').map(c => c.trim());
-                comorbidities.forEach(c => {
-                    acc[c] = (acc[c] || 0) + 1;
-                });
-            } else {
-                acc['Nenhuma'] = (acc['Nenhuma'] || 0) + 1;
-            }
-            return acc;
-        }, {});
+	$: {
+		
+		const counts = data.reduce((acc, item) => {
+			
+			const comorbidityString = item.comorbidade?.trim();
 
-        const labels = Object.keys(counts);
-        const dataPoints = Object.values(counts);
+			if (
+				comorbidityString &&
+				comorbidityString.toLowerCase() !== 'none' &&
+				comorbidityString.toLowerCase() !== 'nega' &&
+                comorbidityString.toLowerCase() !== 'outros'
+			) {
+				
+				const individualComorbidities = comorbidityString.split('+').map((c) => c.trim());
 
-        chartData = {
-            labels,
-            datasets: [{
-                data: dataPoints,
-                backgroundColor: chartColors,
-                hoverOffset: 4,
-                borderColor: '#1e1e2f'
-            }]
-        };
-    }
+				individualComorbidities.forEach((c) => {
+					if (c) {
+						
+						acc[c] = (acc[c] || 0) + 1;
+					}
+				});
+			}
+			return acc;
+		}, {});
+
+	
+		const sortedTop10 = Object.entries(counts)
+			.sort(([, a], [, b]) => b - a)
+			.slice(0, 10)
+			
+
+		const labels = sortedTop10.map((item) => item[0]);
+		const dataPoints = sortedTop10.map((item) => item[1]);
+
+		chartData = {
+			labels,
+			datasets: [
+				{
+					label: 'Pacientes',
+					data: dataPoints,
+					backgroundColor: '#af7aa1',
+					borderRadius: 4,
+					barThickness: 20
+				}
+			]
+		};
+	}
 </script>
 
-<div class="bg-[#1e1e2f] p-4 rounded-xl shadow-lg h-full flex flex-col">
-    <h3 class="text-center text-lg font-semibold mb-3 text-white">Prevalência de Comorbidades</h3>
-    <div class="relative flex-grow min-h-[250px]">
-        {#if data.length > 0}
-            <Doughnut {chartData} {chartOptions} />
-        {:else}
-            <p class="text-center text-gray-400 italic mt-10">Carregando dados...</p>
-        {/if}
-    </div>
+<div class="bg-[#fcfeff] p-4 rounded-xl shadow-lg h-full flex flex-col">
+	<h3 class="text-center text-lg font-semibold mb-3 text-black">Comorbidades Prevalentes</h3>
+	<div class="relative flex-grow min-h-[300px]">
+		{#if data.length > 0 && chartData.labels?.length > 0}
+			<Bar data={chartData} options={chartOptions} />
+		{:else}
+			<p class="text-center text-gray-400 italic mt-10">Sem dados de comorbidade para exibir.</p>
+		{/if}
+	</div>
 </div>
