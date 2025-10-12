@@ -2,228 +2,287 @@ from typing import List, Union, Generator, Iterator
 import os
 import asyncio
 import httpx
-import pandas as pd
-from sqlalchemy import create_engine, text
 import re
 
 class Pipeline:
     def __init__(self):
         self.name = "Analisar Prontuários Médicos"
-        self.db_engine = None
         self.ollama_base_url = "http://ollama:11434"
+        
+        # ============================================
+        # CONFIGURAÇÃO DA API
+        # ============================================
+        self.api_config = {
+            "base_url": "http://host.docker.internal:3000",
+            "endpoint": "/api/v1/anamnese",
+            "timeout": 30.0
+        }
+        
         print(f"__init__: {self.name} inicializado.")
+        print(f"🔗 API configurada: {self.api_config['base_url']}{self.api_config['endpoint']}")
 
     async def on_startup(self):
-        print(f"on_startup: {self.name} - Conectando ao PostgreSQL...")
+        """Verifica conexão com a API na inicialização"""
+        print(f"on_startup: {self.name} - Verificando conexão com a API...")
         
-        user = os.getenv("POSTGRES_USER", "default_user")
-        password = os.getenv("POSTGRES_PASSWORD", "default_pass")
-        db_name = os.getenv("POSTGRES_DB", "default_db")
-        host = "postgres"
-        conn_str = f"postgresql://{user}:{password}@{host}:5432/{db_name}"
-
-        retries = 5
-        while retries > 0:
-            try:
-                self.db_engine = create_engine(conn_str)
-                connection = self.db_engine.connect()
-                connection.close()
-                print("✅ Conexão com o PostgreSQL estabelecida!")
-                return
-            except Exception as e:
-                print(f"🔴 Erro ao conectar: {e}")
-                retries -= 1
-                self.db_engine = None
-                print(f"Tentativas restantes: {retries}. Aguardando 5 segundos...")
-                await asyncio.sleep(5)
-        
-        print("🔴 Falha na conexão com o banco após várias tentativas.")
+        try:
+            async with httpx.AsyncClient(timeout=10.0) as client:
+                url = f"{self.api_config['base_url']}{self.api_config['endpoint']}/"
+                response = await client.get(
+                    url,
+                    params={"page": 1, "limit": 1}
+                )
+                
+                if response.status_code == 200:
+                    print(f"✅ API conectada com sucesso!")
+                    data = response.json()
+                    print(f"📊 API respondeu corretamente")
+                else:
+                    print(f"⚠️  API respondeu com status {response.status_code}")
+                    
+        except httpx.ConnectError:
+            print(f"🔴 Erro: Não foi possível conectar à API em {self.api_config['base_url']}")
+            print("💡 Verifique se o serviço está rodando e se host.docker.internal está acessível")
+        except Exception as e:
+            print(f"⚠️  Aviso ao verificar API: {e}")
 
     async def on_shutdown(self):
-        if self.db_engine:
-            self.db_engine.dispose()
-            print("on_shutdown: Conexão fechada.")
+        print("on_shutdown: Pipeline finalizado.")
 
     def pipe(
         self, user_message: str, model_id: str, messages: List[dict], body: dict
     ) -> Union[str, Generator, Iterator]:
+        """Processa a requisição do usuário"""
         
-        if not self.db_engine:
-            return "❌ Erro: Conexão com banco indisponível."
-
-        nome_paciente = self._extrair_nome_paciente(user_message)
+        # Extrai o ID da anamnese da mensagem
+        anamnese_id = self._extrair_id_anamnese(user_message)
         
-        if not nome_paciente:
-            return """
- **Sistema de Análise de Prontuários**
+        if not anamnese_id:
+            return """📋 **Sistema de Análise de Prontuários Médicos**
 
-Para consultar um paciente, use um dos formatos:
-• "Analisar paciente João Silva"
-• "Buscar Maria Santos"  
-• "Prontuário de Pedro Costa"
-• "Consultar Ana Oliveira"
+Para consultar um paciente, digite o **ID da anamnese**:
 
- O sistema buscará o paciente no banco e gerará uma análise médica completa.
-            """.strip()
+**Exemplos:**
+• "Analisar anamnese 123"
+• "Buscar prontuário 456"
+• "Consultar paciente 789"
+• Ou simplesmente: "123"
+
+💡 O sistema buscará a anamnese na base de dados e gerará uma análise médica completa."""
 
         try:
-            paciente_info = self._buscar_paciente(nome_paciente)
+            # Busca a anamnese pelo ID
+            anamnese = self._buscar_anamnese_por_id(anamnese_id)
             
-            if not paciente_info:
-                return f"❌ Paciente '{nome_paciente}' não encontrado no sistema.\n\n💡 Verifique a grafia do nome e tente novamente."
+            if not anamnese:
+                return f"""❌ **Anamnese não encontrada**
 
-            print(f"✅ Paciente encontrado: {paciente_info['nome']}. Gerando análise...")
+A anamnese com ID '{anamnese_id}' não foi localizada no sistema.
 
-            return self._gerar_analise_medica( paciente_info, model_id)
+💡 **Dicas:**
+• Verifique se o ID está correto
+• Confirme se a anamnese existe na base de dados
+• Tente listar as anamneses disponíveis primeiro"""
+
+            print(f"✅ Anamnese ID {anamnese_id} encontrada. Gerando análise...")
+
+            return self._gerar_analise_medica(anamnese, model_id)
                 
         except Exception as e:
             print(f"🔴 Erro no pipeline: {e}")
-            return f"❌ Erro interno: {str(e)}"
+            import traceback
+            traceback.print_exc()
+            return f"❌ **Erro interno:** {str(e)}"
 
-    def _extrair_nome_paciente(self, mensagem: str) -> str:
-        mensagem = mensagem.lower().strip()
+    def _extrair_id_anamnese(self, mensagem: str) -> str:
+        """Extrai o ID da anamnese da mensagem do usuário"""
+        mensagem = mensagem.strip()
         
+        # Padrões para capturar o ID
         padroes = [
-            r'analisar\s+paciente\s+(.+)',
-            r'buscar\s+(.+)',
-            r'prontuário\s+(?:de\s+|do\s+)?(.+)',
-            r'consultar\s+(.+)',
-            r'paciente\s+(.+)',
-            r'análise\s+(?:de\s+|do\s+)?(.+)'
+            r'anamnese\s+(\d+)',
+            r'prontuário\s+(\d+)',
+            r'consultar\s+(?:paciente\s+)?(\d+)',
+            r'buscar\s+(?:paciente\s+)?(\d+)',
+            r'analisar\s+(?:paciente\s+)?(\d+)',
+            r'paciente\s+(\d+)',
+            r'id\s+(\d+)',
+            r'^(\d+)$',  # Apenas números
         ]
         
         for padrao in padroes:
-            match = re.search(padrao, mensagem)
+            match = re.search(padrao, mensagem, re.IGNORECASE)
             if match:
-                nome = match.group(1).strip()
-                nome = re.sub(r'\b(por favor|pfv|obrigado|obrigada)\b', '', nome).strip()
-                return nome.title()
-            
+                return match.group(1)
+        
         return ""
 
-    def _buscar_paciente(self, nome: str) -> dict:
+    def _buscar_anamnese_por_id(self, anamnese_id: str) -> dict:
+        """Busca anamnese pelo ID via API REST"""
         try:
-            query =  text("""
-                            SELECT 
-                                prontuario, nome, especialidade, data, comorbidade,
-                                medicacao, mac, eco_endo, polipo, mioma,
-                                gravidez, parto, aborto
-                            FROM pacientes 
-                            WHERE LOWER(nome) LIKE LOWER(:nome_busca)
-                            ORDER BY 
-                                CASE WHEN LOWER(nome) = LOWER(:nome_exato) THEN 1 ELSE 2 END,
-                                nome
-                            LIMIT 1
-                        """)
-                    
-            with self.db_engine.connect() as conn:
-                result = conn.execute(query, {
-                    'nome_busca': f'%{nome}%',
-                    'nome_exato': nome
-                })
-                row = result.fetchone()
-                
-                if row:
-                    colunas = result.keys()
-                    return dict(zip(colunas, row))
-                    
-        except Exception as e:
-            print(f"🔴 Erro na busca: {e}")
+            # Monta a URL com o ID
+            url = f"{self.api_config['base_url']}{self.api_config['endpoint']}/{anamnese_id}"
             
-        return None
+            print(f"🔍 Buscando anamnese ID '{anamnese_id}'...")
+            print(f"🌐 URL: {url}")
+            
+            response = httpx.get(
+                url,
+                timeout=self.api_config['timeout']
+            )
+            
+            print(f"📡 Status da resposta: {response.status_code}")
+            
+            if response.status_code == 200:
+                data = response.json()
+                print(f"✅ Anamnese encontrada!")
+                return data
+                    
+            elif response.status_code == 404:
+                print(f"❌ Anamnese ID {anamnese_id} não encontrada")
+                return None
+            else:
+                print(f"🔴 API retornou status {response.status_code}")
+                print(f"📄 Resposta: {response.text[:200]}")
+                return None
+                
+        except httpx.TimeoutException:
+            print(f"🔴 Timeout ao buscar na API (>{self.api_config['timeout']}s)")
+            return None
+        except httpx.ConnectError as e:
+            print(f"🔴 Erro de conexão com a API: {self.api_config['base_url']}")
+            print(f"💡 Verifique se o serviço está rodando e se host.docker.internal está configurado")
+            print(f"🔧 Erro: {e}")
+            return None
+        except Exception as e:
+            print(f"🔴 Erro ao buscar na API: {e}")
+            import traceback
+            traceback.print_exc()
+            return None
 
-    def _gerar_analise_medica(self, paciente: dict, model_id: str) -> str:
-        prompt = f"""
-Você é um assistente médico especializado em análise de prontuários. Analise as informações do paciente abaixo e forneça uma avaliação médica estruturada.
+    def _gerar_analise_medica(self, anamnese: dict, model_id: str) -> str:
+        """Gera análise médica usando o modelo de IA"""
+        
+        dados_formatados = self._formatar_dados_anamnese(anamnese)
+        
+        prompt = f"""Você é um assistente médico especializado em análise de prontuários ginecológicos. Analise as informações da anamnese abaixo e forneça uma avaliação médica estruturada.
 
-**INFORMAÇÕES DO PACIENTE:**
-Nome: {paciente.get('nome', 'N/A')}
-Especialidade: {paciente.get('especialidade', 'N/A')}
-Data: {paciente.get('data', 'Não informado')}
-Comorbidade: {paciente.get('comorbidade', 'Nenhum')}
-Medicação: {paciente.get('medicacao', 'Nenhuma conhecida')}
-MAC (Método Anticoncepcional): {paciente.get('mac', 'Não relatados')}
-Exame Eco/Endo: {paciente.get('eco_endo', 'Nenhum')}
-Pólipo: {paciente.get('polipo', 'Nenhuma')}
-Mioma: {paciente.get('mioma', 'N/A')}
-Gravidez: {paciente.get('gravidez', 'N/A')}
-Parto: {paciente.get('parto', 'N/A')}
-Aborto: {paciente.get('aborto', 'N/A')}
-
+{dados_formatados}
 
 **SOLICITAÇÃO:**
 Forneça uma análise médica estruturada seguindo este formato:
 
-## RESUMO CLÍNICO
-[Breve resumo da condição atual do paciente]
+## 📋 RESUMO CLÍNICO
+[Breve resumo da condição atual do paciente baseado nos dados da anamnese - máximo 3-4 linhas]
 
-## PRINCIPAIS ACHADOS
-[Pontos mais relevantes do histórico e sintomas]
+## 🔍 PRINCIPAIS ACHADOS
+[Liste os pontos mais relevantes do histórico médico, queixas atuais e dados da anamnese]
 
-## RECOMENDAÇÕES
-[Sugestões de acompanhamento, exames ou cuidados]
+## 💊 RECOMENDAÇÕES
+[Sugestões de acompanhamento, exames complementares ou cuidados preventivos baseados nos dados coletados]
 
-## PONTOS DE ATENÇÃO
-[Fatores que requerem monitoramento especial]
+## ⚠️ PONTOS DE ATENÇÃO
+[Fatores que requerem monitoramento especial, sinais de alerta ou que apresentam maior risco]
 
-## CONSIDERAÇÕES FINAIS
-[Determine se a pessoa precisa de um exame de histeroscopia ou outro procedimento baseado nas informações fornecidas]
+## 🩺 CONSIDERAÇÕES FINAIS
+[Avaliação geral e necessidade de procedimentos adicionais baseado nas informações da anamnese]
 
-**IMPORTANTE:** Esta é uma análise informativa baseada em IA. Sempre consulte um profissional de saúde qualificado para decisões médicas; HD SIGNIFICA HISTEROSCOPIA DIAGNOTICA, QUE É O TIPO DE EXAME QUE O PACIENTE SOLICITA.
-        """
+**NOTAS IMPORTANTES:**
+- HD = Histeroscopia Diagnóstica
+- MAC = Método Anticoncepcional
+- G/P/A = Gestações/Partos/Abortos
+- Esta é uma análise informativa baseada em IA
+- Sempre consulte um profissional de saúde qualificado para decisões médicas definitivas"""
         
         return self._call_ollama(prompt, model_id)
 
+    def _formatar_dados_anamnese(self, anamnese: dict) -> str:
+        """Formata os dados da anamnese para o prompt"""
+        
+        # Função auxiliar para formatar valores
+        def fmt(valor, padrao="Não informado"):
+            return valor if valor not in [None, "", "null"] else padrao
+        
+        # Extrai informações do paciente (se estiver no objeto anamnese)
+        paciente = anamnese.get('paciente', {})
+        
+        resultado = f"""**DADOS DO PACIENTE:**
+• **ID da Anamnese:** {anamnese.get('id', 'N/A')}
+• **Nome do Paciente:** {paciente.get('nome_completo', 'N/A') if paciente else 'N/A'}
+• **Data de Nascimento:** {paciente.get('data_nascimento', 'N/A') if paciente else 'N/A'}
+
+**DADOS DA ANAMNESE:**
+"""
+        
+        # Adiciona todos os campos da anamnese dinamicamente
+        campos_ignorar = ['id', 'paciente', 'created_at', 'updated_at', 'paciente_id']
+        
+        for chave, valor in anamnese.items():
+            if chave not in campos_ignorar and valor not in [None, "", "null"]:
+                # Formata a chave (transforma snake_case em Título)
+                chave_formatada = chave.replace('_', ' ').title()
+                resultado += f"• **{chave_formatada}:** {valor}\n"
+        
+        # Se não houver dados além dos básicos
+        if len([k for k in anamnese.keys() if k not in campos_ignorar]) == 0:
+            resultado += "• Nenhum dado adicional de anamnese registrado\n"
+        
+        return resultado
+
     def _call_ollama(self, user_prompt: str, model_id: str) -> str:
-            system_prompt = """Você é um assistente médico especializado em análise de prontuários. 
-    Forneça análises médicas estruturadas, precisas e baseadas em evidências. 
-    Sempre inclua avisos sobre a necessidade de consulta médica profissional.
-    Mantenha um tom profissional e científico."""
+        """Chama o serviço Ollama para gerar a análise"""
+        
+        system_prompt = """Você é um assistente médico especializado em análise de prontuários e anamneses ginecológicas. 
+Forneça análises médicas estruturadas, precisas e baseadas em evidências científicas. 
+Mantenha um tom profissional, empático e científico.
+Sempre inclua avisos sobre a necessidade de consulta médica profissional.
+Seja objetivo e direto nas recomendações.
+Considere todos os dados fornecidos na anamnese para fazer uma avaliação completa."""
 
-            print("--- PIPE: Enviando payload de chat para o Ollama ---")
-            
-            ollama_payload = {
-                "model": 'medgemma', 
-                "messages": [
-                    {
-                        "role": "system",
-                        "content": system_prompt,
-                    },
-                    {
-                        "role": "user",
-                        "content": user_prompt,
-                    }
-                ],
-                "stream": False,
-                "options": {
-                    "temperature": 0.3,
-                    "top_p": 0.9
+        print("--- PIPE: Enviando payload de chat para o Ollama ---")
+        
+        ollama_payload = {
+            "model": 'medgemma', 
+            "messages": [
+                {
+                    "role": "system",
+                    "content": system_prompt,
+                },
+                {
+                    "role": "user",
+                    "content": user_prompt,
                 }
+            ],
+            "stream": False,
+            "options": {
+                "temperature": 0.3,
+                "top_p": 0.9
             }
+        }
 
-            try:
-                print("--- PIPE: Aguardando resposta do Ollama (timeout de 5 minutos)... ---")
-                response = httpx.post(
-                    f"{self.ollama_base_url}/api/chat",
-                    json=ollama_payload,
-                    timeout=300.0
-                )
-                response.raise_for_status()
-                response_data = response.json()
+        try:
+            print("--- PIPE: Aguardando resposta do Ollama (timeout de 5 minutos)... ---")
+            response = httpx.post(
+                f"{self.ollama_base_url}/api/chat",
+                json=ollama_payload,
+                timeout=300.0
+            )
+            response.raise_for_status()
+            response_data = response.json()
+            
+            if "message" in response_data and "content" in response_data["message"]:
+                print("✅ Resposta recebida do Ollama com sucesso!")
+                return response_data["message"]["content"].strip()
+            else:
+                print(f"🔴 Resposta inesperada do Ollama: {response_data}")
+                return "Ollama não retornou uma mensagem com conteúdo válido."
                 
-                if "message" in response_data and "content" in response_data["message"]:
-                    print("✅ Resposta recebida do Ollama com sucesso!")
-                    return response_data["message"]["content"].strip()
-                else:
-                    print(f"🔴 Resposta inesperada do Ollama: {response_data}")
-                    return "Ollama não retornou uma mensagem com conteúdo válido."
-                    
-            except httpx.RequestError as e:
-                print(f"🔴 Erro de rede ao chamar Ollama: {e}")
-                return "Erro de conexão com o serviço de análise."
-            except httpx.HTTPStatusError as e:
-                print(f"🔴 Erro HTTP do Ollama: {e.response.status_code} - {e.response.text}")
-                return "Erro no serviço de análise (status HTTP)."
-            except Exception as e:
-                print(f"🔴 Erro inesperado ao chamar Ollama: {e}")
-                return "Erro interno no serviço de análise."
+        except httpx.RequestError as e:
+            print(f"🔴 Erro de rede ao chamar Ollama: {e}")
+            return "Erro de conexão com o serviço de análise."
+        except httpx.HTTPStatusError as e:
+            print(f"🔴 Erro HTTP do Ollama: {e.response.status_code} - {e.response.text}")
+            return "Erro no serviço de análise (status HTTP)."
+        except Exception as e:
+            print(f"🔴 Erro inesperado ao chamar Ollama: {e}")
+            return "Erro interno no serviço de análise."
