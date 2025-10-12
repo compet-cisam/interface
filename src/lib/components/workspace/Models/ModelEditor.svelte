@@ -188,7 +188,7 @@
 		}
 
 		if (model) {
-			name = 'Assistante-Médico UPE';
+			
 			await tick();
 
 			id = model.id;
