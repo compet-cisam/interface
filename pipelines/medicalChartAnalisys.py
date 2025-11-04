@@ -54,8 +54,9 @@ class Pipeline:
     ) -> Union[str, Generator, Iterator]:
         """Processa a requisição do usuário"""
         
-        # Extrai o ID da anamnese da mensagem
+        # Extrai o ID da anamnese e da especialidade da mensagem
         anamnese_id = self._extrair_id_anamnese(user_message)
+        id_especialidade = self._extrair_id_especialidade(user_message)
         
         if not anamnese_id:
             return """📋 **Sistema de Análise de Prontuários Médicos**
@@ -66,21 +67,23 @@ Para consultar um paciente, digite o **ID da anamnese**:
 • "Analisar anamnese 123"
 • "Buscar prontuário 456"
 • "Consultar paciente 789"
-• Ou simplesmente: "123"
+• "123" (usa especialidade padrão: ginecologia)
+• "Paciente 123 especialidade 2" (especifica especialidade)
 
 💡 O sistema buscará a anamnese na base de dados e gerará uma análise médica completa."""
 
         try:
-            # Busca a anamnese pelo ID
-            anamnese = self._buscar_anamnese_por_id(anamnese_id)
+            # Busca a anamnese pelo ID e especialidade
+            anamnese = self._buscar_anamnese(anamnese_id, id_especialidade)
             
             if not anamnese:
                 return f"""❌ **Anamnese não encontrada**
 
-A anamnese com ID '{anamnese_id}' não foi localizada no sistema.
+A anamnese com ID '{anamnese_id}' e especialidade '{id_especialidade}' não foi localizada no sistema.
 
 💡 **Dicas:**
-• Verifique se o ID está correto
+• Verifique se o ID do paciente está correto
+• Verifique se a especialidade está correta (padrão: 1 - ginecologia)
 • Confirme se a anamnese existe na base de dados
 • Tente listar as anamneses disponíveis primeiro"""
 
@@ -116,6 +119,151 @@ A anamnese com ID '{anamnese_id}' não foi localizada no sistema.
                 return match.group(1)
         
         return ""
+
+    def _extrair_id_especialidade(self, mensagem: str) -> str:
+        """Extrai o ID da especialidade da mensagem (padrão: 1 para ginecologia)"""
+        padroes = [
+            r'especialidade\s+(\d+)',
+            r'esp\s+(\d+)',
+        ]
+        
+        for padrao in padroes:
+            match = re.search(padrao, mensagem, re.IGNORECASE)
+            if match:
+                return match.group(1)
+        
+        return "1"  # Padrão: ginecologia
+
+    def _buscar_anamnese(self, anamnese_id: str, id_especialidade: str = "1") -> dict:
+        """
+        Busca anamnese pelo ID do paciente e ID da especialidade
+        
+        Args:
+            anamnese_id: ID do paciente
+            id_especialidade: ID da especialidade (padrão: "1" para ginecologia)
+        
+        Returns:
+            dict: Dados da anamnese encontrada ou None
+        """
+        try:
+            url = f"{self.api_config['base_url']}{self.api_config['endpoint']}/"
+            
+            params = {
+                "page": 1,
+                "limit": 100,
+                "sort": "created_at",
+                "order": "desc"
+            }
+            
+            print(f"🔍 Buscando anamneses para paciente ID: {anamnese_id}, especialidade: {id_especialidade}")
+            print(f"🌐 URL: {url}")
+            
+            response = httpx.get(
+                url,
+                params=params,
+                timeout=self.api_config['timeout']
+            )
+
+            print(f"📡 Status da resposta: {response.status_code}")
+            
+            if response.status_code == 200:
+                data = response.json()
+                
+                # Verifica se a resposta é uma lista ou um objeto com lista
+                anamneses = data if isinstance(data, list) else data.get('data', [])
+                
+                print(f"✅ Total de anamneses retornadas: {len(anamneses)}")
+                
+                # DEBUG: Mostra os primeiros registros para análise
+                if anamneses:
+                    print(f"🔬 DEBUG - Exemplo do primeiro registro:")
+                    primeiro = anamneses[0]
+                    print(f"   - Campos disponíveis: {list(primeiro.keys())}")
+                    print(f"   - id_paciente: {primeiro.get('id_paciente')} (tipo: {type(primeiro.get('id_paciente'))})")
+                    print(f"   - id_especialidade: {primeiro.get('id_especialidade')} (tipo: {type(primeiro.get('id_especialidade'))})")
+                
+                # Filtra por id_paciente e id_especialidade
+                anamneses_filtradas = []
+                print(f"🔍 Filtrando: Procurando paciente={anamnese_id} (int: {int(anamnese_id)}), especialidade={id_especialidade} (int: {int(id_especialidade)})")
+                
+                for a in anamneses:
+                    id_pac = a.get('id_paciente')
+                    id_esp = a.get('id_especialidade')
+                    
+                    # Converte para int para comparação segura
+                    try:
+                        # Converte o id_paciente (pode ser string ou int)
+                        if isinstance(id_pac, str):
+                            id_pac_int = int(id_pac)
+                        elif isinstance(id_pac, int):
+                            id_pac_int = id_pac
+                        else:
+                            continue
+                        
+                        # Converte o id_especialidade (pode ser string ou int)
+                        if isinstance(id_esp, str):
+                            id_esp_int = int(id_esp)
+                        elif isinstance(id_esp, int):
+                            id_esp_int = id_esp
+                        else:
+                            continue
+                        
+                        anamnese_id_int = int(anamnese_id)
+                        id_especialidade_int = int(id_especialidade)
+                        
+                        # Debug de cada comparação
+                        print(f"   📝 Comparando: Paciente {id_pac_int} == {anamnese_id_int}? {id_pac_int == anamnese_id_int} | Especialidade {id_esp_int} == {id_especialidade_int}? {id_esp_int == id_especialidade_int}")
+                        
+                        if id_pac_int == anamnese_id_int and id_esp_int == id_especialidade_int:
+                            anamneses_filtradas.append(a)
+                            print(f"   ✓ Match encontrado: Paciente {id_pac_int}, Especialidade {id_esp_int}")
+                    except (ValueError, TypeError) as e:
+                        print(f"   ⚠️ Erro ao converter IDs: {e}")
+                        continue
+                
+                print(f"🔎 Anamneses encontradas após filtro: {len(anamneses_filtradas)}")
+                
+                if anamneses_filtradas:
+                    # Retorna a anamnese mais recente (primeiro item após ordenação desc)
+                    anamnese_encontrada = anamneses_filtradas[0]
+                    # Tenta pegar o ID correto (id_anamnese ou id)
+                    id_anamnese = anamnese_encontrada.get('id_anamnese') or anamnese_encontrada.get('id')
+                    print(f"✅ Anamnese encontrada - ID: {id_anamnese}")
+                    return anamnese_encontrada
+                else:
+                    print(f"❌ Nenhuma anamnese encontrada para paciente {anamnese_id} e especialidade {id_especialidade}")
+                    # DEBUG: Mostra todos os IDs disponíveis
+                    print(f"🔬 DEBUG - IDs de pacientes disponíveis:")
+                    ids_unicos = set()
+                    for a in anamneses[:10]:  # Mostra apenas os 10 primeiros
+                        id_p = a.get('id_paciente')
+                        id_e = a.get('id_especialidade')
+                        ids_unicos.add(f"Paciente: {id_p}, Especialidade: {id_e}")
+                    for id_info in list(ids_unicos)[:5]:
+                        print(f"   - {id_info}")
+                    return None
+                        
+            elif response.status_code == 404:
+                print(f"❌ Endpoint não encontrado (404)")
+                return None
+            else:
+                print(f"🔴 API retornou status {response.status_code}")
+                print(f"📄 Resposta: {response.text[:200]}")
+                return None
+                
+        except httpx.TimeoutException:
+            print(f"🔴 Timeout ao buscar na API (>{self.api_config['timeout']}s)")
+            return None
+        except httpx.ConnectError as e:
+            print(f"🔴 Erro de conexão com a API: {self.api_config['base_url']}")
+            print(f"💡 Verifique se o serviço está rodando e se host.docker.internal está configurado")
+            print(f"🔧 Erro: {e}")
+            return None
+        except Exception as e:
+            print(f"🔴 Erro ao buscar na API: {e}")
+            import traceback
+            traceback.print_exc()
+            return None
 
     def _buscar_anamnese_por_id(self, anamnese_id: str) -> dict:
         """Busca anamnese pelo ID via API REST"""
@@ -206,8 +354,13 @@ Forneça uma análise médica estruturada seguindo este formato:
         # Extrai informações do paciente (se estiver no objeto anamnese)
         paciente = anamnese.get('paciente', {})
         
+        # Pega o ID correto da anamnese
+        id_anamnese = anamnese.get('id_anamnese') or anamnese.get('id', 'N/A')
+        
         resultado = f"""**DADOS DO PACIENTE:**
-• **ID da Anamnese:** {anamnese.get('id', 'N/A')}
+• **ID da Anamnese:** {id_anamnese}
+• **ID do Paciente:** {anamnese.get('id_paciente', 'N/A')}
+• **ID da Especialidade:** {anamnese.get('id_especialidade', 'N/A')}
 • **Nome do Paciente:** {paciente.get('nome_completo', 'N/A') if paciente else 'N/A'}
 • **Data de Nascimento:** {paciente.get('data_nascimento', 'N/A') if paciente else 'N/A'}
 
@@ -215,7 +368,7 @@ Forneça uma análise médica estruturada seguindo este formato:
 """
         
         # Adiciona todos os campos da anamnese dinamicamente
-        campos_ignorar = ['id', 'paciente', 'created_at', 'updated_at', 'paciente_id']
+        campos_ignorar = ['id', 'id_anamnese', 'id_paciente', 'id_especialidade', 'paciente', 'created_at', 'updated_at', 'paciente_id']
         
         for chave, valor in anamnese.items():
             if chave not in campos_ignorar and valor not in [None, "", "null"]:
