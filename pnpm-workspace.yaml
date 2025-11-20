@@ -1,0 +1,9 @@
+onlyBuiltDependencies:
+  - '@parcel/watcher'
+  - core-js
+  - cypress
+  - esbuild
+  - onnxruntime-node
+  - protobufjs
+  - sharp
+  - svelte-preprocess
