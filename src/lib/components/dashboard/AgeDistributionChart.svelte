@@ -20,7 +20,7 @@
 
     $: {
         const counts = data.reduce((acc, item) => {
-        const ageRange = item.AgeRange;
+        const ageRange = item.faixa_etaria;
 
         if (ageRange) {
             acc[ageRange] = (acc[ageRange] || 0) + 1;
@@ -46,11 +46,11 @@
 <div class="bg-[#fcfeff] p-4 rounded-xl shadow-lg h-full flex flex-col">
     <h3 class="text-center text-lg font-semibold mb-3 text-black">Distribuição por Faixa Etária</h3>
     <div class="relative flex-grow min-h-[250px]">
-        <!-- {#if data.length > 0}
-            <Bar {chartData} {chartOptions} />
+        {#if data.length > 0}
+            <Bar data={chartData} options={chartOptions} />
         {:else}
             <p class="text-center text-gray-400 italic mt-10">Sem dados para exibir.</p>
-        {/if} -->
-        <Bar data={chartData} options={chartOptions} />
+        {/if}
+        <!-- <Bar data={chartData} options={chartOptions} /> -->
     </div>
 </div>

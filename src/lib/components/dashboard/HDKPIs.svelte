@@ -1,12 +1,12 @@
 <script>
     export let totalAppointments = 0;
     export let avgAge = 0;
-    export let busiestArea = '-';
+    export let peakSymptom = '-';
     export let peakMonth = '-'; 
     export let avgTimeToConsult = 0;
     export let avgTimeToExam = 0;
 
-//GERAL HOME
+
     const monthMap = {
         '1': 'Janeiro',
         '2': 'Fevereiro',
@@ -38,11 +38,6 @@
     </div>
 
     <div class="bg-[#fcfeff] p-5 rounded-xl shadow-lg flex flex-col justify-between">
-        <p class="text-sm font-medium text-black">Área Mais Ativa</p>
-        <p class="text-3xl font-bold text-purple-400 truncate">{busiestArea}</p>
-    </div>
-
-    <div class="bg-[#fcfeff] p-5 rounded-xl shadow-lg flex flex-col justify-between">
         <p class="text-sm font-medium text-black">Mês de Pico de Agendamentos</p>
         <p class="text-3xl font-bold text-yellow-400">{formattedPeakMonth}</p>
     </div>
@@ -50,4 +45,8 @@
         <p class="text-sm font-medium text-black">Média de Dias do Agendamento à Teleconsulta</p>
         <p class="text-3xl font-bold text-cyan-400">{Math.round(avgTimeToConsult)} dias</p>
     </div>
-    </div>
+    <div class="bg-[#fcfeff] p-5 rounded-xl shadow-lg flex flex-col justify-between">
+        <p class="text-sm font-medium text-black">Média de Dias da Teleconsulta ao Exame</p>
+        <p class="text-3xl font-bold text-orange-400">{Math.round(avgTimeToExam)} dias</p>
+    </div> 
+</div>
