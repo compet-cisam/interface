@@ -1,54 +1,60 @@
 <script>
-	import { Bar } from 'svelte-chartjs';
-	import { Chart, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js';
+    import { Bar } from 'svelte-chartjs';
+    import { Chart, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js';
 
-	Chart.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale);
+    Chart.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale);
 
-	export let data = [];
+    export let data = [];
 
-	let chartData = {};
-	let chartOptions = {
-		indexAxis: 'y',
-		responsive: true,
-		maintainAspectRatio: false,
-		plugins: { legend: {
-			display: false },
-			tooltip: {
-				backgroundColor: '#333',
-				titleColor: '#fff',
-				bodyColor: '#eee',
-				padding: 10,
-				cornerRadius: 4
-			}
-		},
-		scales: {
-			x: {
-				ticks: { color: 'black', font: { family: 'Poppins', size: 12 } },
-				grid: { color: '#ccc' }
-			},
-			y: {
-				ticks: { color: 'black', font: { family: 'Poppins', size: 12 } },
-				grid: {display: false}
-			}
-		},
-		elements: {
-			bar: {
-				borderRadius: 6,
-				barThickness: 24 
-			}
-		}
-	};
+    let chartData = {};
+    
+    // Configuração do gráfico
+    let chartOptions = {
+        indexAxis: 'y',
+        responsive: true,
+        maintainAspectRatio: false,
+        layout: {
+            padding: {
+                top: 0,
+                bottom: 0
+            }
+        },
+        plugins: { 
+            legend: { display: false },
+            tooltip: {
+                backgroundColor: '#333',
+                titleColor: '#fff',
+                bodyColor: '#eee',
+                padding: 10,
+                cornerRadius: 4
+            }
+        },
+        scales: {
+            x: {
+                display: false, 
+                grid: { display: false }
+            },
+            y: {
+                display: false, 
+                grid: { display: false }
+            }
+        },
+        elements: {
+            bar: {
+                borderRadius: 4,
+                barThickness: 28 
+            }
+        }
+    };
 
-	$: {
-		const counts = {};
+
+    $: {
+        const counts = {};
         data.forEach((item) => {
-            if (item.Symptom && typeof item.Symptom === 'string') {
-
-                const individualSymptoms = item.Symptom.split('+');
-
+            if (item.motivo_solicitacao && typeof item.motivo_solicitacao === 'string') {
+                const individualSymptoms = item.motivo_solicitacao.split('+');
                 individualSymptoms.forEach(symptomStr => {
                     const cleanedSymptom = symptomStr.trim();
-
                     if (cleanedSymptom) {
                         counts[cleanedSymptom] = (counts[cleanedSymptom] || 0) + 1;
                     }
@@ -56,44 +62,63 @@
             }
         });
 
-		// const labels = Object.keys(counts);
-		// const dataPoints = Object.values(counts);
-
-		const symptomEntries = Object.entries(counts);
-
-        // Filtra o array, mantendo apenas os que têm contagem >= 2
+        const symptomEntries = Object.entries(counts);
         const filteredSymptoms = symptomEntries.filter(([symptom, count]) => count >= 2);
-        // Converte o objeto de contagens para um array [chave, valor]
-        // Ex: [['Infertilidade', 15], ['Dor pélvica', 10]]
         const sortedSymptoms = filteredSymptoms.sort(([, a], [, b]) => b - a);
 
-        const labels = sortedSymptoms.map(item => item[0]);
+        const labels = sortedSymptoms.map(item => item[0]); 
         const dataPoints = sortedSymptoms.map(item => item[1]);
 
-		chartData = {
-			labels,
-			datasets: [
-				{
-					label: 'Sintomas',
-					data: dataPoints,
-					backgroundColor: 'rgba(75, 192, 192, 0.6)',
-					borderColor: 'rgba(75, 192, 192, 1)',
-					borderWidth: 1
-				}
-			]
-		};
-	}
+        chartData = {
+            labels,
+            datasets: [
+                {
+                    label: 'Sintomas',
+                    data: dataPoints,
+                    backgroundColor: 'rgba(75, 192, 192, 0.6)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }
+            ]
+        };
+    }
 </script>
 
-{#if data.length > 0}
-	<div class="rounded-xl bg-[#fcfeff] p-4 shadow-md">
-		<h3 class="text-center text-black text-lg font-semibold mb-3">Ocorrência por Motivação de Consulta</h3>
-		<div class="relative flex-grow h-[450px] overflow-y-auto pr-2">
-            <div style="height: {Math.max(chartData.labels.length * 35, 450)}px">
-                <Bar data={chartData} options={chartOptions} />
+
+
+<div class="rounded-xl bg-[#fcfeff] p-4 shadow-md h-full flex flex-col">
+    <h3 class="text-center text-black text-lg font-semibold mb-3">Ocorrência por Motivação de Consulta</h3>
+    
+    <div class="relative flex-grow h-[450px] overflow-y-auto pr-2">
+
+        {#if data.length > 0 && chartData.labels?.length > 0}
+            <div class="flex flex-row" style="height: {Math.max(chartData.labels.length * 55, 450)}px">
+                
+                <div class="w-[40%] flex flex-col justify-around pr-2 border-r border-gray-100">
+                    {#each chartData.labels as label}
+                        <div class="h-[55px] flex items-center justify-end w-full marquee-container group cursor-default">
+                            <span class="text-xs text-right text-gray-700 font-medium font-primary marquee-content px-1">
+                                {label}
+                            </span>
+                            
+                            {#if label.length > 25}
+                                <div class="absolute left-0 top-0 bottom-0 w-4 bg-gradient-to-r from-[#fcfeff] to-transparent pointer-events-none"></div>
+                            {/if}
+                        </div>
+                    {/each}
+                </div>
+
+                <div class="w-[60%] h-full relative">
+                    <div class="absolute inset-0">
+                        <Bar data={chartData} options={chartOptions} />
+                    </div>
+                </div>
+
             </div>
-        </div>
-	</div>
-{:else}
-	<p class="text-center text-gray-400 italic">Sem dados para exibir nesta seleção.</p>
-{/if}
+        {:else}
+            <div class="flex items-center justify-center h-full">
+                <p class="text-center text-gray-500 italic">Sem dados para exibir nesta seleção.</p>
+            </div>
+        {/if}
+    </div>
+</div>

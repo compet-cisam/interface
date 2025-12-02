@@ -19,8 +19,8 @@
         },
         scales: {
             x: { 
-                ticks: { color: '#gray' }, 
-                grid: { color: '#444' },
+                ticks: { color: 'rgba(99, 99, 99, 1)' }, 
+                grid: { color: 'rgba(99, 99, 99, 0.25)' },
                 title: {
                     display: true,
                     text: 'Nº de Pacientes',
@@ -50,7 +50,7 @@
             .sort(([, a], [, b]) => b - a)
             .slice(0, 10);
 
-    
+        // para inverter a ordem:
         // const reversedTop10 = top10.reverse();
 
         const labels = top10.map(item => item[0]);
@@ -74,7 +74,7 @@
         {#if data.length > 0 && chartData.labels?.length > 0}
             <Bar data={chartData} options={chartOptions} />
         {:else}
-            <p class="text-center text-gray-400 italic mt-10">Não há dados de cidade para exibir.</p>
+            <p class="text-center text-gray-400 italic mt-10">Sem dados para exibir.</p>
         {/if}
     </div>
 </div>

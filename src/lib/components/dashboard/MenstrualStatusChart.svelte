@@ -36,7 +36,7 @@
 
     $: {
         
-        const histeroscopiaData = data.filter(item => item.HealthArea === 'Histeroscopia Diagnóstica');
+        const histeroscopiaData = data.filter(item => item.especialidade === 'Histeroscopia Diagnóstica');
 
         const counts = {
             'Sangramento Ativo': 0,

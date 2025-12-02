@@ -65,7 +65,7 @@
         const allDiseases = [...new Set(data.map(d => d.DiagnosedDisease))].filter(disease => !valoresIgnorados.includes(disease));
 
         const dataByArea = data.reduce((acc, curr) => {
-            const area = curr.HealthArea;
+            const area = curr.especialidade;
             if (area) { 
                 if (!acc[area]) acc[area] = [];
                 acc[area].push(curr);

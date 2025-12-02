@@ -3,6 +3,7 @@
     import 'chart.js/auto';
 
     export let data = [];
+    //export let selectedAreas = [];
     let chartData = {};
 
     let chartOptions = {
@@ -10,12 +11,14 @@
         maintainAspectRatio: false,
         plugins: { legend: { labels: { color: '#gray' } } },
         scales: {
-            x: { ticks: { color: '#gray' }, grid: { color: '#444' } },
-            y: { ticks: { color: '#gray' }, grid: { color: '#444' } }
+            x: { ticks: { color: 'rgba(99, 99, 99, 1)' }, 
+                grid: { color: 'rgba(99, 99, 99, 0.25)' } },
+            y: { ticks: { color: 'rgba(99, 99, 99, 1)' }, grid: { color: 'rgba(99, 99, 99, 0.25)' } }
         }
     };
 
     $: {
+        
         const totals = data.reduce((acc, item) => {
             acc.gravidez += Number(item.gravidez) || 0;
             acc.parto += Number(item.parto) || 0;

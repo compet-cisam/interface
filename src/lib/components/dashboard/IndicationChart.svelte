@@ -42,10 +42,10 @@
             'Não informado': 0
         };
 
-        const histeroscopiaData = data.filter(item => item.HealthArea === 'Histeroscopia Diagnóstica');
+        const histeroscopiaData = data.filter(item => item.especialidade === 'Histeroscopia Diagnóstica');
 
         histeroscopiaData.forEach(item => {
-            const indicacao = item.hd_indicada?.trim();
+            const indicacao = item.status_HD?.trim();
             if (indicacao === 'Agendado') {
                 counts['Agendada']++;
             } else if (indicacao === 'Não foi indicada') {

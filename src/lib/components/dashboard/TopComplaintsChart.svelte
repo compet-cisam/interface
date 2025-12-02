@@ -11,14 +11,14 @@
 		maintainAspectRatio: false,
 		plugins: { legend: { display: false } },
 		scales: {
-			x: { ticks: { color: 'black' }, grid: { color: 'gray' } },
+			x: { ticks: { color: 'rgba(99, 99, 99, 1)' }, grid: { color: 'rgba(99, 99, 99, 0.25)' } },
 			y: { ticks: { color: 'black' }, grid: { display: false } }
 		}
 	};
 
 	$: {
 		const counts = data.reduce((acc, item) => {
-			const symptom = item.Symptom;
+			const symptom = item.motivo_solicitacao;
 			if (symptom) {
 				acc[symptom] = (acc[symptom] || 0) + 1;
 			}

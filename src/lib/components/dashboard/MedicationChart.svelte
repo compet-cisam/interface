@@ -11,7 +11,8 @@
 		maintainAspectRatio: false,
 		plugins: { legend: { display: false } },
 		scales: {
-			x: { ticks: { color: '#gray' }, grid: { color: '#444' } },
+			x: { ticks: { color: 'rgba(99, 99, 99, 1)' }, 
+                grid: { color: 'rgba(99, 99, 99, 0.25)' } },
 			y: { ticks: { color: '#black' }, grid: { display: false } }
 		}
 	};
@@ -55,7 +56,7 @@
 		{#if data.length > 0}
 			<Bar data={chartData} options={chartOptions} />
 		{:else}
-			<p class="text-center text-gray-400 italic mt-10">Carregando dados...</p>
+			<p class="text-center text-gray-400 italic mt-10">Sem dados para exibir.</p>
 		{/if}
 	</div>
 </div>

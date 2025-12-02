@@ -21,8 +21,8 @@
 		},
 		scales: {
 			x: {
-				ticks: { color: '#black', precision: 0 }, 
-				grid: { color: '#444' },
+				ticks: { color: 'rgba(99, 99, 99, 1)' }, 
+                grid: { color: 'rgba(99, 99, 99, 0.25)' },
 				title: {
 					display: true,
 					text: 'Nº de Pacientes',
@@ -91,7 +91,7 @@
 		{#if data.length > 0 && chartData.labels?.length > 0}
 			<Bar data={chartData} options={chartOptions} />
 		{:else}
-			<p class="text-center text-gray-400 italic mt-10">Sem dados de comorbidade para exibir.</p>
+			<p class="text-center text-gray-400 italic mt-10">Sem dados para exibir.</p>
 		{/if}
 	</div>
 </div>
