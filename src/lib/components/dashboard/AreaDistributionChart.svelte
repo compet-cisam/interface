@@ -19,7 +19,7 @@
 
     $: {
     const counts = data.reduce((acc, item) => {
-        const area = item.especialidade;
+        const area = item.especialidade_extenso;
 
         if (area) {
             acc[area] = (acc[area] || 0) + 1;
