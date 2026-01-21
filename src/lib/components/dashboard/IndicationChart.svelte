@@ -42,7 +42,7 @@
             'Não informado': 0
         };
 
-        const histeroscopiaData = data.filter(item => item.especialidade === 'Histeroscopia Diagnóstica');
+        const histeroscopiaData = data.filter(item => item.especialidade_extenso === 'Histeroscopia Diagnóstica');
 
         histeroscopiaData.forEach(item => {
             const indicacao = item.status_HD?.trim();

@@ -51,7 +51,7 @@
 
 
 	onMount(async () => {
-		const response = await fetch('/medical_data.csv');
+		const response = await fetch('/dados_medicos/dados_medicos.csv');
 		const csvText = await response.text();
 
 		Papa.parse(csvText, {
@@ -64,7 +64,7 @@
 				filteredData = allData;
 			}
 		});
-		Papa.parse('/medical_data.csv', {
+		Papa.parse('/dados_medicos/dados_medicos.csv', {
 			header: true,
 			skipEmptyLines: true,
 			delimiter: ';',
@@ -80,8 +80,7 @@
         if (allData.length > 0) {
             filteredData = allData.filter((item) => {
                 
-                const areaFilter = selectedAreas.length === 0 || selectedAreas.includes(item.especialidade);
-                
+                const areaFilter = selectedAreas.length === 0 || selectedAreas.includes(item.especialidade_extenso);                
                 const ageFilter = selectedAgeRanges.length === 0 || selectedAgeRanges.includes(item.faixa_etaria);
                 const monthFilter = selectedMonths.length === 0 || selectedMonths.includes(item.marcacao_mes?.trim());
                 const yearFilter = selectedYears.length === 0 || selectedYears.includes(item.marcacao_ano);
@@ -100,7 +99,7 @@
             avgAge = totalAge / totalAppointments;
 
             const areaCounts = filteredData.reduce((acc, item) => {
-                acc[item.especialidade] = (acc[item.especialidade] || 0) + 1;
+                acc[item.especialidade_extenso] = (acc[item.especialidade_extenso] || 0) + 1;
                 return acc;
             }, {});
             busiestArea = Object.keys(areaCounts).reduce((a, b) => (areaCounts[a] > areaCounts[b] ? a : b), '-');

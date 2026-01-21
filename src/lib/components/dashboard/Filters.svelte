@@ -29,7 +29,7 @@
 
     $: {
         if (data.length > 0) {
-            uniqueAreas = [...new Set(data.map((item) => item.especialidade))].filter(Boolean);
+            uniqueAreas = [...new Set(data.map((item) => item.especialidade_extenso))].filter(Boolean);
             uniqueAgeRanges = [...new Set(data.map((item) => item.faixa_etaria))].filter(Boolean).sort();
             uniqueYears = [...new Set(data.map((item) => item.marcacao_ano))].filter(Boolean).sort();
             uniqueRegion = [...new Set(data.map(item => item.cidade))].filter(region => region && region.trim() !== '');
