@@ -51,7 +51,7 @@
 
 
 	onMount(async () => {
-		const response = await fetch('/dados_medicos/dados_medicos.csv');
+		const response = await fetch('dados_medicos/dados_medicos.csv');
 		const csvText = await response.text();
 
 		Papa.parse(csvText, {
@@ -64,7 +64,7 @@
 				filteredData = allData;
 			}
 		});
-		Papa.parse('/dados_medicos/dados_medicos.csv', {
+		Papa.parse('dados_medicos/dados_medicos.csv', {
 			header: true,
 			skipEmptyLines: true,
 			delimiter: ';',
