@@ -1,4 +1,4 @@
-FROM ./medgemma-4b-it-Q8_0.gguf
+FROM ./medgemma-4b-it-Q8_0/medgemma-4b-it-Q8_0.gguf
 
 TEMPLATE """<start_of_turn>user
 {{ .Prompt }}<end_of_turn>

@@ -57,7 +57,7 @@
 		Papa.parse(csvText, {
 			header: true,
 			skipEmptyLines: true,
-			delimiter: ';',
+			delimiter: ',',
 			complete: (results) => {
 				// Filtra linhas vazias ou malformadas que o Papa.parse pode criar
 				allData = results.data.filter((item) => item.data_nascimento);
