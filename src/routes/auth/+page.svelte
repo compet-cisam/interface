@@ -5,6 +5,10 @@
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 
+	// --- 1. ADICIONADO: Import da sua API personalizada ---
+	import { enviarDados } from '$lib/services/api.js';
+	// -----------------------------------------------------
+
 	import { getBackendConfig } from '$lib/apis';
 	import { ldapUserSignIn, getSessionUser, userSignIn, userSignUp } from '$lib/apis/auths';
 
@@ -50,14 +54,42 @@
 		}
 	};
 
+	// --- 2. MODIFICADO: Handler de Login usando sua API ---
 	const signInHandler = async () => {
-		const sessionUser = await userSignIn(email, password).catch((error) => {
-			toast.error(`${error}`);
-			return null;
-		});
+		try {
+			// Usamos a função enviarDados do seu arquivo api.js
+			// Aponta para a rota de login da sua API (ajuste '/auth/token' se sua rota for diferente, ex: '/login')
+			const resposta = await enviarDados('/auth/token', {
+				username: email, // Backends FastAPI geralmente esperam 'username' para o campo de login (mesmo sendo email)
+				password: password
+			});
 
-		await setSessionUser(sessionUser);
+			console.log('Login realizado:', resposta);
+
+			// Tenta pegar o token da resposta (pode vir como access_token ou token)
+			const token = resposta.access_token || resposta.token;
+
+			if (token) {
+				// Salva o token no navegador
+				localStorage.setItem('token', token);
+				toast.success('Conectado com sucesso!');
+
+				// Redireciona para a página inicial (Dashboard)
+				await goto('/');
+				
+				// Opcional: Recarregar a página para garantir que o estado do usuário seja atualizado
+				// window.location.reload(); 
+			} else {
+				toast.error('Login falhou: Token não recebido.');
+			}
+
+		} catch (error) {
+			console.error(error);
+			// Exibe o erro na tela usando o componente de toast nativo
+			toast.error(`Erro ao conectar: ${error.message || error}`);
+		}
 	};
+	// -----------------------------------------------------
 
 	const signUpHandler = async () => {
 		const sessionUser = await userSignUp(name, email, password, generateInitialsImage(name)).catch(
